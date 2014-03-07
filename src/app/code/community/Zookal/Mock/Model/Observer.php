@@ -35,7 +35,6 @@ class Zookal_Mock_Model_Observer
             $class = 'Zookal_Mock_Model_Mocks_' . $module[0];
             if (true === isset($this->_mappingModel[$moduleName])) {
                 Mage::getConfig()->setNode('global/models/' . $this->_mappingModel[$moduleName] . '/class', $class);
-
                 $resource = $this->_mappingModel[$moduleName] . '_resource';
                 Mage::getConfig()->setNode('global/models/' . $this->_mappingModel[$moduleName] . '/resourceModel', $resource);
                 Mage::getConfig()->setNode('global/models/' . $resource . '/class', $class);

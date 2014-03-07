@@ -3,7 +3,22 @@ Zookal Mock Objects
 
 Transparent autodetecting of disabled core modules and providing mock objects for not breaking Magento.
 
-Nothing to configure. Works out of the box.
+Nothing to configure. No class rewrites. Only one observer. Works out of the box.
+
+Which modules causes challenges?
+--------------------------------
+
+If following modules (until now) are disabled they will then break the rest of the core:
+
+- Mage_Wishlist
+- Mage_Review
+- Mage_Rating
+- Mage_Tag?
+- Mage_Log
+- Mage_Backup
+
+Only if you would like to disable one of the six modules above then use this mock module.
+
 
 At Zookal we have the following modules disabled:
 
@@ -31,17 +46,6 @@ At Zookal we have the following modules disabled:
 - Mage_XmlConnect
 - Phoenix_Moneybookers
 
-If following modules (until now) are disabled they then will break the rest of the core:
-
-- Mage_Wishlist
-- Mage_Review
-- Mage_Rating
-- Mage_Tag?
-- Mage_Log
-- Mage_Backup      
-
-Yes there will be a performance increasement.
-
 How do I disable a module?
 --------------------------
 
@@ -56,6 +60,11 @@ Add in your custom app/etc/modules/customer_module.xml
     </modules>
 </config>
 ```
+
+Will there be a performance increase?
+-------------------------------------
+
+Yes there will be a performance increasement due to less loading of classes and xml files.
 
 License
 -------
