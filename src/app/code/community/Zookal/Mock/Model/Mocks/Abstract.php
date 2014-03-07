@@ -12,24 +12,27 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
 
     protected $_mockMethodsReturnThis = array(
         'add'            => 1, // e.g. addCustomerFilter ...
-        'loa'            => 1, // e.g. load and loadBy....
-        'set'            => 1,
-        'uns'            => 1,
         'cle'            => 1, // e.g. clean() clear() clearasil()
-        'too'            => 1, // e.g. toOptionArray, toOptionHash
+        'gettotals'      => 1, // Special case in Sales_Collection
+        'gro'            => 1, // e.g. groupByCustomer
+        'joi'            => 1, // e.g. joinCustomerName
+        'loa'            => 1, // e.g. load and loadBy....
+        'ord'            => 1, // e.g. orderByTotalAmount
         'resetsortorder' => 1,
         'renewsession'   => 1,
-        'gettotals'   => 1,     // Special case in Sales_Collection
+        'set'            => 1,
+        'too'            => 1, // e.g. toOptionArray, toOptionHash
+        'uns'            => 1,
     );
     protected $_mockMethodsReturnNull = array(
-        'get'   => 1,
         'count' => 1,
+        'get'   => 1,
     );
     protected $_mockMethodsReturnFalse = array(
         'has' => 1,
         'iss' => 1, // e.g. isSubscribed
-        'use' => 1,
         'isv' => 1, // e.g. isValid...
+        'use' => 1,
     );
 
     /**

@@ -21,6 +21,7 @@ class Zookal_Mock_Model_Observer
         'Mage_Tax'        => 'tax',
         'Mage_Sales'      => 'sales',
         'Mage_Review'     => 'review',
+        'Mage_Reports'     => 'reports',
         'Mage_Rating'     => 'rating',
         'Mage_Newsletter' => 'newsletter',
         'Mage_Log'        => 'log',
@@ -34,14 +35,23 @@ class Zookal_Mock_Model_Observer
     public function mockDisabledModules(Varien_Event_Observer $observer)
     {
         $modules = $this->_getDisabledModules();
+        $pathPrefix = 'global/models/';
 
         foreach ($modules as $moduleName => $module) {
-            $class = 'Zookal_Mock_Model_Mocks_' . $module[0];
             if (TRUE === isset($this->_mappingModel[$moduleName])) {
-                Mage::getConfig()->setNode('global/models/' . $this->_mappingModel[$moduleName] . '/class', $class);
+                $class = 'Zookal_Mock_Model_Mocks_' . $module[0];
+                Mage::getConfig()->setNode($pathPrefix . $this->_mappingModel[$moduleName] . '/class', $class);
                 $resource = $this->_mappingModel[$moduleName] . '_resource';
-                Mage::getConfig()->setNode('global/models/' . $this->_mappingModel[$moduleName] . '/resourceModel', $resource);
-                Mage::getConfig()->setNode('global/models/' . $resource . '/class', $class);
+                Mage::getConfig()->setNode($pathPrefix . $this->_mappingModel[$moduleName] . '/resourceModel', $resource);
+                Mage::getConfig()->setNode($pathPrefix . $resource . '/class', $class);
+
+                /**
+                 * Special case when Mage_Tax is disabled and Mage_Customer is enabled
+                 * Mage_Customer needs the tax_class table name for joining
+                 */
+                if ('Mage_Tax' === $moduleName) {
+                    Mage::getConfig()->setNode($pathPrefix . $resource . '/entities/tax_class/table', 'tax_class');
+                }
             }
         }
     }
