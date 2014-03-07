@@ -22,6 +22,7 @@ class Zookal_Mock_Model_Observer
         'Mage_Tag'        => 'tag',
         'Mage_Newsletter' => 'newsletter',
         'Mage_Log'        => 'log',
+        'Mage_Catalog'    => 'catalog',
         'Mage_Backup'     => 'backup',
     );
 
