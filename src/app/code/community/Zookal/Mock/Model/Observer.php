@@ -20,6 +20,7 @@ class Zookal_Mock_Model_Observer
         'Mage_Review'     => 'review',
         'Mage_Rating'     => 'rating',
         'Mage_Tag'        => 'tag',
+        'Mage_Tax'        => 'tax',
         'Mage_Newsletter' => 'newsletter',
         'Mage_Log'        => 'log',
         'Mage_Catalog'    => 'catalog',
