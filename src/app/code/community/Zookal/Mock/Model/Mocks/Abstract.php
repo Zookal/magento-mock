@@ -26,6 +26,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
     );
     protected $_mockMethodsReturnFalse = array(
         'has' => 1,
+        'iss' => 1, // e.g. isSubscribed
         'use' => 1,
         'isv' => 1, // e.g. isValid...
     );
@@ -43,18 +44,18 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
     {
         $lowerMethod  = strtolower($method);
         $firstThree   = substr($lowerMethod, 0, 3);
-        $isCollection = strpos($lowerMethod, 'collection') !== false;
-        if (true === $isCollection || isset($this->_mockMethodsReturnThis[$lowerMethod]) || isset($this->_mockMethodsReturnThis[$firstThree])) {
+        $isCollection = strpos($lowerMethod, 'collection') !== FALSE;
+        if (TRUE === $isCollection || isset($this->_mockMethodsReturnThis[$lowerMethod]) || isset($this->_mockMethodsReturnThis[$firstThree])) {
             $this->_log($method . ' return this');
             return $this;
         }
         if (isset($this->_mockMethodsReturnNull[$lowerMethod]) || isset($this->_mockMethodsReturnNull[$firstThree])) {
             $this->_log($method . ' return null');
-            return null;
+            return NULL;
         }
         if (isset($this->_mockMethodsReturnFalse[$firstThree])) {
             $this->_log($method . ' return false');
-            return false;
+            return FALSE;
         }
 
         throw new Varien_Exception("Invalid method " . get_class($this) . "::" . $method . "(" . print_r($args, 1) . ")");

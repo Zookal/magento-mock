@@ -16,12 +16,13 @@ class Zookal_Mock_Model_Observer
      * @var array
      */
     protected $_mappingModel = array(
-        'Mage_Wishlist' => 'wishlist',
-        'Mage_Review'   => 'review',
-        'Mage_Rating'   => 'rating',
-        'Mage_Tag'      => 'tag',
-        'Mage_Log'      => 'log',
-        'Mage_Backup'   => 'backup',
+        'Mage_Wishlist'   => 'wishlist',
+        'Mage_Review'     => 'review',
+        'Mage_Rating'     => 'rating',
+        'Mage_Tag'        => 'tag',
+        'Mage_Newsletter' => 'newsletter',
+        'Mage_Log'        => 'log',
+        'Mage_Backup'     => 'backup',
     );
 
     /**
@@ -33,7 +34,7 @@ class Zookal_Mock_Model_Observer
 
         foreach ($modules as $moduleName => $module) {
             $class = 'Zookal_Mock_Model_Mocks_' . $module[0];
-            if (true === isset($this->_mappingModel[$moduleName])) {
+            if (TRUE === isset($this->_mappingModel[$moduleName])) {
                 Mage::getConfig()->setNode('global/models/' . $this->_mappingModel[$moduleName] . '/class', $class);
                 $resource = $this->_mappingModel[$moduleName] . '_resource';
                 Mage::getConfig()->setNode('global/models/' . $this->_mappingModel[$moduleName] . '/resourceModel', $resource);
@@ -53,7 +54,7 @@ class Zookal_Mock_Model_Observer
         foreach ($modules->children() as $moduleName => $node) {
             /** @var $node Mage_Core_Model_Config_Element */
             $isDisabled = strtolower($node->active) !== 'true';
-            if (true === $isDisabled) {
+            if (TRUE === $isDisabled) {
                 $_disabledModules[$moduleName] = explode('_', $moduleName);
             }
         }
