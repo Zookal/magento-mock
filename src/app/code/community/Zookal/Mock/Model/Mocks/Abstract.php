@@ -19,6 +19,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'too'            => 1, // e.g. toOptionArray, toOptionHash
         'resetsortorder' => 1,
         'renewsession'   => 1,
+        'gettotals'   => 1,     // Special case in Sales_Collection
     );
     protected $_mockMethodsReturnNull = array(
         'get'   => 1,
@@ -71,6 +72,11 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         return Mage::getModel('core/message_collection');
     }
 
+    /**
+     * uncomment this in dev env to see what methods are called
+     *
+     * @param $msg
+     */
     protected function _log($msg)
     {
         //Mage::log(get_class($this) . '::' . $msg, null, 'mock.log');
