@@ -29,32 +29,9 @@ Only if you would like to disable one of the modules above then use this mock mo
 Also we can't delete the database tables from some disabled modules as e.g. CatalogIndex relies von customer_group tables
 or Customer relies on some tax tables when tax is disabled.
 
-
-At Zookal we have the following modules disabled:
-
-- Mage_AdminNotification
-- Mage_Authorizenet
-- Mage_Backup
-- Mage_Captcha
-- Mage_Compiler
-- Mage_Connect
-- Mage_GoogleCheckout
-- Mage_GoogleBase
-- Mage_Install
-- Mage_Log
-- Mage_Paypal
-- Mage_PaypalUk
-- Mage_Poll
-- Mage_ProductAlert
-- Mage_Review
-- Mage_Rating
-- Mage_Rss
-- Mage_Sendfriend
-- Mage_Tag
-- Mage_Usa
-- Mage_Wishlist
-- Mage_XmlConnect
-- Phoenix_Moneybookers
+At Zookal we have the following modules disabled: Mage_AdminNotification, Mage_Authorizenet, Mage_Backup, Mage_Captcha, Mage_Compiler, Mage_Connect,
+Mage_GoogleCheckout, Mage_GoogleBase, Mage_Install, Mage_Log, Mage_Paypal, Mage_PaypalUk, Mage_Poll, Mage_ProductAlert, Mage_Review, Mage_Rating,
+Mage_Rss, Mage_Sendfriend, Mage_Tag, Mage_Usa, Mage_Wishlist, Mage_XmlConnect, Phoenix_Moneybookers.
 
 How do I disable a module?
 --------------------------
@@ -115,6 +92,11 @@ Please see the folder examples.
 License
 -------
 [OSL - Open Software Licence 3.0](http://opensource.org/licenses/osl-3.0.php)
+
+Copyright
+---------
+
+Copyright (c) Zookal Pty Ltd, Sydney Australia
 
 Author
 ------
