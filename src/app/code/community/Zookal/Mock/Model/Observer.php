@@ -26,6 +26,7 @@ class Zookal_Mock_Model_Observer
         'Mage_Newsletter' => 'newsletter',
         'Mage_Log'        => 'log',
         'Mage_Catalog'    => 'catalog',
+        'Mage_Customer'   => 'customer',
         'Mage_Backup'     => 'backup',
     );
 
@@ -34,12 +35,13 @@ class Zookal_Mock_Model_Observer
      */
     public function mockDisabledModules(Varien_Event_Observer $observer)
     {
-        $disabledModules    = $this->_getDisabledModules();
-        $pathPrefix = 'global/models/';
+        $disabledModules = $this->_getDisabledModules();
+        $pathPrefix      = 'global/models/';
 
         $specialMethods = array(
-            'Mage_Tax'     => '_mageTaxClass',
-            'Mage_Catalog' => '_mageCatalog',
+            'Mage_Catalog'  => '_mageCatalog',
+            'Mage_Customer' => '_mageCustomer',
+            'Mage_Tax'      => '_mageTaxClass',
         );
 
         foreach ($disabledModules as $moduleName => $module) {
@@ -59,19 +61,6 @@ class Zookal_Mock_Model_Observer
     }
 
     /**
-     * Special case when Mage_Tax is disabled and Mage_Customer is enabled
-     * Mage_Customer needs the tax_class table name for joining
-     *
-     * @param $pathPrefix
-     * @param $moduleName
-     * @param $resource
-     */
-    protected function _mageTaxClass($pathPrefix, $moduleName, $resource)
-    {
-        Mage::getConfig()->setNode($pathPrefix . $resource . '/entities/tax_class/table', 'tax_class');
-    }
-
-    /**
      * Special case when Mage_Catalog is disabled and Mage_Widget is enabled
      *
      * @param $pathPrefix
@@ -85,6 +74,32 @@ class Zookal_Mock_Model_Observer
         Mage::getConfig()->setNode($prefix . 'model', 'zookal_mock/mocks_mage_product');
         Mage::getConfig()->setNode($prefix . 'composite', '0');
         Mage::getConfig()->setNode($prefix . 'index_priority', '10');
+    }
+
+    /**
+     * Special case when Mage_CatalogIndex is enabled and Mage_Customer is disabled
+     * Mage_Customer needs the tax_class table name for joining
+     *
+     * @param $pathPrefix
+     * @param $moduleName
+     * @param $resource
+     */
+    protected function _mageCustomer($pathPrefix, $moduleName, $resource)
+    {
+        Mage::getConfig()->setNode($pathPrefix . $resource . '/entities/customer_group/table', 'customer_group');
+    }
+
+    /**
+     * Special case when Mage_Tax is disabled and Mage_Customer is enabled
+     * Mage_Customer needs the tax_class table name for joining
+     *
+     * @param $pathPrefix
+     * @param $moduleName
+     * @param $resource
+     */
+    protected function _mageTaxClass($pathPrefix, $moduleName, $resource)
+    {
+        Mage::getConfig()->setNode($pathPrefix . $resource . '/entities/tax_class/table', 'tax_class');
     }
 
     /**

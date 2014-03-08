@@ -13,11 +13,17 @@ If following modules (until now) are disabled they will then break the rest of t
 - Mage_Wishlist
 - Mage_Review
 - Mage_Rating
-- Mage_Tag?
+- Mage_Tag
+- Mage_Tax
 - Mage_Log
 - Mage_Backup
+- Mage_Customer
+- Mage_Catalog
 
-Only if you would like to disable one of the six modules above then use this mock module.
+Only if you would like to disable one of the modules above then use this mock module.
+
+Also we can't delete the database tables from some disabled modules as e.g. CatalogIndex relies von customer_group tables
+or Customer relies on some tax tables when tax is disabled.
 
 
 At Zookal we have the following modules disabled:
