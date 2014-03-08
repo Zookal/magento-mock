@@ -16,6 +16,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'gro'            => 1, // e.g. groupByCustomer
         'joi'            => 1, // e.g. joinCustomerName
         'loa'            => 1, // e.g. load and loadBy....
+        'lim'            => 1, // e.g. limit() -> on collection
         'ord'            => 1, // e.g. orderByTotalAmount
         'resetsortorder' => 1,
         'renewsession'   => 1,
