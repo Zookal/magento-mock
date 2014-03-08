@@ -84,6 +84,6 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
      */
     protected function _log($msg)
     {
-        //Mage::log(get_class($this) . '::' . $msg, null, 'mock.log');
+        // Mage::log(get_class($this) . '::' . $msg, null, 'mock.log');
     }
 }

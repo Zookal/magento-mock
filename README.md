@@ -1,14 +1,14 @@
 Zookal Mock Objects
 ===================
 
-Transparent autodetecting of disabled core modules and providing mock objects for not breaking Magento.
+Transparent auto detecting of disabled core modules and providing mock objects for not breaking Magento.
 
 Nothing to configure. No class rewrites. Only one observer. Works out of the box.
 
 Which modules causes challenges?
 --------------------------------
 
-If following modules (until now) are disabled they will then break the rest of the core:
+If one or all of the following modules (until now) are disabled they will then break the rest of the core:
 
 - Mage_Wishlist
 - Mage_Review
@@ -18,7 +18,11 @@ If following modules (until now) are disabled they will then break the rest of t
 - Mage_Log
 - Mage_Backup
 - Mage_Customer
+- Mage_Checkout
+- Mage_Sales
+- Mage_Cms
 - Mage_Catalog
+- and some more ... test it :-)
 
 Only if you would like to disable one of the modules above then use this mock module.
 
@@ -55,7 +59,7 @@ At Zookal we have the following modules disabled:
 How do I disable a module?
 --------------------------
 
-Add in your custom app/etc/modules/customer_module.xml
+Add in your custom app/etc/modules/Vendor_NameSpace.xml
 
 ```xml
 <config>
@@ -76,8 +80,8 @@ Let's say you disabled Mage_Dataflow but enabled Mage_Catalog and the system is 
 
 You have two possibilities:
 
-1. Edit app/etc/modules/Mage_All.xml and remove the appropriate dependencies.
-2. Edit your main index.php file and add a custom config model to `Mage::run()`
+1. Edit app/etc/modules/Mage_*.xml and remove the appropriate dependencies.
+2. Edit your main index.php file and add this custom config model to `Mage::run()`
 
 ```php
 Mage::run($mageRunCode, $mageRunType, array(
@@ -85,13 +89,28 @@ Mage::run($mageRunCode, $mageRunType, array(
 ));
 ```
 
-The config model `Zookal_Mock_Model_Config` will automatically resolve invalid dependencies for disabled modules.
-
+The config model `Zookal_Mock_Model_Config` will automatically resolve invalid dependencies for disabled modules. But some dependency really make sense ;-)
 
 Will there be a performance increase?
 -------------------------------------
 
-Yes there will be a performance increasement due to less loading of classes and xml files.
+Yes there will be a performance increase due to less loading of classes and xml files.
+
+I've disabled Mage_Cms!
+-----------------------
+
+The catalog system and other routes will still work but you cannot access the root page (/) because that route is
+provided by Mage_Cms. You only have two solutions:
+
+1. Customize your theme in that way that no one can access (/).
+2. Create your own front router by adding an observer to the event `controller_front_init_routers`.
+
+Blocks are also gone.
+
+Exmaples
+--------
+
+Please see the folder examples.
 
 License
 -------
