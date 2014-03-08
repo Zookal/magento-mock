@@ -25,6 +25,7 @@ class Zookal_Mock_Model_Observer
         'Mage_Rating'     => 'rating',
         'Mage_Newsletter' => 'newsletter',
         'Mage_Log'        => 'log',
+        'Mage_Dataflow'   => 'dataflow',
         'Mage_Catalog'    => 'catalog',
         'Mage_Customer'   => 'customer',
         'Mage_Backup'     => 'backup',
