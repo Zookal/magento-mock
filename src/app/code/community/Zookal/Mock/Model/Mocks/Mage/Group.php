@@ -7,15 +7,15 @@
  * @copyright   Copyright (c) Zookal Pty Ltd
  * @license     OSL - Open Software Licence 3.0 | http://opensource.org/licenses/osl-3.0.php
  */
-class Zookal_Mock_Model_Mocks_Mage_Session extends Zookal_Mock_Model_Mocks_Abstract
+class Zookal_Mock_Model_Mocks_Mage_Group extends Zookal_Mock_Model_Mocks_Abstract
 {
     /**
-     * also used in Mage_Catalog_Model_Resource_Product_Collection::addPriceData
+     * @see table tax_class
      *
      * @return int
      */
-    public function getCustomerGroupId()
+    public function getTaxClassId()
     {
-        return 0;
+        return 1;
     }
 }

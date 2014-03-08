@@ -9,7 +9,6 @@
  */
 abstract class Zookal_Mock_Model_Mocks_Abstract
 {
-
     protected $_mockMethodsReturnThis = array(
         'add'            => 1, // e.g. addCustomerFilter ...
         'cle'            => 1, // e.g. clean() clear() clearasil()
@@ -32,6 +31,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'has' => 1,
         'iss' => 1, // e.g. isSubscribed
         'isv' => 1, // e.g. isValid...
+        'isl' => 1, // e.g. isLoggedIn
         'use' => 1,
     );
 
