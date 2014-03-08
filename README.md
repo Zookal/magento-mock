@@ -95,7 +95,7 @@ provided by Mage_Cms. You only have two solutions:
 
 Blocks are also gone.
 
-Exmaples of deactivation
+Examples of deactivation
 ------------------------
 
 Please see the folder examples.
