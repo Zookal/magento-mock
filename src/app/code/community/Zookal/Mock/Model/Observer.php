@@ -28,6 +28,7 @@ class Zookal_Mock_Model_Observer
         'Mage_Dataflow'   => 'dataflow',
         'Mage_Catalog'    => 'catalog',
         'Mage_Customer'   => 'customer',
+        'Mage_Cms'        => 'cms',
         'Mage_Backup'     => 'backup',
     );
 

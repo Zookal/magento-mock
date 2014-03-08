@@ -7,6 +7,11 @@
     </modules>
 
     <global>
+        <blocks>
+            <zookal_mock>
+                <class>Zookal_Mock_Block</class>
+            </zookal_mock>
+        </blocks>
         <models>
             <zookal_mock>
                 <class>Zookal_Mock_Model</class>

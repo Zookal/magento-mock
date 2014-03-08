@@ -27,6 +27,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
     protected $_mockMethodsReturnNull = array(
         'count' => 1,
         'get'   => 1,
+        'toh'   => 1, // toHtml() on blocks
     );
     protected $_mockMethodsReturnFalse = array(
         'has' => 1,
