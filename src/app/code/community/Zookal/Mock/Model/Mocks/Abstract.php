@@ -9,6 +9,8 @@
  */
 abstract class Zookal_Mock_Model_Mocks_Abstract
 {
+    protected $_isLogEnabled = false;
+
     protected $_mockMethodsReturnThis = array(
         'add'            => 1, // e.g. addCustomerFilter ...
         'cle'            => 1, // e.g. clean() clear() clearasil()
@@ -30,12 +32,21 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'toh'   => 1, // toHtml() on blocks
     );
     protected $_mockMethodsReturnFalse = array(
+        'can' => 1, // canCapture and all other payment related methods
         'has' => 1,
+        'isa' => 1, // e.g. isAvailable -> Payment
+        'isg' => 1, // e.g. isGateway -> Payment
+        'isi' => 1, // e.g. isInitializeNeeded -> Payment
         'iss' => 1, // e.g. isSubscribed
         'isv' => 1, // e.g. isValid...
         'isl' => 1, // e.g. isLoggedIn
         'use' => 1,
     );
+
+    public function __construct()
+    {
+        $this->_isLogEnabled = Mage::getStoreConfigFlag('system/zookalmock/enable_method_log');
+    }
 
     /**
      * Add/Set/Get attribute wrapper
@@ -50,18 +61,18 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
     {
         $lowerMethod  = strtolower($method);
         $firstThree   = substr($lowerMethod, 0, 3);
-        $isCollection = strpos($lowerMethod, 'collection') !== FALSE;
-        if (TRUE === $isCollection || isset($this->_mockMethodsReturnThis[$lowerMethod]) || isset($this->_mockMethodsReturnThis[$firstThree])) {
+        $isCollection = strpos($lowerMethod, 'collection') !== false;
+        if (true === $isCollection || isset($this->_mockMethodsReturnThis[$lowerMethod]) || isset($this->_mockMethodsReturnThis[$firstThree])) {
             $this->_log($method . ' return this');
             return $this;
         }
         if (isset($this->_mockMethodsReturnNull[$lowerMethod]) || isset($this->_mockMethodsReturnNull[$firstThree])) {
             $this->_log($method . ' return null');
-            return NULL;
+            return null;
         }
         if (isset($this->_mockMethodsReturnFalse[$firstThree])) {
             $this->_log($method . ' return false');
-            return FALSE;
+            return false;
         }
 
         throw new Varien_Exception("Invalid method " . get_class($this) . "::" . $method . "(" . print_r($args, 1) . ")");
@@ -84,6 +95,8 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
      */
     protected function _log($msg)
     {
-        // Mage::log(get_class($this) . '::' . $msg, null, 'mock.log');
+        if (true === $this->_isLogEnabled) {
+            Mage::log(get_class($this) . '::' . $msg, null, 'mock.log');
+        }
     }
 }
