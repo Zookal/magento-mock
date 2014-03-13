@@ -9,7 +9,7 @@
  */
 
 /**
- * core/alyout checks if a block is an instance of Mage_Core_Block_Abstract otherwise FE rendering fails :-(
+ * core/layout checks if a block is an instance of Mage_Core_Block_Abstract otherwise FE rendering fails :-(
  *
  * Class Zookal_Mock_Block_Payment_Frontend
  */
@@ -20,6 +20,9 @@ class Zookal_Mock_Block_Payment_Frontend extends Mage_Core_Block_Abstract
      */
     protected $_payment = null;
 
+    /**
+     * @var string
+     */
     protected $_html = '{{method}}';
 
     /**
