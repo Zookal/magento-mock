@@ -12,6 +12,11 @@
                 <class>Zookal_Mock_Model</class>
             </zookal_mock>
         </models>
+        <blocks>
+            <zookal_mock>
+                <class>Zookal_Mock_Block</class>
+            </zookal_mock>
+        </blocks>
         <events>
             <controller_front_init_before>
                 <observers>

@@ -1,9 +1,11 @@
 Zookal Mock Objects
 ===================
 
-TL;DR: Transparent autodetecting of disabled core modules and providing mock objects for not breaking Magento. Nothing to configure. No class rewrites. Only one observer. Works out of the box.
+##### TL;DR: Transparent autodetecting of disabled core modules and providing mock objects for not breaking Magento. Nothing to configure. No class rewrites. Only one observer. Works out of the box.
 
 If you try to disable e.g. Mage_Newsletter or Mage_Wishlist or ... and you call certain parts of the backend or some rare parts of the frontend you will get errors that Magento cannot find the class XYZ. Best examples are the two previoulsy mentioned. If you have disabled them and you open in the backend a customer entry to edit it, the page will generate an error. Mage_Customer Edit has many dependencies with other modules. So the **Zookal Mock Module** will provide you mock objects which catches all method calls to disabled classes of that modules without breaking anything.
+
+**Uninstalling payment modules**: If you try to remove a payment module (*which has already been used by customers in the checkout*) you cannot open anymore all orders associated with that module. The reason is that the tables `sales_flat_*_payment` contains in the column `method` the method which referers to the model for loading payment relevant informations. Please see below how to uninstall your payment module without touching database tables.
 
 Which modules causes challenges?
 --------------------------------
@@ -22,6 +24,7 @@ If one or all of the following modules (until now) are disabled they will then b
 - Mage_Sales
 - Mage_Cms
 - Mage_Catalog
+- All payment modules
 - and some more ... test it :-)
 
 Only if you would like to disable one of the modules above then use this mock module.
@@ -47,6 +50,34 @@ Add in your custom app/etc/modules/Vendor_NameSpace.xml
     </modules>
 </config>
 ```
+
+How do I uninstall a payment module?
+------------------------------------
+
+An example would be if you switch from one Stripe payment module to another or changing the credit card payment provider.
+
+Simply delete all module relevant files.
+
+In one of your local modules add the following "backup" entry into the config.xml:
+
+```xml
+<config>
+    <default>
+        <payment>
+            <paypal_standard>
+                <model>zookal_mock/mocks_mage_payment</model>
+            </paypal_standard>
+            <another_payment_method>
+                <model>zookal_mock/mocks_mage_payment</model>
+            </another_payment_method>
+        </payment>
+    </default>
+</config>
+```
+The abouve xml contains the section where Mage_Paypal module has been disabled and previously used in orders. 
+
+No other database updates are required. Clear the caches and check in the backend some orders related to that payment method.
+
 
 I've disabled module FooBar but still getting errors regarding dependency?
 --------------------------------------------------------------------------
@@ -79,11 +110,6 @@ Mage_[Bundle|Rating|Review|Wishlist|Usa] requires the module Mage_XmlConnect. Th
 So deactivating Mage_XmlConnect works out as the solution. It has many dependencies. Btw: Only if you have the Magento own mobile app you'll need the
 XmlConnect module. I'll disable it every time.
 
-Will there be a performance increase?
--------------------------------------
-
-Yes there will be a performance increase due to less loading of classes and xml files.
-
 I've disabled Mage_Cms!
 -----------------------
 
@@ -94,6 +120,11 @@ provided by Mage_Cms. You only have two solutions:
 2. Create your own front router by adding an observer to the event `controller_front_init_routers`.
 
 Blocks are also gone.
+
+Will there be a performance increase?
+-------------------------------------
+
+Yes there will be a performance increase due to less loading of classes and xml files.
 
 Examples of deactivation
 ------------------------

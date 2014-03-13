@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <system>
+            <groups>
+                <zookalmock translate="label">
+                    <label>Object Mock [Zookal_Mock Module]</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>301</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable_method_log>
+                            <label>Enable logging of used methods</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Please use only during development!</comment>
+                        </enable_method_log>
+                    </fields>
+                </zookalmock>
+            </groups>
+        </system>
+    </sections>
+</config>
