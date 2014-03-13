@@ -7,6 +7,11 @@
     </modules>
 
     <global>
+        <helpers>
+            <zookal_mock>
+                <class>Zookal_Mock_Helper</class>
+            </zookal_mock>
+        </helpers>
         <models>
             <zookal_mock>
                 <class>Zookal_Mock_Model</class>
@@ -28,4 +33,15 @@
             </controller_front_init_before>
         </events>
     </global>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Mage_Cms>
+                    <files>
+                        <default>Zookal_Mock.csv</default>
+                    </files>
+                </Mage_Cms>
+            </modules>
+        </translate>
+    </adminhtml>
 </config>

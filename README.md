@@ -76,7 +76,11 @@ In one of your local modules add the following "backup" entry into the config.xm
 ```
 The abouve xml contains the section where Mage_Paypal module has been disabled and previously used in orders. 
 
-No other database updates are required. Clear the caches and check in the backend some orders related to that payment method.
+No other database updates are required. Clear the caches and check in the backend some orders related to that payment method. You will now see a key/value list of the payment details.
+
+The backend mock payment block has an integrated event `mock_payment_backend_block_to_html_before` with which you can modify the output.
+
+The frontend mock payment block uses the default block `Mage_Core_Block_Abstract` which allows you the usual modifications.
 
 
 I've disabled module FooBar but still getting errors regarding dependency?
