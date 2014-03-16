@@ -16,20 +16,21 @@ class Zookal_Mock_Model_Observer
      * @var array
      */
     protected $_mappingModel = array(
-        'Mage_Wishlist'   => 'wishlist',
-        'Mage_Tag'        => 'tag',
-        'Mage_Tax'        => 'tax',
-        'Mage_Sales'      => 'sales',
-        'Mage_Review'     => 'review',
-        'Mage_Reports'    => 'reports',
-        'Mage_Rating'     => 'rating',
-        'Mage_Newsletter' => 'newsletter',
-        'Mage_Log'        => 'log',
-        'Mage_Dataflow'   => 'dataflow',
-        'Mage_Catalog'    => 'catalog',
-        'Mage_Customer'   => 'customer',
-        'Mage_Cms'        => 'cms',
-        'Mage_Backup'     => 'backup',
+        'Mage_Wishlist'     => 'wishlist',
+        'Mage_Tag'          => 'tag',
+        'Mage_Tax'          => 'tax',
+        'Mage_Sales'        => 'sales',
+        'Mage_Review'       => 'review',
+        'Mage_Reports'      => 'reports',
+        'Mage_Rating'       => 'rating',
+        'Mage_ProductAlert' => 'productalert',
+        'Mage_Newsletter'   => 'newsletter',
+        'Mage_Log'          => 'log',
+        'Mage_Dataflow'     => 'dataflow',
+        'Mage_Catalog'      => 'catalog',
+        'Mage_Customer'     => 'customer',
+        'Mage_Cms'          => 'cms',
+        'Mage_Backup'       => 'backup',
     );
 
     /**
@@ -41,13 +42,14 @@ class Zookal_Mock_Model_Observer
         $pathPrefix      = 'global/models/';
 
         $specialMethods = array(
-            'Mage_Catalog'  => '_mageCatalog',
-            'Mage_Customer' => '_mageCustomer',
-            'Mage_Tax'      => '_mageTaxClass',
+            'Mage_Catalog'      => '_mageCatalog',
+            'Mage_Customer'     => '_mageCustomer',
+            'Mage_ProductAlert' => '_mageMockHelper',
+            'Mage_Tax'          => '_mageTaxClass',
         );
 
         foreach ($disabledModules as $moduleName => $module) {
-            if (FALSE === isset($this->_mappingModel[$moduleName])) {
+            if (false === isset($this->_mappingModel[$moduleName])) {
                 continue;
             }
             $class = 'Zookal_Mock_Model_Mocks_' . $module[0];
@@ -56,10 +58,22 @@ class Zookal_Mock_Model_Observer
             Mage::getConfig()->setNode($pathPrefix . $this->_mappingModel[$moduleName] . '/resourceModel', $resource);
             Mage::getConfig()->setNode($pathPrefix . $resource . '/class', $class);
 
-            if (TRUE === isset($specialMethods[$moduleName])) {
+            if (true === isset($specialMethods[$moduleName])) {
                 $this->{$specialMethods[$moduleName]}($pathPrefix, $moduleName, $resource);
             }
         }
+    }
+
+    /**
+     * Special Handling when Mage_ProductAlert is disabled, when need to fake a helper
+     *
+     * @param $pathPrefix
+     * @param $moduleName
+     * @param $resource
+     */
+    protected function _mageMockHelper($pathPrefix, $moduleName, $resource)
+    {
+        Mage::getConfig()->setNode('global/helpers/' . $this->_mappingModel[$moduleName] . '/class', 'zookal_mock/mocks_mage');
     }
 
     /**
@@ -115,7 +129,7 @@ class Zookal_Mock_Model_Observer
         foreach ($modules->children() as $moduleName => $node) {
             /** @var $node Mage_Core_Model_Config_Element */
             $isDisabled = strtolower($node->active) !== 'true';
-            if (TRUE === $isDisabled) {
+            if (true === $isDisabled) {
                 $_disabledModules[$moduleName] = explode('_', $moduleName);
             }
         }
