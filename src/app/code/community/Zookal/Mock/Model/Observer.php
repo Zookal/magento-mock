@@ -10,27 +10,35 @@
 class Zookal_Mock_Model_Observer
 {
     /**
+     * General Container for rewriting nodes entries
+     *
+     * @var array
+     */
+    protected $_newConfigNodes = array();
+
+    /**
      * Only add these modules which are tightly coupled with the core and causes issues once active=>false
      * Module Name => model name
      *
      * @var array
      */
     protected $_mappingModel = array(
-        'Mage_Wishlist'     => 'wishlist',
-        'Mage_Tag'          => 'tag',
-        'Mage_Tax'          => 'tax',
-        'Mage_Sales'        => 'sales',
-        'Mage_Review'       => 'review',
-        'Mage_Reports'      => 'reports',
-        'Mage_Rating'       => 'rating',
-        'Mage_ProductAlert' => 'productalert',
-        'Mage_Newsletter'   => 'newsletter',
-        'Mage_Log'          => 'log',
-        'Mage_Dataflow'     => 'dataflow',
-        'Mage_Catalog'      => 'catalog',
-        'Mage_Customer'     => 'customer',
-        'Mage_Cms'          => 'cms',
-        'Mage_Backup'       => 'backup',
+        'Mage_Wishlist'       => 'wishlist',
+        'Mage_Tag'            => 'tag',
+        'Mage_Tax'            => 'tax',
+        'Mage_Sales'          => 'sales',
+        'Mage_Review'         => 'review',
+        'Mage_Reports'        => 'reports',
+        'Mage_Rating'         => 'rating',
+        'Mage_ProductAlert'   => 'productalert',
+        'Mage_Newsletter'     => 'newsletter',
+        'Mage_Log'            => 'log',
+        'Mage_GoogleCheckout' => 'googlecheckout',
+        'Mage_Dataflow'       => 'dataflow',
+        'Mage_Catalog'        => 'catalog',
+        'Mage_Customer'       => 'customer',
+        'Mage_Cms'            => 'cms',
+        'Mage_Backup'         => 'backup',
     );
 
     /**
@@ -42,10 +50,11 @@ class Zookal_Mock_Model_Observer
         $pathPrefix      = 'global/models/';
 
         $specialMethods = array(
-            'Mage_Catalog'      => '_mageCatalog',
-            'Mage_Customer'     => '_mageCustomer',
-            'Mage_ProductAlert' => '_mageMockHelper',
-            'Mage_Tax'          => '_mageTaxClass',
+            'Mage_Catalog'        => '_mageCatalog',
+            'Mage_Customer'       => '_mageCustomer',
+            'Mage_GoogleCheckout' => '_mageGoogleCheckout',
+            'Mage_ProductAlert'   => '_mageMockHelper',
+            'Mage_Tax'            => '_mageTaxClass',
         );
 
         foreach ($disabledModules as $moduleName => $module) {
@@ -53,14 +62,31 @@ class Zookal_Mock_Model_Observer
                 continue;
             }
             $class = 'Zookal_Mock_Model_Mocks_' . $module[0];
-            Mage::getConfig()->setNode($pathPrefix . $this->_mappingModel[$moduleName] . '/class', $class);
+            $this->_setConfigNode($pathPrefix . $this->_mappingModel[$moduleName] . '/class', $class);
             $resource = $this->_mappingModel[$moduleName] . '_resource';
-            Mage::getConfig()->setNode($pathPrefix . $this->_mappingModel[$moduleName] . '/resourceModel', $resource);
-            Mage::getConfig()->setNode($pathPrefix . $resource . '/class', $class);
+            $this->_setConfigNode($pathPrefix . $this->_mappingModel[$moduleName] . '/resourceModel', $resource);
+            $this->_setConfigNode($pathPrefix . $resource . '/class', $class);
 
             if (true === isset($specialMethods[$moduleName])) {
                 $this->{$specialMethods[$moduleName]}($pathPrefix, $moduleName, $resource);
             }
+        }
+        $this->_processSetNodes();
+    }
+
+    /**
+     * Special Handling when Mage_GoogleCheckout is disabled. It has a dependency in Mage_Sales/etc/config.xml :-(
+     *
+     * @param $pathPrefix
+     * @param $moduleName
+     * @param $resource
+     */
+    protected function _mageGoogleCheckout($pathPrefix, $moduleName, $resource)
+    {
+        $prefixes = $this->_getAllPathPrefixes();
+        foreach ($prefixes as $prefix) {
+            $this->_setConfigNode($prefix . '/payment/' . $this->_mappingModel[$moduleName] . '/active', '0');
+            $this->_setConfigNode($prefix . '/payment/' . $this->_mappingModel[$moduleName] . '/model', 'zookal_mock/mocks_mage_payment');
         }
     }
 
@@ -73,7 +99,7 @@ class Zookal_Mock_Model_Observer
      */
     protected function _mageMockHelper($pathPrefix, $moduleName, $resource)
     {
-        Mage::getConfig()->setNode('global/helpers/' . $this->_mappingModel[$moduleName] . '/class', 'zookal_mock/mocks_mage');
+        $this->_setConfigNode('global/helpers/' . $this->_mappingModel[$moduleName] . '/class', 'zookal_mock/mocks_mage');
     }
 
     /**
@@ -86,10 +112,10 @@ class Zookal_Mock_Model_Observer
     protected function _mageCatalog($pathPrefix, $moduleName, $resource)
     {
         $prefix = 'global/catalog/product/type/simple/';
-        Mage::getConfig()->setNode($prefix . 'label', 'Simple Product');
-        Mage::getConfig()->setNode($prefix . 'model', 'zookal_mock/mocks_mage_product');
-        Mage::getConfig()->setNode($prefix . 'composite', '0');
-        Mage::getConfig()->setNode($prefix . 'index_priority', '10');
+        $this->_setConfigNode($prefix . 'label', 'Simple Product');
+        $this->_setConfigNode($prefix . 'model', 'zookal_mock/mocks_mage_product');
+        $this->_setConfigNode($prefix . 'composite', '0');
+        $this->_setConfigNode($prefix . 'index_priority', '10');
     }
 
     /**
@@ -102,7 +128,7 @@ class Zookal_Mock_Model_Observer
      */
     protected function _mageCustomer($pathPrefix, $moduleName, $resource)
     {
-        Mage::getConfig()->setNode($pathPrefix . $resource . '/entities/customer_group/table', 'customer_group');
+        $this->_setConfigNode($pathPrefix . $resource . '/entities/customer_group/table', 'customer_group');
     }
 
     /**
@@ -115,7 +141,7 @@ class Zookal_Mock_Model_Observer
      */
     protected function _mageTaxClass($pathPrefix, $moduleName, $resource)
     {
-        Mage::getConfig()->setNode($pathPrefix . $resource . '/entities/tax_class/table', 'tax_class');
+        $this->_setConfigNode($pathPrefix . $resource . '/entities/tax_class/table', 'tax_class');
     }
 
     /**
@@ -134,5 +160,44 @@ class Zookal_Mock_Model_Observer
             }
         }
         return $_disabledModules;
+    }
+
+    /**
+     * @param string $path
+     * @param string $value
+     */
+    protected function _setConfigNode($path, $value)
+    {
+        $this->_newConfigNodes[$path] = $value;
+    }
+
+    /**
+     * runs setNode on getConfig
+     */
+    protected function _processSetNodes()
+    {
+        foreach ($this->_newConfigNodes as $path => $value) {
+            Mage::getConfig()->setNode($path, $value);
+        }
+    }
+
+    /**
+     * refactor when used more than once
+     *
+     * @return array
+     */
+    protected function _getAllPathPrefixes()
+    {
+        $prefixes = array(
+            'default'      => 'default',
+            'stores/admin' => 'stores/admin',
+        );
+
+        $stores = Mage::app()->getStores();
+        foreach ($stores as $store) {
+            /** @var $store Mage_Core_Model_Store */
+            $prefixes['stores/' . $store->getCode()] = 'stores/' . $store->getCode();
+        }
+        return $prefixes;
     }
 }
