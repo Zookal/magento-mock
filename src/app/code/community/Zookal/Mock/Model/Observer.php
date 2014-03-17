@@ -54,7 +54,9 @@ class Zookal_Mock_Model_Observer
             'Mage_Customer'       => '_mageCustomer',
             'Mage_GoogleCheckout' => '_mageGoogleCheckout',
             'Mage_ProductAlert'   => '_mageMockHelper',
+            'Mage_Review'         => '_mageMockHelper',
             'Mage_Tax'            => '_mageTaxClass',
+            'Mage_Wishlist'       => '_mageMockHelper',
         );
 
         foreach ($disabledModules as $moduleName => $module) {
