@@ -9,5 +9,4 @@
  */
 class Zookal_Mock_Helper_Data extends Mage_Core_Helper_Abstract
 {
-
 }

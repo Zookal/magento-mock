@@ -125,6 +125,21 @@ provided by Mage_Cms. You only have two solutions:
 
 Blocks are also gone.
 
+Can I remove the files of the disabled modules?
+-----------------------------------------------
+
+Yes you can! Except:
+
+- Mage_AdminNotification
+- Mage_Log
+- Mage_Tag
+
+Because some of the classes of the these modules are used in adminhtml but these classes are not instanciated using the factory method ... they are called directly for e.g. static method access, e.g.: 
+
+- `Mage_Log_Model_Visitor::getOnlineMinutesInterval()` in `Mage_Adminhtml_Block_Customer_Edit_Tab_View`.
+- `Mage_Tag_Model_Tag::STATUS_DISABLED` in `Mage_Adminhtml_Block_Customer_Edit_Tab_Tag`
+
+
 Will there be a performance increase?
 -------------------------------------
 

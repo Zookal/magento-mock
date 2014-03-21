@@ -20,6 +20,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'loa'            => 1, // e.g. load and loadBy....
         'lim'            => 1, // e.g. limit() -> on collection
         'ord'            => 1, // e.g. orderByTotalAmount
+        'pre'            => 1, // e.g. prepare()
         'resetsortorder' => 1,
         'renewsession'   => 1,
         'set'            => 1,
