@@ -39,7 +39,10 @@ class Zookal_Mock_Model_Observer
         'Mage_Customer'       => 'customer',
         'Mage_Cms'            => 'cms',
         'Mage_Backup'         => 'backup',
+        'Mage_Adminhtml'      => 'adminhtml',
     );
+
+    private $_includePathSet = NULL;
 
     /**
      * @param Varien_Event_Observer $observer
@@ -50,6 +53,7 @@ class Zookal_Mock_Model_Observer
         $pathPrefix      = 'global/models/';
 
         $specialMethods = array(
+            'Mage_Adminhtml'      => '_mageAdminhtml',
             'Mage_Catalog'        => '_mageCatalog',
             'Mage_Customer'       => '_mageCustomer',
             'Mage_GoogleCheckout' => '_mageGoogleCheckout',
@@ -60,7 +64,7 @@ class Zookal_Mock_Model_Observer
         );
 
         foreach ($disabledModules as $moduleName => $module) {
-            if (false === isset($this->_mappingModel[$moduleName])) {
+            if (FALSE === isset($this->_mappingModel[$moduleName])) {
                 continue;
             }
             $class = 'Zookal_Mock_Model_Mocks_' . $module[0];
@@ -69,11 +73,23 @@ class Zookal_Mock_Model_Observer
             $this->_setConfigNode($pathPrefix . $this->_mappingModel[$moduleName] . '/resourceModel', $resource);
             $this->_setConfigNode($pathPrefix . $resource . '/class', $class);
 
-            if (true === isset($specialMethods[$moduleName])) {
+            if (TRUE === isset($specialMethods[$moduleName])) {
                 $this->{$specialMethods[$moduleName]}($pathPrefix, $moduleName, $resource);
             }
         }
         $this->_processSetNodes();
+    }
+
+    /**
+     * Special Handling when Adminhtml is disabled and physically removed
+     *
+     * @param $pathPrefix
+     * @param $moduleName
+     * @param $resource
+     */
+    protected function _mageAdminhtml($pathPrefix, $moduleName, $resource)
+    {
+        $this->_setMockIncludePath();
     }
 
     /**
@@ -157,7 +173,7 @@ class Zookal_Mock_Model_Observer
         foreach ($modules->children() as $moduleName => $node) {
             /** @var $node Mage_Core_Model_Config_Element */
             $isDisabled = strtolower($node->active) !== 'true';
-            if (true === $isDisabled) {
+            if (TRUE === $isDisabled) {
                 $_disabledModules[$moduleName] = explode('_', $moduleName);
             }
         }
@@ -201,5 +217,25 @@ class Zookal_Mock_Model_Observer
             $prefixes['stores/' . $store->getCode()] = 'stores/' . $store->getCode();
         }
         return $prefixes;
+    }
+
+    /**
+     * @param array $adminHtmlFakePath
+     *
+     * @return bool
+     */
+    protected function _setMockIncludePath(array $adminHtmlFakePath = NULL)
+    {
+        if (NULL === $this->_includePathSet) {
+            $adminHtmlFakePath     = NULL === $adminHtmlFakePath
+                ? array(
+                    'app', 'code', 'community', 'Zookal', 'Mock', 'Model', 'Mocks'
+                )
+                : $adminHtmlFakePath;
+            $includePath           = BP . DS . implode(DS, $adminHtmlFakePath) . PS . get_include_path();
+            $this->_includePathSet = set_include_path($includePath);
+        }
+
+        return $this->_includePathSet !== FALSE;
     }
 }
