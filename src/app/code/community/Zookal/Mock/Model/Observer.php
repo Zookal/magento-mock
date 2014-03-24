@@ -39,7 +39,31 @@ class Zookal_Mock_Model_Observer
         'Mage_Customer'       => 'customer',
         'Mage_Cms'            => 'cms',
         'Mage_Backup'         => 'backup',
+        'Mage_Adminhtml'      => 'adminhtml',
     );
+
+    /**
+     * These methods will only be executed when that module has been disabled.
+     *
+     * @var array
+     */
+    protected $_specialMethods = array(
+        'Mage_Adminhtml'      => '_mageMockIncludePath',
+        'Mage_Catalog'        => '_mageCatalog',
+        'Mage_Customer'       => '_mageCustomer',
+        'Mage_GoogleCheckout' => '_mageGoogleCheckout',
+        'Mage_Log'            => '_mageMockIncludePath',
+        'Mage_ProductAlert'   => '_mageMockHelper',
+        'Mage_Review'         => '_mageMockHelper',
+        'Mage_Tag'            => '_mageMockIncludePath',
+        'Mage_Tax'            => '_mageTaxClass',
+        'Mage_Wishlist'       => '_mageMockHelper',
+    );
+
+    /**
+     * @var boolean
+     */
+    private $_includePathSet = NULL;
 
     /**
      * @param Varien_Event_Observer $observer
@@ -49,18 +73,8 @@ class Zookal_Mock_Model_Observer
         $disabledModules = $this->_getDisabledModules();
         $pathPrefix      = 'global/models/';
 
-        $specialMethods = array(
-            'Mage_Catalog'        => '_mageCatalog',
-            'Mage_Customer'       => '_mageCustomer',
-            'Mage_GoogleCheckout' => '_mageGoogleCheckout',
-            'Mage_ProductAlert'   => '_mageMockHelper',
-            'Mage_Review'         => '_mageMockHelper',
-            'Mage_Tax'            => '_mageTaxClass',
-            'Mage_Wishlist'       => '_mageMockHelper',
-        );
-
         foreach ($disabledModules as $moduleName => $module) {
-            if (false === isset($this->_mappingModel[$moduleName])) {
+            if (FALSE === isset($this->_mappingModel[$moduleName])) {
                 continue;
             }
             $class = 'Zookal_Mock_Model_Mocks_' . $module[0];
@@ -69,11 +83,33 @@ class Zookal_Mock_Model_Observer
             $this->_setConfigNode($pathPrefix . $this->_mappingModel[$moduleName] . '/resourceModel', $resource);
             $this->_setConfigNode($pathPrefix . $resource . '/class', $class);
 
-            if (true === isset($specialMethods[$moduleName])) {
-                $this->{$specialMethods[$moduleName]}($pathPrefix, $moduleName, $resource);
-            }
+            $this->{$this->_getSpecialMethod($moduleName)}($pathPrefix, $moduleName, $resource);
         }
         $this->_processSetNodes();
+    }
+
+    /**
+     * Runs a specialMethod if its found otherwise _mageVoid will be executed
+     *
+     * @param $moduleName
+     *
+     * @return string
+     */
+    protected function _getSpecialMethod($moduleName)
+    {
+        return isset($this->_specialMethods[$moduleName]) ? $this->_specialMethods[$moduleName] : '_mageVoid';
+    }
+
+    /**
+     * Special Handling when Mage_Adminhtml/Mage_Log/Mage_Tag is disabled and physically removed
+     *
+     * @param $pathPrefix
+     * @param $moduleName
+     * @param $resource
+     */
+    protected function _mageMockIncludePath($pathPrefix, $moduleName, $resource)
+    {
+        $this->_setMockIncludePath();
     }
 
     /**
@@ -147,6 +183,17 @@ class Zookal_Mock_Model_Observer
     }
 
     /**
+     * empty method for fallback
+     *
+     * @param $pathPrefix
+     * @param $moduleName
+     * @param $resource
+     */
+    protected function _mageVoid($pathPrefix, $moduleName, $resource)
+    {
+    }
+
+    /**
      * @return array
      */
     protected function _getDisabledModules()
@@ -157,7 +204,7 @@ class Zookal_Mock_Model_Observer
         foreach ($modules->children() as $moduleName => $node) {
             /** @var $node Mage_Core_Model_Config_Element */
             $isDisabled = strtolower($node->active) !== 'true';
-            if (true === $isDisabled) {
+            if (TRUE === $isDisabled) {
                 $_disabledModules[$moduleName] = explode('_', $moduleName);
             }
         }
@@ -201,5 +248,28 @@ class Zookal_Mock_Model_Observer
             $prefixes['stores/' . $store->getCode()] = 'stores/' . $store->getCode();
         }
         return $prefixes;
+    }
+
+    /**
+     * Appends a new include path to the current existing one.
+     * Appending is for performance reasons mandatory
+     *
+     * @param array $adminHtmlFakePath
+     *
+     * @return bool
+     */
+    protected function _setMockIncludePath(array $adminHtmlFakePath = NULL)
+    {
+        if (NULL === $this->_includePathSet) {
+            $adminHtmlFakePath     = NULL === $adminHtmlFakePath
+                ? array(
+                    'app', 'code', 'community', 'Zookal', 'Mock', 'Model', 'Mocks'
+                )
+                : $adminHtmlFakePath;
+            $includePath           = get_include_path() . PS . BP . DS . implode(DS, $adminHtmlFakePath);
+            $this->_includePathSet = set_include_path($includePath) !== FALSE;
+        }
+
+        return $this->_includePathSet;
     }
 }
