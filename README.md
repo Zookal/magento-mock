@@ -24,6 +24,7 @@ If one or all of the following modules (until now) are disabled they will then b
 - Mage_Sales
 - Mage_Cms
 - Mage_Catalog
+- Mage_Adminhtml
 - All payment modules
 - and some more ... test it :-)
 
@@ -56,7 +57,7 @@ How do I uninstall a payment module?
 
 An example would be if you switch from one Stripe payment module to another or changing the credit card payment provider.
 
-Simply delete all module relevant files.
+Simply delete/uninstall all module relevant files.
 
 In one of your local modules add the following "backup" entry into the config.xml:
 
@@ -74,13 +75,31 @@ In one of your local modules add the following "backup" entry into the config.xm
     </default>
 </config>
 ```
-The abouve xml contains the section where Mage_Paypal module has been disabled and previously used in orders. 
+The above xml contains the section where Mage_Paypal module has been disabled and previously used in orders. 
 
 No other database updates are required. Clear the caches and check in the backend some orders related to that payment method. You will now see a key/value list of the payment details.
 
 The backend mock payment block has an integrated event `mock_payment_backend_block_to_html_before` with which you can modify the output.
 
 The frontend mock payment block uses the default block `Mage_Core_Block_Abstract` which allows you the usual modifications.
+
+I've disabled and removed Mage_Adminhtml
+----------------------------------------
+
+You rock! 
+
+Did you remove every Adminhtml area via `$ find . -iname "adminhtml" -type d -exec rm -Rf {} +` ?
+
+Running a backend-less version of Magento saves you processor time, space, speeds up your store and improves security. All missing required adminhtml files will be transparently mocked. Nothing to configure!
+
+#### But how do I maintain a backend-less store?
+
+You have two solutions:
+
+1. Install your backend on a different server (or different path with different domain) and share the same database with the frontend.
+2. Use on the command line the awesome tool [n98-magerun](http://magerun.net) (1)
+
+(1) There is currently a feature missing in n98-magerun [https://github.com/netz98/n98-magerun/issues/309](https://github.com/netz98/n98-magerun/issues/309) that you cannot configure `Mage:run()` to use a custom configuration model as explained below.
 
 
 I've disabled module FooBar but still getting errors regarding dependency?
@@ -117,8 +136,7 @@ XmlConnect module. I'll disable it every time.
 I've disabled Mage_Cms!
 -----------------------
 
-The catalog system and other routes will still work but you cannot access the root page (/) because that route is
-provided by Mage_Cms. You only have two solutions:
+The catalog system and other routes will still work but you cannot access the root page (/) because that route is provided by Mage_Cms. You only have two solutions:
 
 1. Customize your theme in that way that no one can access (/).
 2. Create your own front router by adding an observer to the event `controller_front_init_routers`.
@@ -128,17 +146,16 @@ Blocks are also gone.
 Can I remove the files of the disabled modules?
 -----------------------------------------------
 
-Yes you can! Except:
+Yes you can! And you can even remove
 
 - Mage_AdminNotification
+- Mage_Adminhtml
 - Mage_Log
 - Mage_Tag
 
-Because some of the classes of the these modules are used in adminhtml but these classes are not instanciated using the factory method ... they are called directly for e.g. static method access, e.g.: 
+which have hardcoded dependencies through the whole Mage_Adminhtml code (if adminhtml has not been removed).
 
-- `Mage_Log_Model_Visitor::getOnlineMinutesInterval()` in `Mage_Adminhtml_Block_Customer_Edit_Tab_View`.
-- `Mage_Tag_Model_Tag::STATUS_DISABLED` in `Mage_Adminhtml_Block_Customer_Edit_Tab_Tag`
-
+The missing models will also be mocked via the PHP set_include_path() method. Fully compatible from Magento 1.1.x
 
 Will there be a performance increase?
 -------------------------------------
