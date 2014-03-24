@@ -42,6 +42,27 @@ class Zookal_Mock_Model_Observer
         'Mage_Adminhtml'      => 'adminhtml',
     );
 
+    /**
+     * These methods will only be executed when that module has been disabled.
+     *
+     * @var array
+     */
+    protected $_specialMethods = array(
+        'Mage_Adminhtml'      => '_mageMockIncludePath',
+        'Mage_Catalog'        => '_mageCatalog',
+        'Mage_Customer'       => '_mageCustomer',
+        'Mage_GoogleCheckout' => '_mageGoogleCheckout',
+        'Mage_Log'            => '_mageMockIncludePath',
+        'Mage_ProductAlert'   => '_mageMockHelper',
+        'Mage_Review'         => '_mageMockHelper',
+        'Mage_Tag'            => '_mageMockIncludePath',
+        'Mage_Tax'            => '_mageTaxClass',
+        'Mage_Wishlist'       => '_mageMockHelper',
+    );
+
+    /**
+     * @var boolean
+     */
     private $_includePathSet = NULL;
 
     /**
@@ -51,17 +72,6 @@ class Zookal_Mock_Model_Observer
     {
         $disabledModules = $this->_getDisabledModules();
         $pathPrefix      = 'global/models/';
-
-        $specialMethods = array(
-            'Mage_Adminhtml'      => '_mageAdminhtml',
-            'Mage_Catalog'        => '_mageCatalog',
-            'Mage_Customer'       => '_mageCustomer',
-            'Mage_GoogleCheckout' => '_mageGoogleCheckout',
-            'Mage_ProductAlert'   => '_mageMockHelper',
-            'Mage_Review'         => '_mageMockHelper',
-            'Mage_Tax'            => '_mageTaxClass',
-            'Mage_Wishlist'       => '_mageMockHelper',
-        );
 
         foreach ($disabledModules as $moduleName => $module) {
             if (FALSE === isset($this->_mappingModel[$moduleName])) {
@@ -73,21 +83,31 @@ class Zookal_Mock_Model_Observer
             $this->_setConfigNode($pathPrefix . $this->_mappingModel[$moduleName] . '/resourceModel', $resource);
             $this->_setConfigNode($pathPrefix . $resource . '/class', $class);
 
-            if (TRUE === isset($specialMethods[$moduleName])) {
-                $this->{$specialMethods[$moduleName]}($pathPrefix, $moduleName, $resource);
-            }
+            $this->{$this->_getSpecialMethod($moduleName)}($pathPrefix, $moduleName, $resource);
         }
         $this->_processSetNodes();
     }
 
     /**
-     * Special Handling when Adminhtml is disabled and physically removed
+     * Runs a specialMethod if its found otherwise _mageVoid will be executed
+     *
+     * @param $moduleName
+     *
+     * @return string
+     */
+    protected function _getSpecialMethod($moduleName)
+    {
+        return isset($this->_specialMethods[$moduleName]) ? $this->_specialMethods[$moduleName] : '_mageVoid';
+    }
+
+    /**
+     * Special Handling when Mage_Adminhtml/Mage_Log/Mage_Tag is disabled and physically removed
      *
      * @param $pathPrefix
      * @param $moduleName
      * @param $resource
      */
-    protected function _mageAdminhtml($pathPrefix, $moduleName, $resource)
+    protected function _mageMockIncludePath($pathPrefix, $moduleName, $resource)
     {
         $this->_setMockIncludePath();
     }
@@ -163,6 +183,17 @@ class Zookal_Mock_Model_Observer
     }
 
     /**
+     * empty method for fallback
+     *
+     * @param $pathPrefix
+     * @param $moduleName
+     * @param $resource
+     */
+    protected function _mageVoid($pathPrefix, $moduleName, $resource)
+    {
+    }
+
+    /**
      * @return array
      */
     protected function _getDisabledModules()
@@ -220,6 +251,9 @@ class Zookal_Mock_Model_Observer
     }
 
     /**
+     * Appends a new include path to the current existing one.
+     * Appending is for performance reasons mandatory
+     *
      * @param array $adminHtmlFakePath
      *
      * @return bool
@@ -232,10 +266,10 @@ class Zookal_Mock_Model_Observer
                     'app', 'code', 'community', 'Zookal', 'Mock', 'Model', 'Mocks'
                 )
                 : $adminHtmlFakePath;
-            $includePath           = BP . DS . implode(DS, $adminHtmlFakePath) . PS . get_include_path();
-            $this->_includePathSet = set_include_path($includePath);
+            $includePath           = get_include_path() . PS . BP . DS . implode(DS, $adminHtmlFakePath);
+            $this->_includePathSet = set_include_path($includePath) !== FALSE;
         }
 
-        return $this->_includePathSet !== FALSE;
+        return $this->_includePathSet;
     }
 }

@@ -10,7 +10,8 @@
 
 /**
  * Class Mage_Adminhtml_Helper_Data
- * Do not change that class name!
+ * Do not change the class name, as it is needed for the autoloader
+ * @see Zookal_Mock_Model_Observer::_setMockIncludePath
  */
 class Mage_Adminhtml_Helper_Data extends Zookal_Mock_Model_Mocks_Abstract
 {
