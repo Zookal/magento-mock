@@ -48,7 +48,8 @@ class Zookal_Mock_Model_Config extends Mage_Core_Model_Config
      */
     protected function _sortModuleDepends($modules)
     {
-        $disabledModules = $this->_getDisabledModules($modules);
+
+        $disabledModules = $this->getDisabledModules($modules);
 
         foreach ($modules as $moduleName => &$config) {
             if (FALSE === isset($this->_dependencyLiars[$moduleName]) || FALSE === $config['active']) {
@@ -69,7 +70,7 @@ class Zookal_Mock_Model_Config extends Mage_Core_Model_Config
      *
      * @return array
      */
-    protected function _getDisabledModules(array $modules)
+    public function getDisabledModules(array $modules)
     {
         $_disabledModules = array();
         foreach ($modules as $moduleName => $node) {
