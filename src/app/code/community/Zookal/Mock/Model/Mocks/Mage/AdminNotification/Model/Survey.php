@@ -17,12 +17,12 @@ class Mage_AdminNotification_Model_Survey extends Zookal_Mock_Model_Mocks_Abstra
 {
     public static function isSurveyViewed()
     {
-        return TRUE;
+        return true;
     }
 
     public static function isSurveyUrlValid()
     {
-        return FALSE;
+        return false;
     }
 
     public static function getSurveyUrl()

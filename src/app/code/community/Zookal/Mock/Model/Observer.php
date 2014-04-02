@@ -63,7 +63,7 @@ class Zookal_Mock_Model_Observer
     /**
      * @var boolean
      */
-    private $_includePathSet = NULL;
+    private $_includePathSet = null;
 
     /**
      * @param Varien_Event_Observer $observer
@@ -74,7 +74,7 @@ class Zookal_Mock_Model_Observer
         $pathPrefix      = 'global/models/';
 
         foreach ($disabledModules as $moduleName => $module) {
-            if (FALSE === isset($this->_mappingModel[$moduleName])) {
+            if (false === isset($this->_mappingModel[$moduleName])) {
                 continue;
             }
             $class = 'Zookal_Mock_Model_Mocks_' . $module[0];
@@ -204,7 +204,7 @@ class Zookal_Mock_Model_Observer
         foreach ($modules->children() as $moduleName => $node) {
             /** @var $node Mage_Core_Model_Config_Element */
             $isDisabled = strtolower($node->active) !== 'true';
-            if (TRUE === $isDisabled) {
+            if (true === $isDisabled) {
                 $_disabledModules[$moduleName] = explode('_', $moduleName);
             }
         }
@@ -258,16 +258,16 @@ class Zookal_Mock_Model_Observer
      *
      * @return bool
      */
-    protected function _setMockIncludePath(array $adminHtmlFakePath = NULL)
+    protected function _setMockIncludePath(array $adminHtmlFakePath = null)
     {
-        if (NULL === $this->_includePathSet) {
-            $adminHtmlFakePath     = NULL === $adminHtmlFakePath
+        if (null === $this->_includePathSet) {
+            $adminHtmlFakePath     = null === $adminHtmlFakePath
                 ? array(
                     'app', 'code', 'community', 'Zookal', 'Mock', 'Model', 'Mocks'
                 )
                 : $adminHtmlFakePath;
             $includePath           = get_include_path() . PS . BP . DS . implode(DS, $adminHtmlFakePath);
-            $this->_includePathSet = set_include_path($includePath) !== FALSE;
+            $this->_includePathSet = set_include_path($includePath) !== false;
         }
 
         return $this->_includePathSet;
