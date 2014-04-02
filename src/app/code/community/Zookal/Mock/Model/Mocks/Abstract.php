@@ -9,6 +9,12 @@
  */
 abstract class Zookal_Mock_Model_Mocks_Abstract
 {
+
+    /**
+     * @var Zookal_Mock_Helper_Data
+     */
+    protected $_helper = null;
+
     protected $_isLogEnabled = false;
 
     protected $_mockMethodsReturnThis = array(
@@ -44,9 +50,10 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'use' => 1,
     );
 
-    public function __construct()
+    public function __construct(Zookal_Mock_Helper_Data $helper = null)
     {
-        $this->_isLogEnabled = Mage::getStoreConfigFlag('system/zookalmock/enable_method_log');
+        $this->_helper       = $helper;
+        $this->_isLogEnabled = $this->getHelper()->isLogMethodEnabled();
     }
 
     /**
@@ -82,7 +89,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
     /**
      * Special case if Mage_Tag is disabled or any other module which rely on initLayoutMessages
      *
-     * @return false|Mage_Core_Model_Abstract
+     * @return Mage_Core_Model_Message_Collection
      */
     public function getMessages()
     {
@@ -99,5 +106,40 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         if (true === $this->_isLogEnabled) {
             Mage::log(get_class($this) . '::' . $msg, null, 'mock.log');
         }
+    }
+
+    /**
+     * @return Zookal_Mock_Helper_Data
+     */
+    public function getHelper()
+    {
+        if (null === $this->_helper) {
+            $this->_helper = Mage::helper('zookal_mock');
+        }
+        return $this->_helper;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMockMethodsReturnFalse()
+    {
+        return $this->_mockMethodsReturnFalse;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMockMethodsReturnNull()
+    {
+        return $this->_mockMethodsReturnNull;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMockMethodsReturnThis()
+    {
+        return $this->_mockMethodsReturnThis;
     }
 }

@@ -48,19 +48,7 @@ class Zookal_Mock_Model_Config extends Mage_Core_Model_Config
      */
     protected function _sortModuleDepends($modules)
     {
-        $disabledModules = $this->_getDisabledModules($modules);
-
-        foreach ($modules as $moduleName => &$config) {
-            if (FALSE === isset($this->_dependencyLiars[$moduleName]) || FALSE === $config['active']) {
-                continue;
-            }
-
-            foreach ($this->_dependencyLiars[$moduleName] as $inactiveModule) {
-                if (TRUE === isset($disabledModules[$inactiveModule])) { // check if it's really disabled
-                    unset($config['depends'][$inactiveModule]); // remove dependency
-                }
-            }
-        }
+        $modules = $this->removeDependencies($modules);
         return parent::_sortModuleDepends($modules);
     }
 
@@ -69,15 +57,44 @@ class Zookal_Mock_Model_Config extends Mage_Core_Model_Config
      *
      * @return array
      */
-    protected function _getDisabledModules(array $modules)
+    public function removeDependencies(array $modules)
+    {
+        $disabledModules = $this->getDisabledModules($modules);
+        foreach ($modules as $moduleName => $config) {
+            if (false === isset($this->_dependencyLiars[$moduleName]) || false === $config['active']) {
+                continue;
+            }
+            foreach ($this->_dependencyLiars[$moduleName] as $inactiveModule) {
+                if (true === isset($disabledModules[$inactiveModule])) { // check if it's really disabled
+                    unset($modules[$moduleName]['depends'][$inactiveModule]); // remove dependency
+                }
+            }
+        }
+        return $modules;
+    }
+
+    /**
+     * @param array $modules
+     *
+     * @return array
+     */
+    public function getDisabledModules(array $modules)
     {
         $_disabledModules = array();
         foreach ($modules as $moduleName => $node) {
-            $isDisabled = $node['active'] !== TRUE;
-            if (TRUE === $isDisabled) {
+            $isDisabled = $node['active'] !== true;
+            if (true === $isDisabled) {
                 $_disabledModules[$moduleName] = $moduleName;
             }
         }
         return $_disabledModules;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDependencyLiars()
+    {
+        return $this->_dependencyLiars;
     }
 }

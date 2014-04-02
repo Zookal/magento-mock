@@ -9,6 +9,27 @@
  */
 class Zookal_Mock_Model_Mocks_Mage_Payment extends Zookal_Mock_Model_Mocks_Abstract
 {
+    /**
+     * @var Mage_Core_Model_Store
+     */
+    protected $_store = null;
+
+    public function __construct(Zookal_Mock_Helper_Data $helper = null, Mage_Core_Model_Store $store = null)
+    {
+        parent::__construct($helper);
+        $this->_store = $store;
+    }
+
+    /**
+     * @return Mage_Core_Model_Store
+     */
+    public function getStore()
+    {
+        if (null === $this->_store) {
+            $this->_store = Mage::app()->getStore();
+        }
+        return $this->_store;
+    }
 
     /**
      * @see Mage_Payment_Helper_Data
@@ -40,6 +61,6 @@ class Zookal_Mock_Model_Mocks_Mage_Payment extends Zookal_Mock_Model_Mocks_Abstr
      */
     protected function _isAdmin()
     {
-        return (Mage::app()->getStore()->isAdmin() || Mage::getDesign()->getArea() === 'adminhtml');
+        return ($this->getStore()->isAdmin() || Mage::getDesign()->getArea() === 'adminhtml');
     }
 }
