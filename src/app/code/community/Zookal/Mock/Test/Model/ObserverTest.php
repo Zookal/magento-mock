@@ -40,22 +40,6 @@ class Zookal_Mock_Test_Model_ObserverTest extends EcomDev_PHPUnit_Test_Case
     /**
      * @test
      */
-    public function itShouldHaveAMethodSetMockPhpIncludePath()
-    {
-        $this->assertTrue(is_callable(array($this->class, 'setMockPhpIncludePath')));
-    }
-
-    /**
-     * @test
-     */
-    public function itShouldReturnBooleanWhenSettingPhpIncludePath()
-    {
-        $this->assertTrue($this->getInstance()->setMockPhpIncludePath());
-    }
-
-    /**
-     * @test
-     */
     public function itShouldMockDisabledModules()
     {
         $this->assertTrue(true); // @todo

@@ -61,11 +61,6 @@ class Zookal_Mock_Model_Observer
     );
 
     /**
-     * @var boolean
-     */
-    private $_includePathSet = null;
-
-    /**
      * @param Varien_Event_Observer $observer
      */
     public function mockDisabledModules(Varien_Event_Observer $observer)
@@ -109,7 +104,7 @@ class Zookal_Mock_Model_Observer
      */
     protected function _mageMockIncludePath($pathPrefix, $moduleName, $resource)
     {
-        $this->setMockPhpIncludePath();
+        Mage::helper('zookal_mock')->setMockPhpIncludePath();
     }
 
     /**
@@ -248,28 +243,5 @@ class Zookal_Mock_Model_Observer
             $prefixes['stores/' . $store->getCode()] = 'stores/' . $store->getCode();
         }
         return $prefixes;
-    }
-
-    /**
-     * Appends a new include path to the current existing one.
-     * Appending is for performance reasons mandatory
-     *
-     * @param array $adminHtmlFakePath
-     *
-     * @return bool
-     */
-    public function setMockPhpIncludePath(array $adminHtmlFakePath = null)
-    {
-        if (null === $this->_includePathSet) {
-            $adminHtmlFakePath     = null === $adminHtmlFakePath
-                ? array(
-                    'app', 'code', 'community', 'Zookal', 'Mock', 'Model', 'Mocks'
-                )
-                : $adminHtmlFakePath;
-            $includePath           = get_include_path() . PS . BP . DS . implode(DS, $adminHtmlFakePath);
-            $this->_includePathSet = set_include_path($includePath) !== false;
-        }
-
-        return $this->_includePathSet;
     }
 }

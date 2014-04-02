@@ -103,4 +103,20 @@ class Zookal_Mock_Test_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
         $instance  = $this->getInstance($mockStore);
         $this->assertFalse($instance->isLogMethodEnabled());
     }
+
+    /**
+     * @test
+     */
+    public function itShouldHaveAMethodSetMockPhpIncludePath()
+    {
+        $this->assertTrue(is_callable(array($this->class, 'setMockPhpIncludePath')));
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldReturnBooleanWhenSettingPhpIncludePath()
+    {
+        $this->assertTrue($this->getInstance()->setMockPhpIncludePath());
+    }
 }
