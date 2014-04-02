@@ -30,7 +30,7 @@ class Zookal_Mock_Test_Model_Mocks_AbstractTest extends EcomDev_PHPUnit_Test_Cas
     /**
      * @test
      */
-    public function itShouldBeeAnInstanceOfMocksAbstract()
+    public function itShouldBeAnInstanceOfMocksAbstract()
     {
         $this->assertInstanceOf($this->class, $this->getInstance());
     }
