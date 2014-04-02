@@ -11,9 +11,32 @@ class Zookal_Mock_Test_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
 {
     protected $class = 'Zookal_Mock_Helper_Data';
 
-    public function getInstance()
+    /**
+     * @param int $enabled
+     *
+     * @return PHPUnit_Framework_MockObject_MockObject
+     */
+    public function getStoreMock($enabled = 0)
     {
-        return new $this->class;
+        $stubStore = $this->getMock('Mage_Core_Model_Store');
+        $stubStore->expects($this->any())
+            ->method('getConfig')
+            ->with('system/zookalmock/enable_method_log')
+            ->will($this->returnValue($enabled));
+        return $stubStore;
+    }
+
+    /**
+     * @param PHPUnit_Framework_MockObject_MockObject $mockStore
+     *
+     * @return Zookal_Mock_Helper_Data
+     */
+    public function getInstance($mockStore = null)
+    {
+        if (null === $mockStore) {
+            $mockStore = $this->getStoreMock();
+        }
+        return new $this->class($mockStore);
     }
 
     /**
@@ -30,5 +53,54 @@ class Zookal_Mock_Test_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
     public function itShouldExtendTheHelperAbstract()
     {
         $this->assertInstanceOf('Mage_Core_Helper_Abstract', $this->getInstance());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldHaveAGetStoreMethod()
+    {
+        $this->assertTrue(is_callable(array($this->class, 'getStore')));
+    }
+
+    /**
+     * @test
+     * @depends itShouldHaveAGetStoreMethod
+     */
+    public function itShouldReturnTheInjectedStoreModel()
+    {
+        $mockStore = $this->getMock('Mage_Core_Model_Store');
+        $instance  = $this->getInstance($mockStore);
+        $this->assertSame($mockStore, $instance->getStore());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldHaveAMethodIsLogMethodEnabled()
+    {
+        $this->assertTrue(is_callable(array($this->class, 'isLogMethodEnabled')));
+    }
+
+    /**
+     * @test
+     * @depends itShouldHaveAMethodIsLogMethodEnabled
+     */
+    public function itShouldReturnEnabledLog()
+    {
+        $mockStore = $this->getStoreMock(1);
+        $instance  = $this->getInstance($mockStore);
+        $this->assertTrue($instance->isLogMethodEnabled());
+    }
+
+    /**
+     * @test
+     * @depends itShouldHaveAMethodIsLogMethodEnabled
+     */
+    public function itShouldReturnDisabledLog()
+    {
+        $mockStore = $this->getStoreMock(0);
+        $instance  = $this->getInstance($mockStore);
+        $this->assertFalse($instance->isLogMethodEnabled());
     }
 }
