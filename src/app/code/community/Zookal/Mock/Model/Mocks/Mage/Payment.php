@@ -14,10 +14,12 @@ class Zookal_Mock_Model_Mocks_Mage_Payment extends Zookal_Mock_Model_Mocks_Abstr
      */
     protected $_store = null;
 
-    public function __construct(Zookal_Mock_Helper_Data $helper = null, Mage_Core_Model_Store $store = null)
+    public function __construct($helper = null, $store = null)
     {
         parent::__construct($helper);
-        $this->_store = $store;
+        if (false === empty($store) && $store instanceof Mage_Core_Model_Store) {
+            $this->_store = $store;
+        }
     }
 
     /**
