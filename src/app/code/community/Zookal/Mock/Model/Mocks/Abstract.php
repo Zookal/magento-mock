@@ -82,7 +82,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
     /**
      * Special case if Mage_Tag is disabled or any other module which rely on initLayoutMessages
      *
-     * @return false|Mage_Core_Model_Abstract
+     * @return Mage_Core_Model_Message_Collection
      */
     public function getMessages()
     {
