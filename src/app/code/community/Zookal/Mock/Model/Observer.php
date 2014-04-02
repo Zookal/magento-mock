@@ -109,7 +109,7 @@ class Zookal_Mock_Model_Observer
      */
     protected function _mageMockIncludePath($pathPrefix, $moduleName, $resource)
     {
-        $this->_setMockIncludePath();
+        $this->setMockPhpIncludePath();
     }
 
     /**
@@ -258,7 +258,7 @@ class Zookal_Mock_Model_Observer
      *
      * @return bool
      */
-    protected function _setMockIncludePath(array $adminHtmlFakePath = null)
+    public function setMockPhpIncludePath(array $adminHtmlFakePath = null)
     {
         if (null === $this->_includePathSet) {
             $adminHtmlFakePath     = null === $adminHtmlFakePath
