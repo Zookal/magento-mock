@@ -44,6 +44,13 @@
             </modules>
         </translate>
     </adminhtml>
+    <default>
+        <system>
+            <zookalmock>
+                <enable_method_log>0</enable_method_log>
+            </zookalmock>
+        </system>
+    </default>
     <phpunit>
         <suite>
             <modules>

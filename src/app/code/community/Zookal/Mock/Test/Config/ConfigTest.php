@@ -50,4 +50,12 @@ class Zookal_Mock_Test_Config_ConfigTest extends EcomDev_PHPUnit_Test_Case_Confi
         $this->assertBlockAlias('zookal_mock/payment_backend', 'Zookal_Mock_Block_Payment_Backend');
         $this->assertBlockAlias('zookal_mock/payment_frontend', 'Zookal_Mock_Block_Payment_Frontend');
     }
+
+    /**
+     * @test
+     */
+    public function itShouldHaveTheEnableMethodLog()
+    {
+        $this->assertDefaultConfigValue('system/zookalmock/enable_method_log', 0);
+    }
 }
