@@ -48,21 +48,29 @@ class Zookal_Mock_Model_Config extends Mage_Core_Model_Config
      */
     protected function _sortModuleDepends($modules)
     {
+        $modules = $this->removeDependencies($modules);
+        return parent::_sortModuleDepends($modules);
+    }
 
+    /**
+     * @param array $modules
+     *
+     * @return array
+     */
+    public function removeDependencies(array $modules)
+    {
         $disabledModules = $this->getDisabledModules($modules);
-
-        foreach ($modules as $moduleName => &$config) {
-            if (FALSE === isset($this->_dependencyLiars[$moduleName]) || FALSE === $config['active']) {
+        foreach ($modules as $moduleName => $config) {
+            if (false === isset($this->_dependencyLiars[$moduleName]) || false === $config['active']) {
                 continue;
             }
-
             foreach ($this->_dependencyLiars[$moduleName] as $inactiveModule) {
-                if (TRUE === isset($disabledModules[$inactiveModule])) { // check if it's really disabled
-                    unset($config['depends'][$inactiveModule]); // remove dependency
+                if (true === isset($disabledModules[$inactiveModule])) { // check if it's really disabled
+                    unset($modules[$moduleName]['depends'][$inactiveModule]); // remove dependency
                 }
             }
         }
-        return parent::_sortModuleDepends($modules);
+        return $modules;
     }
 
     /**
@@ -74,11 +82,19 @@ class Zookal_Mock_Model_Config extends Mage_Core_Model_Config
     {
         $_disabledModules = array();
         foreach ($modules as $moduleName => $node) {
-            $isDisabled = $node['active'] !== TRUE;
-            if (TRUE === $isDisabled) {
+            $isDisabled = $node['active'] !== true;
+            if (true === $isDisabled) {
                 $_disabledModules[$moduleName] = $moduleName;
             }
         }
         return $_disabledModules;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDependencyLiars()
+    {
+        return $this->_dependencyLiars;
     }
 }
