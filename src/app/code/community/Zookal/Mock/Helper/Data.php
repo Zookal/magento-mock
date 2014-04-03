@@ -51,20 +51,38 @@ class Zookal_Mock_Helper_Data extends Mage_Core_Helper_Abstract
      * Appends a new include path to the current existing one.
      * Appending is for performance reasons mandatory
      *
-     * @param array $customFakePath
+     * @param array   $customFakePath
+     * @param boolean $append
      *
      * @return bool
      */
-    public function setMockPhpIncludePath(array $customFakePath = null)
+    public function setMockPhpIncludePath(array $customFakePath = null, $append = true)
     {
         if (null === $this->_includePathSet) {
-            $customFakePath     = null === $customFakePath
+            $currentIncludePath = get_include_path();
+
+            $customFakePath = null === $customFakePath
                 ? array(
                     'app', 'code', 'community', 'Zookal', 'Mock', 'Model', 'Mocks'
                 )
                 : $customFakePath;
-            $includePath           = get_include_path() . PS . BP . DS . implode(DS, $customFakePath);
+
+            $customFakePath = implode(DS, $customFakePath);
+            if (strpos($currentIncludePath, $customFakePath) !== false) {
+                $this->_includePathSet = false; // has already been set
+                return $this->_includePathSet;
+            }
+
+            if (true === $append) {
+                $includePath = get_include_path() . PS . BP . DS . $customFakePath;
+            } else {
+                $includePath = $customFakePath . PS . BP . DS . get_include_path();
+            }
+
             $this->_includePathSet = set_include_path($includePath) !== false;
+        } else {
+            // every other call returns false as include path has already been set
+            $this->_includePathSet = false;
         }
 
         return $this->_includePathSet;
