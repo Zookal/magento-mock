@@ -173,7 +173,7 @@ About
 -----
 
 - Extension Key: Zookal_Mock
-- Version: x.0.0
+- Version: 1.0.0
 - It's unit tested! :-)
 
 License
