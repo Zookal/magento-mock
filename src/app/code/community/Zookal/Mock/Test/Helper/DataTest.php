@@ -115,8 +115,10 @@ class Zookal_Mock_Test_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
     /**
      * @test
      */
-    public function itShouldReturnBooleanWhenSettingPhpIncludePath()
+    public function itShouldNotSetTheMockPhpIncludePathAgain()
     {
-        $this->assertTrue($this->getInstance()->setMockPhpIncludePath());
+        $this->assertFalse($this->getInstance()->setMockPhpIncludePath());
+        $newIncludePath = get_include_path();
+        $this->assertContains('app/code/community/Zookal/Mock/Model/Mocks', $newIncludePath);
     }
 }

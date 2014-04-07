@@ -15,7 +15,12 @@
  */
 class Zookal_Mock_Test_Model_Mocks_Mage_Log_Model_VisitorTest extends Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase
 {
-    //protected $class = 'Mage_Log_Model_Visitor';
-    protected $class = 'Zookal_Mock_Model_Mocks_Mage_Block'; // dummy for passing the test ;-)
-    // @todo implement test but change the model path and getIncludePath PHP in the config so that the mock class Mage_Tag_Model_Tag will get loaded
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->_trickAutoloader();
+    }
+
+    protected $class = 'Mage_Log_Model_Visitor';
+
 }

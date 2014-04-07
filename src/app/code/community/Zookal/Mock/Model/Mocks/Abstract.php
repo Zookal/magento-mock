@@ -50,9 +50,15 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'use' => 1,
     );
 
-    public function __construct(Zookal_Mock_Helper_Data $helper = null)
+    /**
+     * @param Zookal_Mock_Helper_Data $helper
+     */
+    public function __construct($helper = null)
     {
-        $this->_helper       = $helper;
+        if (false === empty($helper) && $helper instanceof Zookal_Mock_Helper_Data) { // $helper is sometimes an empty array ...
+            $this->_helper = $helper;
+        }
+
         $this->_isLogEnabled = $this->getHelper()->isLogMethodEnabled();
     }
 

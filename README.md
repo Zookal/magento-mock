@@ -75,7 +75,7 @@ In one of your local modules add the following "backup" entry into the config.xm
     </default>
 </config>
 ```
-The above xml contains the section where Mage_Paypal module has been disabled and previously used in orders. 
+The above xml contains the section where Mage_Paypal module has been disabled and previously used in orders.
 
 No other database updates are required. Clear the caches and check in the backend some orders related to that payment method. You will now see a key/value list of the payment details.
 
@@ -86,7 +86,7 @@ The frontend mock payment block uses the default block `Mage_Core_Block_Abstract
 I've disabled and removed Mage_Adminhtml
 ----------------------------------------
 
-You rock! 
+You rock!
 
 Did you remove every Adminhtml area via `$ find . -iname "adminhtml" -type d -exec rm -Rf {} +` ?
 
@@ -168,6 +168,13 @@ Examples of deactivation
 ------------------------
 
 Please see the folder examples.
+
+About
+-----
+
+- Extension Key: Zookal_Mock
+- Version: 1.0.0
+- It's unit tested! :-)
 
 License
 -------

@@ -31,4 +31,24 @@ abstract class Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase extends
     {
         $this->assertInstanceOf('Zookal_Mock_Model_Mocks_Abstract', $this->getInstance());
     }
+
+    /**
+     * @return string
+     */
+    protected function _trickAutoloader()
+    {
+        // move our path to the beginning to trick auto loader
+        $path = array('app', 'code', 'community', 'Zookal', 'Mock', 'Model', 'Mocks');
+        $path = implode(DS, $path);
+
+        $pathParts = explode(PS, get_include_path());
+        $mockPath  = '';
+        foreach ($pathParts as $k => $v) {
+            if (false !== strpos($v, $path)) {
+                $mockPath = $v;
+                unset($pathParts[$k]);
+            }
+        }
+        return set_include_path($mockPath . PS . implode(PS, $pathParts));
+    }
 }
