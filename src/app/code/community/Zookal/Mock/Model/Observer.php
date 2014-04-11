@@ -65,9 +65,10 @@ class Zookal_Mock_Model_Observer
     );
 
     /**
-     * @param Varien_Event_Observer $observer
+     * To use this in a shell script call it: Mage::getModel('zookal_mock/observer')->mockDisabledModules();
+     * @fire controller_front_init_before
      */
-    public function mockDisabledModules(Varien_Event_Observer $observer)
+    public function mockDisabledModules()
     {
         $disabledModules = $this->_getDisabledModules();
         $pathPrefix      = 'global/models/';
