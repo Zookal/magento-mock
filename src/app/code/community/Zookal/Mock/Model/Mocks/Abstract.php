@@ -42,12 +42,18 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'can' => 1, // canCapture and all other payment related methods
         'has' => 1,
         'isa' => 1, // e.g. isAvailable -> Payment
+        'isd' => 1, // e.g. isDiscounted e.g. Weee helper
+        'ise' => 1, // e.g. isEnabled e.g. Weee helper
         'isg' => 1, // e.g. isGateway -> Payment
         'isi' => 1, // e.g. isInitializeNeeded -> Payment
+        'ism' => 1, // e.g. isMessagesAvailable -> GiftMessage
         'iss' => 1, // e.g. isSubscribed
+        'ist' => 1, // e.g. isTaxable in Weee
         'isv' => 1, // e.g. isValid...
         'isl' => 1, // e.g. isLoggedIn
         'use' => 1,
+        'typ' => 1, // Weee Helper->typeofdisplay()
+        'val' => 1, // Weee Helper->validateCatalogPricesAndFptConfiguration()
     );
 
     /**
@@ -84,12 +90,12 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
             $this->_log($method . ' return null');
             return null;
         }
-        if (isset($this->_mockMethodsReturnFalse[$firstThree])) {
+        if (isset($this->_mockMethodsReturnFalse[$firstThree]) || isset($this->_mockMethodsReturnFalse[$lowerMethod])) {
             $this->_log($method . ' return false');
             return false;
         }
 
-        throw new Varien_Exception("Invalid method " . get_class($this) . "::" . $method . "(" . print_r($args, 1) . ")");
+        throw new Varien_Exception("Invalid method " . get_class($this) . "::" . $method . ' Cannot print args ...');
     }
 
     /**

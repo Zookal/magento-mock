@@ -24,6 +24,7 @@ class Zookal_Mock_Model_Observer
      */
     protected $_mappingModel = array(
         'Mage_Wishlist'       => 'wishlist',
+        'Mage_Weee'           => 'weee',
         'Mage_Tag'            => 'tag',
         'Mage_Tax'            => 'tax',
         'Mage_Sales'          => 'sales',
@@ -34,6 +35,7 @@ class Zookal_Mock_Model_Observer
         'Mage_Newsletter'     => 'newsletter',
         'Mage_Log'            => 'log',
         'Mage_GoogleCheckout' => 'googlecheckout',
+        'Mage_GiftMessage'    => 'giftmessage',
         'Mage_Dataflow'       => 'dataflow',
         'Mage_Catalog'        => 'catalog',
         'Mage_Customer'       => 'customer',
@@ -51,6 +53,7 @@ class Zookal_Mock_Model_Observer
         'Mage_Adminhtml'      => '_mageMockIncludePath',
         'Mage_Catalog'        => '_mageCatalog',
         'Mage_Customer'       => '_mageCustomer',
+        'Mage_GiftMessage'    => '_mageMockHelper',
         'Mage_GoogleCheckout' => '_mageGoogleCheckout',
         'Mage_Log'            => '_mageMockIncludePath',
         'Mage_ProductAlert'   => '_mageMockHelper',
@@ -58,12 +61,14 @@ class Zookal_Mock_Model_Observer
         'Mage_Tag'            => '_mageMockIncludePath',
         'Mage_Tax'            => '_mageTaxClass',
         'Mage_Wishlist'       => '_mageMockHelper',
+        'Mage_Weee'           => '_mageMockWeee',
     );
 
     /**
-     * @param Varien_Event_Observer $observer
+     * To use this in a shell script call it: Mage::getModel('zookal_mock/observer')->mockDisabledModules();
+     * @fire controller_front_init_before
      */
-    public function mockDisabledModules(Varien_Event_Observer $observer)
+    public function mockDisabledModules()
     {
         $disabledModules = $this->_getDisabledModules();
         $pathPrefix      = 'global/models/';
@@ -102,7 +107,7 @@ class Zookal_Mock_Model_Observer
      * @param $moduleName
      * @param $resource
      */
-    protected function _mageMockIncludePath($pathPrefix, $moduleName, $resource)
+    protected function _mageMockIncludePath($pathPrefix = null, $moduleName = null, $resource = null)
     {
         Mage::helper('zookal_mock')->setMockPhpIncludePath();
     }
@@ -133,6 +138,19 @@ class Zookal_Mock_Model_Observer
     protected function _mageMockHelper($pathPrefix, $moduleName, $resource)
     {
         $this->_setConfigNode('global/helpers/' . $this->_mappingModel[$moduleName] . '/class', 'zookal_mock/mocks_mage');
+    }
+
+    /**
+     * Special Handling when Mage_ProductAlert is disabled, when need to fake a helper
+     *
+     * @param $pathPrefix
+     * @param $moduleName
+     * @param $resource
+     */
+    protected function _mageMockWeee($pathPrefix, $moduleName, $resource)
+    {
+        $this->_mageMockHelper($pathPrefix, $moduleName, $resource);
+        $this->_mageMockIncludePath();
     }
 
     /**
