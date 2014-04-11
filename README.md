@@ -3,7 +3,7 @@ Zookal Mock Objects
 
 ##### TL;DR: Transparent autodetecting of disabled core modules and extensions and providing mock objects for not breaking Magento. Nothing to configure. No class rewrites. Only one observer. Works out of the box.
 
-If you try to disable e.g. Mage_Newsletter or Mage_Wishlist or ... and you call certain parts of the backend or some rare parts of the frontend you will get errors that Magento cannot find the class XYZ. Best examples are the two previoulsy mentioned. If you have disabled them and you open in the backend a customer entry to edit it, the page will generate an error. Mage_Customer Edit has many dependencies with other modules. So the **Zookal Mock Module** will provide you mock objects which catches all method calls to disabled classes of that modules without breaking anything. 
+If you try to disable e.g. Mage_Newsletter or Mage_Wishlist or ... and you call certain parts of the backend or some rare parts of the frontend you will get errors that Magento cannot find the class XYZ. Best examples are the two previoulsy mentioned. If you have disabled them and you open in the backend a customer entry to edit it, the page will generate an error. Mage_Customer Edit has many dependencies with other modules. So the **Zookal Mock Module** will provide you mock objects which catches all method calls to disabled classes of that modules without breaking anything.
 
 **Uninstalling payment modules**: If you try to remove a payment module (*which has already been used by customers in the checkout*) you cannot open anymore all orders associated with that module. The reason is that the tables `sales_flat_*_payment` contains in the column `method` the method which referers to the model for loading payment relevant informations. Please see below how to uninstall your payment module without touching database tables.
 
@@ -13,6 +13,7 @@ Which modules or extensions causes challenges?
 If one or all of the following modules (until now) are disabled they will then break the rest of the core:
 
 - Mage_Wishlist
+- Mage_Weee
 - Mage_Review
 - Mage_Rating
 - Mage_Tag
@@ -25,6 +26,7 @@ If one or all of the following modules (until now) are disabled they will then b
 - Mage_Cms
 - Mage_Catalog
 - Mage_Adminhtml
+- Mage_GiftMessages
 - Mage_GoogleCheckout
 - All payment modules
 - and some more ... test it :-)

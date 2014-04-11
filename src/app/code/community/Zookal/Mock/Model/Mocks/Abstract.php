@@ -46,6 +46,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'ise' => 1, // e.g. isEnabled e.g. Weee helper
         'isg' => 1, // e.g. isGateway -> Payment
         'isi' => 1, // e.g. isInitializeNeeded -> Payment
+        'ism' => 1, // e.g. isMessagesAvailable -> GiftMessage
         'iss' => 1, // e.g. isSubscribed
         'ist' => 1, // e.g. isTaxable in Weee
         'isv' => 1, // e.g. isValid...
