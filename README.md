@@ -174,9 +174,22 @@ About
 -----
 
 - Extension Key: Zookal_Mock
-- Version: 1.0.0
+- Version: 1.0.1
 - It's unit tested! :-)
 - It runs on production!
+
+History
+-------
+
+#### 1.0.1
+
+- Added Mage_Weee mocks
+- Added Mage_GiftMessage mocks
+- Possibility to run mock module in a shell script
+
+#### 1.0.0
+
+- Initial Release
 
 License
 -------
