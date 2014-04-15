@@ -32,6 +32,7 @@ class Zookal_Mock_Model_Config extends Mage_Core_Model_Config
         'Mage_Catalog'       => array('Mage_Dataflow', 'Mage_Cms'),
         'Mage_CatalogRule'   => array('Mage_Customer'),
         'Mage_CatalogIndex'  => array('Mage_CatalogRule'),
+        'Mage_Checkout'      => array('Mage_CatalogInventory'),
         'Mage_Customer'      => array('Mage_Dataflow'),
         'Mage_Persistent'    => array('Mage_Adminhtml'),
         'Mage_Captcha'       => array('Mage_Adminhtml'),
