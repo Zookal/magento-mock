@@ -181,6 +181,11 @@ About
 History
 -------
 
+#### 1.0.2
+
+- Added Mage_CatalogInventory
+- Added Mage_Usa fallback model. Errors occur when loading system/config section and files of Mage_Usa have been removed
+
 #### 1.0.1
 
 - Added Mage_Weee mocks
