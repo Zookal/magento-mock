@@ -184,7 +184,8 @@ History
 #### 1.0.2
 
 - Added Mage_CatalogInventory
-- Added Mage_Usa fallback model. Errors occur when loading system/config section and files of Mage_Usa have been removed
+- Added Mage_Usa fallback model. Errors occur when loading system/config section and files of Mage_Usa have been removed,
+and when trying to create a new shipment in Sales -> Orders
 
 #### 1.0.1
 

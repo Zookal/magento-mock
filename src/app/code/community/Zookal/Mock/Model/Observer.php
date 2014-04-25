@@ -25,6 +25,7 @@ class Zookal_Mock_Model_Observer
     protected $_mappingModel = array(
         'Mage_Wishlist'       => 'wishlist',
         'Mage_Weee'           => 'weee',
+        'Mage_Usa'            => 'usa',
         'Mage_Tag'            => 'tag',
         'Mage_Tax'            => 'tax',
         'Mage_Sales'          => 'sales',
@@ -60,6 +61,7 @@ class Zookal_Mock_Model_Observer
         'Mage_Review'         => '_mageMockHelper',
         'Mage_Tag'            => '_mageMockIncludePath',
         'Mage_Tax'            => '_mageTaxClass',
+        'Mage_Usa'            => '_mageMockHelper',
         'Mage_Wishlist'       => '_mageMockHelper',
         'Mage_Weee'           => '_mageMockHelperIncludePath',
     );

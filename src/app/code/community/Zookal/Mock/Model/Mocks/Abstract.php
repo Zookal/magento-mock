@@ -39,21 +39,22 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'toh'   => 1, // toHtml() on blocks
     );
     protected $_mockMethodsReturnFalse = array(
-        'can' => 1, // canCapture and all other payment related methods
-        'has' => 1,
-        'isa' => 1, // e.g. isAvailable -> Payment
-        'isd' => 1, // e.g. isDiscounted e.g. Weee helper
-        'ise' => 1, // e.g. isEnabled e.g. Weee helper
-        'isg' => 1, // e.g. isGateway -> Payment
-        'isi' => 1, // e.g. isInitializeNeeded -> Payment
-        'ism' => 1, // e.g. isMessagesAvailable -> GiftMessage
-        'iss' => 1, // e.g. isSubscribed
-        'ist' => 1, // e.g. isTaxable in Weee
-        'isv' => 1, // e.g. isValid...
-        'isl' => 1, // e.g. isLoggedIn
-        'use' => 1,
-        'typ' => 1, // Weee Helper->typeofdisplay()
-        'val' => 1, // Weee Helper->validateCatalogPricesAndFptConfiguration()
+        'displaygirthvalue' => 1, // Mage_Usa helper in packaging/popup.phtml
+        'can'               => 1, // canCapture and all other payment related methods
+        'has'               => 1,
+        'isa'               => 1, // e.g. isAvailable -> Payment
+        'isd'               => 1, // e.g. isDiscounted e.g. Weee helper
+        'ise'               => 1, // e.g. isEnabled e.g. Weee helper
+        'isg'               => 1, // e.g. isGateway -> Payment
+        'isi'               => 1, // e.g. isInitializeNeeded -> Payment
+        'ism'               => 1, // e.g. isMessagesAvailable -> GiftMessage
+        'iss'               => 1, // e.g. isSubscribed
+        'ist'               => 1, // e.g. isTaxable in Weee
+        'isv'               => 1, // e.g. isValid...
+        'isl'               => 1, // e.g. isLoggedIn
+        'use'               => 1,
+        'typ'               => 1, // Weee Helper->typeofdisplay()
+        'val'               => 1, // Weee Helper->validateCatalogPricesAndFptConfiguration()
     );
 
     /**
