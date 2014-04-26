@@ -54,11 +54,11 @@
         </translate>
     </adminhtml>
     <default>
-        <system>
+        <dev>
             <zookalmock>
                 <enable_method_log>0</enable_method_log>
             </zookalmock>
-        </system>
+        </dev>
     </default>
     <phpunit>
         <suite>
