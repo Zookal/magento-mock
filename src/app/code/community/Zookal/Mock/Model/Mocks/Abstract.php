@@ -20,6 +20,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
     protected $_mockMethodsReturnThis = array(
         'add'            => 1, // e.g. addCustomerFilter ...
         'cle'            => 1, // e.g. clean() clear() clearasil()
+        'collectrates'   => 1, // e.g. Mage_Shipping_Model_Shipping::collectRates()
         'gettotals'      => 1, // Special case in Sales_Collection
         'gro'            => 1, // e.g. groupByCustomer
         'joi'            => 1, // e.g. joinCustomerName
@@ -29,6 +30,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'pre'            => 1, // e.g. prepare()
         'resetsortorder' => 1,
         'renewsession'   => 1,
+        'sav'            => 1, // e.g. save()
         'set'            => 1,
         'too'            => 1, // e.g. toOptionArray, toOptionHash
         'uns'            => 1,
