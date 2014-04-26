@@ -18,6 +18,7 @@ If one or all of the following modules (until now) are disabled they will then b
 - Mage_Rating
 - Mage_Tag
 - Mage_Tax
+- Mage_Shipping
 - Mage_Log
 - Mage_Backup
 - Mage_Customer
