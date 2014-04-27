@@ -29,8 +29,10 @@ If one or all of the following modules (until now) are disabled they will then b
 - Mage_Adminhtml
 - Mage_GiftMessages
 - Mage_GoogleCheckout
-- All payment modules
+- All non Mage_* payment modules
 - and some more ... test it :-)
+
+The Mage_Payment module itself cannot be disabled and mocked because it is too tight couple with Mage_Sales and Mage_Checkout.
 
 Also we can't delete the database tables from some disabled modules as e.g. CatalogIndex relies von customer_group tables
 or Customer relies on some tax tables when tax is disabled.
