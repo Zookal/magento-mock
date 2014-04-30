@@ -209,6 +209,10 @@ About
 History
 -------
 
+#### 1.0.4 @todo release
+
+- Adding Mage_Admin_Model_User when Mage_Admin has been removed
+
 #### 1.0.3
 
 - Added Mage_Shipping mocks. Please read documentation how to properly disable this module
