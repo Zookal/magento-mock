@@ -44,6 +44,7 @@ class Zookal_Mock_Model_Observer
         'Mage_Cms'            => 'cms',
         'Mage_Backup'         => 'backup',
         'Mage_Adminhtml'      => 'adminhtml',
+        'Mage_Admin'          => 'admin',
     );
 
     /**
@@ -52,6 +53,7 @@ class Zookal_Mock_Model_Observer
      * @var array
      */
     protected $_specialMethods = array(
+        'Mage_Admin'          => '_mageMockIncludePath',
         'Mage_Adminhtml'      => '_mageMockIncludePath',
         'Mage_Catalog'        => '_mageCatalog',
         'Mage_Customer'       => '_mageCustomer',
