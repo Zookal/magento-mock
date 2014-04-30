@@ -212,6 +212,7 @@ History
 #### 1.0.3
 
 - Added Mage_Shipping mocks. Please read documentation how to properly disable this module
+- Removed entry in $_dependencyLiars because Mage_Catalog needs Mage_Dataflow in checkout->order->save()
 
 #### 1.0.2
 
