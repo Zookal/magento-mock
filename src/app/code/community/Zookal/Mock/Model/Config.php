@@ -29,7 +29,7 @@ class Zookal_Mock_Model_Config extends Mage_Core_Model_Config
         'Mage_Tax'           => array('Mage_Customer'),
         'Mage_Poll'          => array('Mage_Cms'),
         'Mage_Newsletter'    => array('Mage_Widget'),
-        'Mage_Catalog'       => array('Mage_Dataflow', 'Mage_Cms'),
+        'Mage_Catalog'       => array('Mage_Cms'),
         'Mage_CatalogRule'   => array('Mage_Customer'),
         'Mage_CatalogIndex'  => array('Mage_CatalogRule'),
         'Mage_Checkout'      => array('Mage_CatalogInventory'),
