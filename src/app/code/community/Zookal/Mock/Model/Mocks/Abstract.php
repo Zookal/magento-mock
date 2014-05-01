@@ -21,6 +21,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'add'            => 1, // e.g. addCustomerFilter ...
         'cle'            => 1, // e.g. clean() clear() clearasil()
         'collectrates'   => 1, // e.g. Mage_Shipping_Model_Shipping::collectRates()
+        'fil'            => 1, // e.g. filterByCustomerId() when getCollection() is called
         'gettotals'      => 1, // Special case in Sales_Collection
         'gro'            => 1, // e.g. groupByCustomer
         'joi'            => 1, // e.g. joinCustomerName
@@ -84,7 +85,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
     {
         $lowerMethod  = strtolower($method);
         $firstThree   = substr($lowerMethod, 0, 3);
-        $isCollection = strpos($lowerMethod, 'collection') !== false;
+        $isCollection = strpos($lowerMethod, 'collection') !== false; // e.g. getCollection() getItemCollection() and so on
         if (true === $isCollection || isset($this->_mockMethodsReturnThis[$lowerMethod]) || isset($this->_mockMethodsReturnThis[$firstThree])) {
             $this->_log($method . ' return this');
             return $this;
