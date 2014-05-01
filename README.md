@@ -209,9 +209,11 @@ About
 History
 -------
 
-#### 1.0.4 @todo release
+#### 1.0.4
 
 - Adding Mage_Admin_Model_User when Mage_Admin has been removed
+- Bugfix: Added Wishlist model and its collection for iteration
+- Added abstract iteration class
 
 #### 1.0.3
 
