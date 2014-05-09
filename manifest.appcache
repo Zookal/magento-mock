@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Revision 1399601706931
+# Revision 1399602479381
 
 CACHE:
 index.html
@@ -8,8 +8,8 @@ etc/challenges.html
 etc/examples.html
 etc/history.html
 etc/license.html
-uninstalling/README.html
 etc/performance.html
+uninstalling/README.html
 uninstalling/adminhtml.html
 uninstalling/cms.html
 uninstalling/dependency-errors.html

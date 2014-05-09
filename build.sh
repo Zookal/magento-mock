@@ -1,6 +1,6 @@
 #!/bin/sh
 gitbook build doc
-rm -Rf gitbook uninstalling
+rm -Rf gitbook uninstalling etc
 cp -R pages/* ./
 rm -Rf pages
 rm book.json
