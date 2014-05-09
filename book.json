@@ -2,8 +2,8 @@
     "output": "pages/",
     "generator": "site",
     "title": "Zookal Mock module for Magento",
-    "description": "Easily disable almost any Magento core module",
-    "github": "Zookal",
+    "description": "Transparent auto detecting of disabled core modules and extensions and providing mock objects for not breaking Magento. Nothing to configure. No class rewrites. Only one observer. Works out of the box.",
+    "github": "Zookal/magento-mock",
     "githubHost": "https://github.com/",
     "plugins": [
         "-mathjax",
