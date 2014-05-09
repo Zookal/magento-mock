@@ -1,0 +1,3 @@
+# Uninstalling / removing
+
+Doc
