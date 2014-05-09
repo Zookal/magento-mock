@@ -3,7 +3,7 @@
     <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
         
         <meta charset="UTF-8">
-        <title>How do I uninstall a payment module? | Zookal Mock Objects for Magento</title>
+        <title>Problematic modules | Zookal Mock Objects for Magento</title>
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="robots" content="index, follow">
@@ -13,13 +13,13 @@
         <meta name="generator" content="www.gitbook.io">
 
         
-        <link rel="next" href="../uninstalling/adminhtml.html" />
+        <link rel="next" href="../uninstalling/README.html" />
         
         
-        <link rel="prev" href="../uninstalling/README.html" />
+        <link rel="prev" href="../index.html" />
         
 
-        <meta property="og:title" content="How do I uninstall a payment module? | Zookal Mock Objects for Magento">
+        <meta property="og:title" content="Problematic modules | Zookal Mock Objects for Magento">
         <meta property="og:site_name" content="Zookal Mock Objects for Magento">
         <meta property="og:type" content="book">
         <meta property="og:locale" content="en_US">
@@ -42,7 +42,7 @@
 
 
         
-    <div class="book" data-github="Zookal/magento-mock" data-level="2.1" data-basepath=".." data-revision="1399601706930">
+    <div class="book" data-github="Zookal/magento-mock" data-level="1" data-basepath=".." data-revision="1399601706930">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -120,7 +120,7 @@
 
         
         <li>
-            <a href="https://github.com/Zookal/magento-mock/edit/master/uninstalling/payment-modules.md" target="blank">Edit and Contribute</a>
+            <a href="https://github.com/Zookal/magento-mock/edit/master/etc/challenges.md" target="blank">Edit and Contribute</a>
         </li>
         
 
@@ -270,7 +270,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 21.428571428571427%;min-width: 14.285714285714286%;"></div>
+        <div class="inner" style="width: 7.142857142857143%;min-width: 0%;"></div>
     </div>
     <div class="chapters">
     
@@ -278,9 +278,9 @@
     
         <a href="../etc/challenges.html" title="Problematic modules" class="chapter done new-chapter" data-progress="1" style="left: 7.142857142857143%;"></a>
     
-        <a href="../uninstalling/README.html" title="Uninstalling/Removing modules" class="chapter done new-chapter" data-progress="2" style="left: 14.285714285714286%;"></a>
+        <a href="../uninstalling/README.html" title="Uninstalling/Removing modules" class="chapter  new-chapter" data-progress="2" style="left: 14.285714285714286%;"></a>
     
-        <a href="../uninstalling/payment-modules.html" title="How do I uninstall a payment module?" class="chapter done " data-progress="2.1" style="left: 21.428571428571427%;"></a>
+        <a href="../uninstalling/payment-modules.html" title="How do I uninstall a payment module?" class="chapter  " data-progress="2.1" style="left: 21.428571428571427%;"></a>
     
         <a href="../uninstalling/adminhtml.html" title="Mage_Adminhtml" class="chapter  " data-progress="2.2" style="left: 28.571428571428573%;"></a>
     
@@ -309,29 +309,37 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_12">
+                    <section class="normal" id="section-gitbook_3">
                     
-                        <h2 id="how-do-i-uninstall-a-payment-module-">How do I uninstall a payment module?</h2>
-<p>An example would be if you switch from one Stripe payment module to another or changing the credit card payment provider.</p>
-<p>Simply delete/uninstall all module relevant files.</p>
-<p>In one of your local modules add the following &quot;backup&quot; entry into the config.xml:</p>
-<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">config</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">default</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">payment</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">paypal_standard</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">model</span>&gt;</span>zookal_mock/mocks_mage_payment<span class="hljs-tag">&lt;/<span class="hljs-title">model</span>&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-title">paypal_standard</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">another_payment_method</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">model</span>&gt;</span>zookal_mock/mocks_mage_payment<span class="hljs-tag">&lt;/<span class="hljs-title">model</span>&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-title">another_payment_method</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">payment</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">default</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">config</span>&gt;</span>
-</code></pre>
-<p>The above xml contains the section where Mage_Paypal module has been disabled and previously used in orders.</p>
-<p>No other database updates are required. Clear the caches and check in the backend some orders related to that payment method. You will now see a key/value list of the payment details.</p>
-<p>The backend mock payment block has an integrated event <code>mock_payment_backend_block_to_html_before</code> with which you can modify the output.</p>
-<p>The frontend mock payment block uses the default block <code>Mage_Core_Block_Abstract</code> which allows you the usual modifications.</p>
+                        <h2 id="which-modules-or-extensions-causes-challenges-">Which modules or extensions causes challenges?</h2>
+<p>If one or all of the following modules (until now) are disabled they will then break the rest of the core:</p>
+<ul>
+<li>Mage_Wishlist</li>
+<li>Mage_Weee</li>
+<li>Mage_Review</li>
+<li>Mage_Rating</li>
+<li>Mage_Tag</li>
+<li>Mage_Tax</li>
+<li>Mage_Shipping</li>
+<li>Mage_Log</li>
+<li>Mage_Backup</li>
+<li>Mage_Customer</li>
+<li>Mage_Checkout</li>
+<li>Mage_Sales</li>
+<li>Mage_Cms</li>
+<li>Mage_Catalog</li>
+<li>Mage_Adminhtml</li>
+<li>Mage_GiftMessages</li>
+<li>Mage_GoogleCheckout</li>
+<li>All non Mage_* payment modules</li>
+<li>and some more ... test it :-)</li>
+</ul>
+<p>The Mage_Payment module itself cannot be disabled and mocked because it is too tight couple with Mage_Sales and Mage_Checkout.</p>
+<p>Also we can&#39;t delete the database tables from some disabled modules as e.g. CatalogIndex relies von customer_group tables
+or Customer relies on some tax tables when tax is disabled.</p>
+<p>At Zookal we have the following modules disabled: Mage_AdminNotification, Mage_Authorizenet, Mage_Backup, Mage_Captcha, Mage_Compiler, Mage_Connect,
+Mage_GoogleCheckout, Mage_GoogleBase, Mage_Install, Mage_Log, Mage_Paypal, Mage_PaypalUk, Mage_Poll, Mage_ProductAlert, Mage_Review, Mage_Rating,
+Mage_Rss, Mage_Sendfriend, Mage_Tag, Mage_Usa, Mage_Wishlist, Mage_XmlConnect, Phoenix_Moneybookers.</p>
 
                     
                     </section>
@@ -341,10 +349,10 @@
         </div>
 
         
-        <a href="../uninstalling/README.html" class="navigation navigation-prev "><i class="fa fa-angle-left"></i></a>
+        <a href="../index.html" class="navigation navigation-prev "><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../uninstalling/adminhtml.html" class="navigation navigation-next "><i class="fa fa-angle-right"></i></a>
+        <a href="../uninstalling/README.html" class="navigation navigation-next "><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

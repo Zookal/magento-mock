@@ -3,7 +3,7 @@
     <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
         
         <meta charset="UTF-8">
-        <title>How do I uninstall a payment module? | Zookal Mock Objects for Magento</title>
+        <title>Example | Zookal Mock Objects for Magento</title>
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="robots" content="index, follow">
@@ -13,13 +13,13 @@
         <meta name="generator" content="www.gitbook.io">
 
         
-        <link rel="next" href="../uninstalling/adminhtml.html" />
+        <link rel="next" href="../etc/about.html" />
         
         
-        <link rel="prev" href="../uninstalling/README.html" />
+        <link rel="prev" href="../etc/performance.html" />
         
 
-        <meta property="og:title" content="How do I uninstall a payment module? | Zookal Mock Objects for Magento">
+        <meta property="og:title" content="Example | Zookal Mock Objects for Magento">
         <meta property="og:site_name" content="Zookal Mock Objects for Magento">
         <meta property="og:type" content="book">
         <meta property="og:locale" content="en_US">
@@ -42,7 +42,7 @@
 
 
         
-    <div class="book" data-github="Zookal/magento-mock" data-level="2.1" data-basepath=".." data-revision="1399601706930">
+    <div class="book" data-github="Zookal/magento-mock" data-level="4" data-basepath=".." data-revision="1399601706930">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -120,7 +120,7 @@
 
         
         <li>
-            <a href="https://github.com/Zookal/magento-mock/edit/master/uninstalling/payment-modules.md" target="blank">Edit and Contribute</a>
+            <a href="https://github.com/Zookal/magento-mock/edit/master/etc/examples.md" target="blank">Edit and Contribute</a>
         </li>
         
 
@@ -270,7 +270,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 21.428571428571427%;min-width: 14.285714285714286%;"></div>
+        <div class="inner" style="width: 78.57142857142857%;min-width: 71.42857142857143%;"></div>
     </div>
     <div class="chapters">
     
@@ -282,21 +282,21 @@
     
         <a href="../uninstalling/payment-modules.html" title="How do I uninstall a payment module?" class="chapter done " data-progress="2.1" style="left: 21.428571428571427%;"></a>
     
-        <a href="../uninstalling/adminhtml.html" title="Mage_Adminhtml" class="chapter  " data-progress="2.2" style="left: 28.571428571428573%;"></a>
+        <a href="../uninstalling/adminhtml.html" title="Mage_Adminhtml" class="chapter done " data-progress="2.2" style="left: 28.571428571428573%;"></a>
     
-        <a href="../uninstalling/dependency-errors.html" title="Dependency Errors" class="chapter  " data-progress="2.3" style="left: 35.714285714285715%;"></a>
+        <a href="../uninstalling/dependency-errors.html" title="Dependency Errors" class="chapter done " data-progress="2.3" style="left: 35.714285714285715%;"></a>
     
-        <a href="../uninstalling/weird-errors.html" title="Weird Errors" class="chapter  " data-progress="2.4" style="left: 42.857142857142854%;"></a>
+        <a href="../uninstalling/weird-errors.html" title="Weird Errors" class="chapter done " data-progress="2.4" style="left: 42.857142857142854%;"></a>
     
-        <a href="../uninstalling/cms.html" title="Mage_Cms" class="chapter  " data-progress="2.5" style="left: 50%;"></a>
+        <a href="../uninstalling/cms.html" title="Mage_Cms" class="chapter done " data-progress="2.5" style="left: 50%;"></a>
     
-        <a href="../uninstalling/shipping.html" title="Mage_Shipping" class="chapter  " data-progress="2.6" style="left: 57.142857142857146%;"></a>
+        <a href="../uninstalling/shipping.html" title="Mage_Shipping" class="chapter done " data-progress="2.6" style="left: 57.142857142857146%;"></a>
     
-        <a href="../uninstalling/remove.html" title="Removing files" class="chapter  " data-progress="2.7" style="left: 64.28571428571429%;"></a>
+        <a href="../uninstalling/remove.html" title="Removing files" class="chapter done " data-progress="2.7" style="left: 64.28571428571429%;"></a>
     
-        <a href="../etc/performance.html" title="Performance" class="chapter  new-chapter" data-progress="3" style="left: 71.42857142857143%;"></a>
+        <a href="../etc/performance.html" title="Performance" class="chapter done new-chapter" data-progress="3" style="left: 71.42857142857143%;"></a>
     
-        <a href="../etc/examples.html" title="Example" class="chapter  new-chapter" data-progress="4" style="left: 78.57142857142857%;"></a>
+        <a href="../etc/examples.html" title="Example" class="chapter done new-chapter" data-progress="4" style="left: 78.57142857142857%;"></a>
     
         <a href="../etc/about.html" title="About" class="chapter  new-chapter" data-progress="5" style="left: 85.71428571428571%;"></a>
     
@@ -309,29 +309,10 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_12">
+                    <section class="normal" id="section-gitbook_4">
                     
-                        <h2 id="how-do-i-uninstall-a-payment-module-">How do I uninstall a payment module?</h2>
-<p>An example would be if you switch from one Stripe payment module to another or changing the credit card payment provider.</p>
-<p>Simply delete/uninstall all module relevant files.</p>
-<p>In one of your local modules add the following &quot;backup&quot; entry into the config.xml:</p>
-<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">config</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">default</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">payment</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">paypal_standard</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">model</span>&gt;</span>zookal_mock/mocks_mage_payment<span class="hljs-tag">&lt;/<span class="hljs-title">model</span>&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-title">paypal_standard</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">another_payment_method</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">model</span>&gt;</span>zookal_mock/mocks_mage_payment<span class="hljs-tag">&lt;/<span class="hljs-title">model</span>&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-title">another_payment_method</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">payment</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">default</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">config</span>&gt;</span>
-</code></pre>
-<p>The above xml contains the section where Mage_Paypal module has been disabled and previously used in orders.</p>
-<p>No other database updates are required. Clear the caches and check in the backend some orders related to that payment method. You will now see a key/value list of the payment details.</p>
-<p>The backend mock payment block has an integrated event <code>mock_payment_backend_block_to_html_before</code> with which you can modify the output.</p>
-<p>The frontend mock payment block uses the default block <code>Mage_Core_Block_Abstract</code> which allows you the usual modifications.</p>
+                        <h2 id="examples-of-deactivation">Examples of deactivation</h2>
+<p>Please see the folder examples.</p>
 
                     
                     </section>
@@ -341,10 +322,10 @@
         </div>
 
         
-        <a href="../uninstalling/README.html" class="navigation navigation-prev "><i class="fa fa-angle-left"></i></a>
+        <a href="../etc/performance.html" class="navigation navigation-prev "><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../uninstalling/adminhtml.html" class="navigation navigation-next "><i class="fa fa-angle-right"></i></a>
+        <a href="../etc/about.html" class="navigation navigation-next "><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

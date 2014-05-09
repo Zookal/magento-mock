@@ -1,7 +1,7 @@
 {
     "output": "pages/",
     "generator": "site",
-    "title": "Zookal Mock module for Magento",
+    "title": "Zookal Mock Objects for Magento",
     "description": "Transparent auto detecting of disabled core modules and extensions and providing mock objects for not breaking Magento. Nothing to configure. No class rewrites. Only one observer. Works out of the box.",
     "github": "Zookal/magento-mock",
     "githubHost": "https://github.com/",
@@ -20,17 +20,14 @@
 
 
     "links": {
-        "home": "/",
-
+        "home": "/magento-mock/",
 
         "about": "",
         "issues": null,
         "contribute": null,
 
         "sharing": {
-            "google": null,
-            "facebook": null,
-            "twitter": null
+            "twitter": "https://twitter.com/schumacherfm"
         }
     }
 }

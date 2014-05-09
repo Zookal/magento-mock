@@ -1,11 +1,22 @@
 CACHE MANIFEST
-# Revision 1399600353025
+# Revision 1399601706931
 
 CACHE:
 index.html
+etc/about.html
+etc/challenges.html
+etc/examples.html
+etc/history.html
+etc/license.html
 uninstalling/README.html
+etc/performance.html
 uninstalling/adminhtml.html
+uninstalling/cms.html
+uninstalling/dependency-errors.html
 uninstalling/payment-modules.html
+uninstalling/remove.html
+uninstalling/shipping.html
+uninstalling/weird-errors.html
 gitbook/app.js
 gitbook/fonts/anonymouspro/400.woff
 gitbook/fonts/anonymouspro/400i.woff
