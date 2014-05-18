@@ -63,7 +63,7 @@ class Zookal_Mock_Model_Observer
         'Mage_ProductAlert'   => '_mageMockHelper',
         'Mage_Review'         => '_mageMockHelper',
         'Mage_Shipping'       => '_mageMockHelperIncludePath',
-        'Mage_Tag'            => '_mageMockIncludePath',
+        'Mage_Tag'            => '_mageMockHelperIncludePath',
         'Mage_Tax'            => '_mageTaxClass',
         'Mage_Usa'            => '_mageMockHelper',
         'Mage_Wishlist'       => '_mageMockHelper',
