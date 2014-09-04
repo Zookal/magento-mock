@@ -54,21 +54,22 @@ class Zookal_Mock_Model_Observer
      * @var array
      */
     protected $_specialMethods = array(
-        'Mage_Admin'          => '_mageMockIncludePath',
-        'Mage_Adminhtml'      => '_mageMockIncludePath',
-        'Mage_Catalog'        => '_mageCatalog',
-        'Mage_Customer'       => '_mageCustomer',
-        'Mage_GiftMessage'    => '_mageMockHelperIncludePath',
-        'Mage_GoogleCheckout' => '_mageGoogleCheckout',
-        'Mage_Log'            => '_mageMockIncludePath',
-        'Mage_ProductAlert'   => '_mageMockHelper',
-        'Mage_Review'         => '_mageMockHelper',
-        'Mage_Shipping'       => '_mageMockHelperIncludePath',
-        'Mage_Tag'            => '_mageMockHelperIncludePath',
-        'Mage_Tax'            => '_mageTaxClass',
-        'Mage_Usa'            => '_mageMockHelper',
-        'Mage_Wishlist'       => '_mageMockHelper',
-        'Mage_Weee'           => '_mageMockHelperIncludePath',
+        'Mage_Admin'             => '_mageMockIncludePath',
+        'Mage_Adminhtml'         => '_mageMockIncludePath',
+        'Mage_AdminNotification' => '_mageMockIncludePath',
+        'Mage_Catalog'           => '_mageCatalog',
+        'Mage_Customer'          => '_mageCustomer',
+        'Mage_GiftMessage'       => '_mageMockHelperIncludePath',
+        'Mage_GoogleCheckout'    => '_mageGoogleCheckout',
+        'Mage_Log'               => '_mageMockIncludePath',
+        'Mage_ProductAlert'      => '_mageMockHelper',
+        'Mage_Review'            => '_mageMockHelper',
+        'Mage_Shipping'          => '_mageMockHelperIncludePath',
+        'Mage_Tag'               => '_mageMockHelperIncludePath',
+        'Mage_Tax'               => '_mageTaxClass',
+        'Mage_Usa'               => '_mageMockHelper',
+        'Mage_Wishlist'          => '_mageMockHelper',
+        'Mage_Weee'              => '_mageMockHelperIncludePath',
     );
 
     /**
