@@ -9,10 +9,10 @@
  */
 
 /**
- * Class Mage_Adminnotification_Model_Survey
- * Do not change the class name, as it is needed for the autoloader because this class is somewhere in Magentos source code hardcoded :-(
+ * Class Mage_Adminnotification_Model_Inbox
+ * Special hack ... due to case-insensitive file systems
  * @see Zookal_Mock_Model_Observer::_setMockIncludePath
  */
-class Mage_Adminnotification_Model_Inbox extends Zookal_Mock_Model_Mocks_Abstract
+class Zookal_Mock_Model_Mocks_Mage_Inbox extends Zookal_Mock_Model_Mocks_Abstract
 {
 }
