@@ -1,6 +1,14 @@
 History
 -------
 
+### 1.0.6
+
+- Add Mock for Mage_Downloadable_Model_Product_Type (if you have M2ePro installed)
+
+### 1.0.5
+
+- Add Mock for Mage_AdminNotification_Model_Inbox with loggin output into a file (if you have M2ePro installed)
+
 #### 1.0.4
 
 - Adding Mage_Admin_Model_User when Mage_Admin has been removed
