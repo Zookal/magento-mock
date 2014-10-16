@@ -72,13 +72,13 @@ class Zookal_Mock_Test_Model_ConfigTest extends EcomDev_PHPUnit_Test_Case
     public function itShouldRemoveTheDependencies()
     {
         $instance              = $this->getInstance();
-        $liars                 = $instance->getDependencyLiars();
         $modulesNoDependencies = $instance->removeDependencies($this->getModuleFixture());
 
         foreach ($modulesNoDependencies as $module => $config) {
-            if (isset($liars[$module]) && true === $config['active']) {
-                $liarModules = $liars[$module];
-                $depends     = $config['depends'];
+            $liarModules = $this->_getLiarModules($module, $config);
+            if (null !== $liarModules) {
+
+                $depends = $config['depends'];
                 foreach ($liarModules as $liarModule) {
                     if (false === $modulesNoDependencies[$liarModule]['active']) {
                         $this->assertArrayNotHasKey(
@@ -90,6 +90,21 @@ class Zookal_Mock_Test_Model_ConfigTest extends EcomDev_PHPUnit_Test_Case
                 }
             }
         }
+    }
+
+    /**
+     * @param       $module
+     * @param array $config
+     *
+     * @return null|array
+     */
+    protected function _getLiarModules($module, array $config)
+    {
+        $liars = $this->getInstance()->getDependencyLiars();
+        if (isset($liars[$module]) && true === $config['active']) {
+            return $liars[$module];
+        }
+        return null;
     }
 
     /**
