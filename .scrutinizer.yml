@@ -1,0 +1,30 @@
+inherit: true
+
+checks:
+    php:
+        code_rating: true
+        duplication: true
+
+tools:
+    external_code_coverage: false
+    php_code_coverage:      false
+    php_code_sniffer:
+        config:
+            standard: 'Zend'
+    php_changetracking: false
+    php_sim: true
+    php_cs_fixer: true
+    php_mess_detector: true
+    php_pdepend: true
+    php_analyzer: true
+    sensiolabs_security_checker: true
+
+build:
+    environment:
+        php: { version: 5.4.28 }
+
+build_failure_conditions:
+    - 'elements.rating(<= C).exists'
+    - 'issues.count > 10'
+    - 'issues.new.exists'
+    - 'project.metric("scrutinizer.quality", < 10)'
