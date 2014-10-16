@@ -90,8 +90,11 @@ class Zookal_Mock_Model_Observer
             $resource = $this->_mappingModel[$moduleName] . '_resource';
             $this->_setConfigNode($pathPrefix . $this->_mappingModel[$moduleName] . '/resourceModel', $resource);
             $this->_setConfigNode($pathPrefix . $resource . '/class', $class);
-
-            $this->{$this->_getSpecialMethod($moduleName)}($pathPrefix, $moduleName, $resource);
+            $this->{$this->_getSpecialMethod($moduleName)}(array(
+                'p' => $pathPrefix,
+                'm' => $moduleName,
+                'r' => $resource
+            ));
         }
         $this->_processSetNodes();
     }
@@ -110,12 +113,8 @@ class Zookal_Mock_Model_Observer
 
     /**
      * Special Handling when Mage_Adminhtml/Mage_Log/Mage_Tag is disabled and physically removed
-     *
-     * @param $pathPrefix
-     * @param $moduleName
-     * @param $resource
      */
-    protected function _mageMockIncludePath($pathPrefix = null, $moduleName = null, $resource = null)
+    protected function _mageMockIncludePath()
     {
         Mage::helper('zookal_mock')->setMockPhpIncludePath();
     }
@@ -123,52 +122,45 @@ class Zookal_Mock_Model_Observer
     /**
      * Special Handling when Mage_GoogleCheckout is disabled. It has a dependency in Mage_Sales/etc/config.xml :-(
      *
-     * @param $pathPrefix
-     * @param $moduleName
-     * @param $resource
+     * @param array $o
      */
-    protected function _mageGoogleCheckout($pathPrefix, $moduleName, $resource)
+    protected function _mageGoogleCheckout(array $o)
     {
         $prefixes = $this->_getAllPathPrefixes();
         foreach ($prefixes as $prefix) {
-            $this->_setConfigNode($prefix . '/payment/' . $this->_mappingModel[$moduleName] . '/active', '0');
-            $this->_setConfigNode($prefix . '/payment/' . $this->_mappingModel[$moduleName] . '/model', 'zookal_mock/mocks_mage_payment');
+            $this->_setConfigNode($prefix . '/payment/' . $this->_mappingModel[$o['m']] . '/active', '0');
+            $this->_setConfigNode(
+                $prefix . '/payment/' . $this->_mappingModel[$o['m']] . '/model',
+                'zookal_mock/mocks_mage_payment'
+            );
         }
     }
 
     /**
      * Special Handling when Mage_ProductAlert is disabled, when need to fake a helper
      *
-     * @param $pathPrefix
-     * @param $moduleName
-     * @param $resource
+     * @param array $o
      */
-    protected function _mageMockHelper($pathPrefix, $moduleName, $resource)
+    protected function _mageMockHelper(array $o)
     {
-        $this->_setConfigNode('global/helpers/' . $this->_mappingModel[$moduleName] . '/class', 'zookal_mock/mocks_mage');
+        $this->_setConfigNode('global/helpers/' . $this->_mappingModel[$o['m']] . '/class', 'zookal_mock/mocks_mage');
     }
 
     /**
      * Special Handling when Mage_ProductAlert is disabled, when need to fake a helper
      *
-     * @param $pathPrefix
-     * @param $moduleName
-     * @param $resource
+     * @param array $o
      */
-    protected function _mageMockHelperIncludePath($pathPrefix, $moduleName, $resource)
+    protected function _mageMockHelperIncludePath(array $o)
     {
-        $this->_mageMockHelper($pathPrefix, $moduleName, $resource);
+        $this->_mageMockHelper($o);
         $this->_mageMockIncludePath();
     }
 
     /**
      * Special case when Mage_Catalog is disabled and Mage_Widget is enabled
-     *
-     * @param $pathPrefix
-     * @param $moduleName
-     * @param $resource
      */
-    protected function _mageCatalog($pathPrefix, $moduleName, $resource)
+    protected function _mageCatalog()
     {
         $prefix = 'global/catalog/product/type/simple/';
         $this->_setConfigNode($prefix . 'label', 'Simple Product');
@@ -181,36 +173,28 @@ class Zookal_Mock_Model_Observer
      * Special case when Mage_CatalogIndex is enabled and Mage_Customer is disabled
      * Mage_Customer needs the tax_class table name for joining
      *
-     * @param $pathPrefix
-     * @param $moduleName
-     * @param $resource
+     * @param array $o
      */
-    protected function _mageCustomer($pathPrefix, $moduleName, $resource)
+    protected function _mageCustomer(array $o)
     {
-        $this->_setConfigNode($pathPrefix . $resource . '/entities/customer_group/table', 'customer_group');
+        $this->_setConfigNode($o['p'] . $o['r'] . '/entities/customer_group/table', 'customer_group');
     }
 
     /**
      * Special case when Mage_Tax is disabled and Mage_Customer is enabled
      * Mage_Customer needs the tax_class table name for joining
      *
-     * @param $pathPrefix
-     * @param $moduleName
-     * @param $resource
+     * @param array $o
      */
-    protected function _mageTaxClass($pathPrefix, $moduleName, $resource)
+    protected function _mageTaxClass(array $o)
     {
-        $this->_setConfigNode($pathPrefix . $resource . '/entities/tax_class/table', 'tax_class');
+        $this->_setConfigNode($o['p'] . $o['r'] . '/entities/tax_class/table', 'tax_class');
     }
 
     /**
      * empty method for fallback
-     *
-     * @param $pathPrefix
-     * @param $moduleName
-     * @param $resource
      */
-    protected function _mageVoid($pathPrefix, $moduleName, $resource)
+    protected function _mageVoid()
     {
     }
 
