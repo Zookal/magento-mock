@@ -42,7 +42,6 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'too'            => 1, // e.g. toOptionArray, toOptionHash
         'uns'            => 1,
         'pro'            => 1, // Weee Helper->processTierPrices()
-
     );
     protected $_mockMethodsReturnNull = array(
         'count' => 1,
