@@ -9,14 +9,14 @@
  */
 class Zookal_Mock_Test_Model_Mocks_AbstractTest extends EcomDev_PHPUnit_Test_Case
 {
-    protected $class = 'Zookal_Mock_Model_Mocks_Abstract';
+    protected $_class = 'Zookal_Mock_Model_Mocks_Abstract';
 
     /**
      * @return Zookal_Mock_Model_Mocks_Abstract
      */
     public function getInstance()
     {
-        return $this->getMockForAbstractClass($this->class);
+        return $this->getMockForAbstractClass($this->_class);
     }
 
     /**
@@ -24,7 +24,7 @@ class Zookal_Mock_Test_Model_Mocks_AbstractTest extends EcomDev_PHPUnit_Test_Cas
      */
     public function itShouldExist()
     {
-        $this->assertTrue(class_exists($this->class), "Failed asserting {$this->class} exists");
+        $this->assertTrue(class_exists($this->_class), "Failed asserting {$this->_class} exists");
     }
 
     /**
@@ -32,7 +32,7 @@ class Zookal_Mock_Test_Model_Mocks_AbstractTest extends EcomDev_PHPUnit_Test_Cas
      */
     public function itShouldBeAnInstanceOfMocksAbstract()
     {
-        $this->assertInstanceOf($this->class, $this->getInstance());
+        $this->assertInstanceOf($this->_class, $this->getInstance());
     }
 
     /**
@@ -40,7 +40,7 @@ class Zookal_Mock_Test_Model_Mocks_AbstractTest extends EcomDev_PHPUnit_Test_Cas
      */
     public function itShouldHaveAMethod__Call()
     {
-        $this->assertTrue(method_exists($this->class, '__call'));
+        $this->assertTrue(method_exists($this->_class, '__call'));
     }
 
     /**
@@ -48,7 +48,7 @@ class Zookal_Mock_Test_Model_Mocks_AbstractTest extends EcomDev_PHPUnit_Test_Cas
      */
     public function itShouldHaveAMethodGetMessages()
     {
-        $this->assertTrue(method_exists($this->class, 'getMessages'));
+        $this->assertTrue(method_exists($this->_class, 'getMessages'));
     }
 
     /**
@@ -56,7 +56,7 @@ class Zookal_Mock_Test_Model_Mocks_AbstractTest extends EcomDev_PHPUnit_Test_Cas
      */
     public function itShouldHaveAMethodGetMockMethodsReturnThis()
     {
-        $this->assertTrue(method_exists($this->class, 'getMockMethodsReturnThis'));
+        $this->assertTrue(method_exists($this->_class, 'getMockMethodsReturnThis'));
     }
 
     /**
@@ -64,7 +64,7 @@ class Zookal_Mock_Test_Model_Mocks_AbstractTest extends EcomDev_PHPUnit_Test_Cas
      */
     public function itShouldHaveAMethodgetMockMethodsReturnNull()
     {
-        $this->assertTrue(method_exists($this->class, 'getMockMethodsReturnNull'));
+        $this->assertTrue(method_exists($this->_class, 'getMockMethodsReturnNull'));
     }
 
     /**
@@ -72,7 +72,7 @@ class Zookal_Mock_Test_Model_Mocks_AbstractTest extends EcomDev_PHPUnit_Test_Cas
      */
     public function itShouldHaveAMethodgetMockMethodsReturnFalse()
     {
-        $this->assertTrue(method_exists($this->class, 'getMockMethodsReturnFalse'));
+        $this->assertTrue(method_exists($this->_class, 'getMockMethodsReturnFalse'));
     }
 
     /**
@@ -99,7 +99,7 @@ class Zookal_Mock_Test_Model_Mocks_AbstractTest extends EcomDev_PHPUnit_Test_Cas
         $instance    = $this->getInstance();
         $thisMethods = $instance->getMockMethodsReturnThis();
         foreach ($thisMethods as $method => $int) {
-            $this->assertInstanceOf($this->class, $instance->$method());
+            $this->assertInstanceOf($this->_class, $instance->$method());
         }
     }
 
@@ -109,7 +109,7 @@ class Zookal_Mock_Test_Model_Mocks_AbstractTest extends EcomDev_PHPUnit_Test_Cas
     public function itShouldReturnThisWhenCallingACollection()
     {
         $instance = $this->getInstance();
-        $this->assertInstanceOf($this->class, $instance->getWildCatsCollection());
+        $this->assertInstanceOf($this->_class, $instance->getWildCatsCollection());
     }
 
     /**

@@ -11,6 +11,7 @@
 /**
  * Class Zookal_Mock_Model_Mocks_Abstract
  * @method Zookal_Mock_Model_Mocks_Abstract getWildCatsCollection()
+ * @method Zookal_Mock_Model_Mocks_Abstract zzz() Calling this method throws an error in the test
  */
 abstract class Zookal_Mock_Model_Mocks_Abstract
 {
