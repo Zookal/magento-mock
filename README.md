@@ -9,6 +9,10 @@ No class rewrites.
 
 Only one observer. Works out of the box.
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Zookal/magento-mock/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Zookal/magento-mock/?branch=master)
+
+[![Build Status](https://scrutinizer-ci.com/g/Zookal/magento-mock/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Zookal/magento-mock/build-status/master)
+
 
 # Please see [http://zookal.github.io/magento-mock](http://zookal.github.io/magento-mock)
 
