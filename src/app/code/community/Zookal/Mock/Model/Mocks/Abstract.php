@@ -41,6 +41,8 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'set'            => 1,
         'too'            => 1, // e.g. toOptionArray, toOptionHash
         'uns'            => 1,
+        'pro'            => 1, // Weee Helper->processTierPrices()
+
     );
     protected $_mockMethodsReturnNull = array(
         'count' => 1,
@@ -64,6 +66,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'use'               => 1,
         'typ'               => 1, // Weee Helper->typeofdisplay()
         'val'               => 1, // Weee Helper->validateCatalogPricesAndFptConfiguration()
+        'inc'               => 1, // Weee Helper->includeInSubtotal()
     );
 
     /**
