@@ -1,6 +1,11 @@
 History
 -------
 
+### 1.1.1
+
+- Merged PR [Issue 3](https://github.com/Zookal/magento-mock/issues/3) Disabled Mage_Weee fixes
+
+
 ### 1.1.0
 
 - Major internal refactorings because of Scrutinizer CI integration
