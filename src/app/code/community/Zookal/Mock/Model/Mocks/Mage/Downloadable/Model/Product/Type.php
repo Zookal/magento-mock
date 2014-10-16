@@ -9,7 +9,8 @@
 
 /**
  * Class Mage_Downloadable_Model_Product_Type
- * Do not change the class name, as it is needed for the autoloader because this class is somewhere in a source code hardcoded :-(
+ * Do not change the class name, as it is needed for the autoloader because this class is
+ * somewhere in a source code hardcoded :-(
  * @see Zookal_Mock_Model_Observer::_setMockIncludePath
  */
 class Mage_Downloadable_Model_Product_Type extends Zookal_Mock_Model_Mocks_Abstract

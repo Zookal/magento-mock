@@ -36,7 +36,8 @@ class Zookal_Mock_Model_Mocks_Mage_Payment extends Zookal_Mock_Model_Mocks_Abstr
     /**
      * @see Mage_Payment_Helper_Data
      * Retrieve block type for display method information
-     * Only frontend layout generation checks if a block is an instance of Mage_Core_Block_Abstract therefore we need to separate.
+     * Only frontend layout generation checks if a block is an instance of Mage_Core_Block_Abstract
+     * therefore we need to separate.
      *
      * @return string
      */

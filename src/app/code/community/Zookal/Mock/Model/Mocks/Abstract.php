@@ -65,7 +65,8 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
      */
     public function __construct($helper = null)
     {
-        if (false === empty($helper) && $helper instanceof Zookal_Mock_Helper_Data) { // $helper is sometimes an empty array ...
+        // $helper is sometimes an empty array ...
+        if (false === empty($helper) && $helper instanceof Zookal_Mock_Helper_Data) {
             $this->_helper = $helper;
         }
 
@@ -83,18 +84,32 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
      */
     public function __call($method, $args)
     {
-        $lowerMethod  = strtolower($method);
-        $firstThree   = substr($lowerMethod, 0, 3);
-        $isCollection = strpos($lowerMethod, 'collection') !== false; // e.g. getCollection() getItemCollection() and so on
-        if (true === $isCollection || isset($this->_mockMethodsReturnThis[$lowerMethod]) || isset($this->_mockMethodsReturnThis[$firstThree])) {
+        $lowerMethod = strtolower($method);
+        $firstThree  = substr($lowerMethod, 0, 3);
+        // e.g. getCollection() getItemCollection() and so on
+        $isCollection = strpos($lowerMethod, 'collection') !== false;
+
+        if (
+            true === $isCollection ||
+            isset($this->_mockMethodsReturnThis[$lowerMethod]) ||
+            isset($this->_mockMethodsReturnThis[$firstThree])
+        ) {
             $this->_log($method . ' return this');
             return $this;
         }
-        if (isset($this->_mockMethodsReturnNull[$lowerMethod]) || isset($this->_mockMethodsReturnNull[$firstThree])) {
+
+        if (
+            isset($this->_mockMethodsReturnNull[$lowerMethod]) ||
+            isset($this->_mockMethodsReturnNull[$firstThree])
+        ) {
             $this->_log($method . ' return null');
             return null;
         }
-        if (isset($this->_mockMethodsReturnFalse[$firstThree]) || isset($this->_mockMethodsReturnFalse[$lowerMethod])) {
+
+        if (
+            isset($this->_mockMethodsReturnFalse[$firstThree]) ||
+            isset($this->_mockMethodsReturnFalse[$lowerMethod])
+        ) {
             $this->_log($method . ' return false');
             return false;
         }

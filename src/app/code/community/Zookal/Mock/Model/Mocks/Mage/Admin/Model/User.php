@@ -9,7 +9,8 @@
 
 /**
  * Class Mage_Admin_Model_User
- * Do not change the class name, as it is needed for the autoloader because this class is somewhere in Magentos source code hardcoded :-(
+ * Do not change the class name, as it is needed for the autoloader because this class is somewhere in
+ * Magentos source code hardcoded :-(
  * @see Zookal_Mock_Model_Observer::_setMockIncludePath
  * @needed in Mage_Customer_Model_Customer::hashPassword()
  */
