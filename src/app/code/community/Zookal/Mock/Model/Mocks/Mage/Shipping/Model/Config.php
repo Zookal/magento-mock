@@ -9,24 +9,18 @@
  */
 
 /**
- * Class Mage_AdminNotification_Model_Survey
+ * needed when Mage_Shipping is disabled
  * Do not change the class name, as it is needed for the autoloader because this class is somewhere in Magentos source code hardcoded :-(
  * @see Zookal_Mock_Model_Observer::_setMockIncludePath
+ * Class Zookal_Mock_Model_Mocks_Mage_Config
  */
-class Mage_Adminnotification_Model_Survey extends Zookal_Mock_Model_Mocks_Abstract
+class Mage_Shipping_Model_Config extends Zookal_Mock_Model_Mocks_Abstract
 {
-    public static function isSurveyViewed()
-    {
-        return true;
-    }
-
-    public static function isSurveyUrlValid()
-    {
-        return false;
-    }
-
-    public static function getSurveyUrl()
-    {
-        return '';
-    }
+    /**
+     * Shipping origin settings
+     */
+    const XML_PATH_ORIGIN_COUNTRY_ID = 'shipping/mock/fake_country_id';
+    const XML_PATH_ORIGIN_REGION_ID  = 'shipping/mock/fake_region_id';
+    const XML_PATH_ORIGIN_CITY       = 'shipping/mock/fake_city';
+    const XML_PATH_ORIGIN_POSTCODE   = 'shipping/mock/fake_postcode';
 }

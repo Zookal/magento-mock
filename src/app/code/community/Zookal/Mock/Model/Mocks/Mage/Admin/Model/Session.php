@@ -9,24 +9,19 @@
  */
 
 /**
- * Class Mage_AdminNotification_Model_Survey
+ * Class Mage_Admin_Model_Session
  * Do not change the class name, as it is needed for the autoloader because this class is somewhere in Magentos source code hardcoded :-(
  * @see Zookal_Mock_Model_Observer::_setMockIncludePath
+ * @needed in e.g. MageMonkey
  */
-class Mage_Adminnotification_Model_Survey extends Zookal_Mock_Model_Mocks_Abstract
+class Mage_Admin_Model_Session extends Zookal_Mock_Model_Mocks_Abstract
 {
-    public static function isSurveyViewed()
-    {
-        return true;
-    }
 
-    public static function isSurveyUrlValid()
+    /**
+     * @return bool
+     */
+    public static function isLoggedIn()
     {
         return false;
-    }
-
-    public static function getSurveyUrl()
-    {
-        return '';
     }
 }

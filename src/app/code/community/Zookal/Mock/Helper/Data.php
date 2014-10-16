@@ -44,7 +44,7 @@ class Zookal_Mock_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function isLogMethodEnabled()
     {
-        return (int)$this->getStore()->getConfig('system/zookalmock/enable_method_log') === 1;
+        return (int)$this->getStore()->getConfig('dev/zookalmock/enable_method_log') === 1;
     }
 
     /**

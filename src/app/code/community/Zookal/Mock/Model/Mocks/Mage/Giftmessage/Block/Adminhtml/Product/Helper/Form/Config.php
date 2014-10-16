@@ -9,24 +9,19 @@
  */
 
 /**
- * Class Mage_AdminNotification_Model_Survey
+ * Class Mage_GiftMessage_Block_Adminhtml_Product_Helper_Form_Config
  * Do not change the class name, as it is needed for the autoloader because this class is somewhere in Magentos source code hardcoded :-(
  * @see Zookal_Mock_Model_Observer::_setMockIncludePath
  */
-class Mage_Adminnotification_Model_Survey extends Zookal_Mock_Model_Mocks_Abstract
+class Mage_GiftMessage_Block_Adminhtml_Product_Helper_Form_Config extends Mage_Adminhtml_Block_Catalog_Product_Helper_Form_Config
 {
-    public static function isSurveyViewed()
+    /**
+     * Return nothing
+     *
+     * @return string
+     */
+    public function getElementHtml()
     {
-        return true;
-    }
-
-    public static function isSurveyUrlValid()
-    {
-        return false;
-    }
-
-    public static function getSurveyUrl()
-    {
-        return '';
+        return '<strong>' . Mage::helper('zookal_mock')->__('Module Disabled!') . '</strong>';
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @category    Zookal_Mock
  * @package     Model
@@ -9,24 +8,21 @@
  */
 
 /**
- * Class Mage_AdminNotification_Model_Survey
+ * Class Mage_Admin_Model_User
  * Do not change the class name, as it is needed for the autoloader because this class is somewhere in Magentos source code hardcoded :-(
  * @see Zookal_Mock_Model_Observer::_setMockIncludePath
+ * @needed in Mage_Customer_Model_Customer::hashPassword()
  */
-class Mage_Adminnotification_Model_Survey extends Zookal_Mock_Model_Mocks_Abstract
+class Mage_Admin_Model_User
 {
-    public static function isSurveyViewed()
-    {
-        return true;
-    }
 
-    public static function isSurveyUrlValid()
-    {
-        return false;
-    }
+    /**
+     * Minimum length of admin password
+     */
+    const MIN_PASSWORD_LENGTH = 7;
 
-    public static function getSurveyUrl()
-    {
-        return '';
-    }
+    /**
+     * Length of salt
+     */
+    const HASH_SALT_LENGTH = 32;
 }

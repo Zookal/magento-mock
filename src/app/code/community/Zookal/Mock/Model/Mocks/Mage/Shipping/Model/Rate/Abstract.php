@@ -9,24 +9,10 @@
  */
 
 /**
- * Class Mage_AdminNotification_Model_Survey
+ * Class Mage_Shipping_Model_Rate_Abstract
  * Do not change the class name, as it is needed for the autoloader because this class is somewhere in Magentos source code hardcoded :-(
  * @see Zookal_Mock_Model_Observer::_setMockIncludePath
  */
-class Mage_Adminnotification_Model_Survey extends Zookal_Mock_Model_Mocks_Abstract
+abstract class Mage_Shipping_Model_Rate_Abstract extends Zookal_Mock_Model_Mocks_Abstract //Mage_Core_Model_Abstract
 {
-    public static function isSurveyViewed()
-    {
-        return true;
-    }
-
-    public static function isSurveyUrlValid()
-    {
-        return false;
-    }
-
-    public static function getSurveyUrl()
-    {
-        return '';
-    }
 }

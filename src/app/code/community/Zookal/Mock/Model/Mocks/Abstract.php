@@ -20,6 +20,8 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
     protected $_mockMethodsReturnThis = array(
         'add'            => 1, // e.g. addCustomerFilter ...
         'cle'            => 1, // e.g. clean() clear() clearasil()
+        'collectrates'   => 1, // e.g. Mage_Shipping_Model_Shipping::collectRates()
+        'fil'            => 1, // e.g. filterByCustomerId() when getCollection() is called
         'gettotals'      => 1, // Special case in Sales_Collection
         'gro'            => 1, // e.g. groupByCustomer
         'joi'            => 1, // e.g. joinCustomerName
@@ -29,6 +31,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'pre'            => 1, // e.g. prepare()
         'resetsortorder' => 1,
         'renewsession'   => 1,
+        'sav'            => 1, // e.g. save()
         'set'            => 1,
         'too'            => 1, // e.g. toOptionArray, toOptionHash
         'uns'            => 1,
@@ -39,15 +42,22 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
         'toh'   => 1, // toHtml() on blocks
     );
     protected $_mockMethodsReturnFalse = array(
-        'can' => 1, // canCapture and all other payment related methods
-        'has' => 1,
-        'isa' => 1, // e.g. isAvailable -> Payment
-        'isg' => 1, // e.g. isGateway -> Payment
-        'isi' => 1, // e.g. isInitializeNeeded -> Payment
-        'iss' => 1, // e.g. isSubscribed
-        'isv' => 1, // e.g. isValid...
-        'isl' => 1, // e.g. isLoggedIn
-        'use' => 1,
+        'displaygirthvalue' => 1, // Mage_Usa helper in packaging/popup.phtml
+        'can'               => 1, // canCapture and all other payment related methods
+        'has'               => 1,
+        'isa'               => 1, // e.g. isAvailable -> Payment
+        'isd'               => 1, // e.g. isDiscounted e.g. Weee helper
+        'ise'               => 1, // e.g. isEnabled e.g. Weee helper
+        'isg'               => 1, // e.g. isGateway -> Payment
+        'isi'               => 1, // e.g. isInitializeNeeded -> Payment
+        'ism'               => 1, // e.g. isMessagesAvailable -> GiftMessage
+        'iss'               => 1, // e.g. isSubscribed
+        'ist'               => 1, // e.g. isTaxable in Weee
+        'isv'               => 1, // e.g. isValid...
+        'isl'               => 1, // e.g. isLoggedIn
+        'use'               => 1,
+        'typ'               => 1, // Weee Helper->typeofdisplay()
+        'val'               => 1, // Weee Helper->validateCatalogPricesAndFptConfiguration()
     );
 
     /**
@@ -75,7 +85,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
     {
         $lowerMethod  = strtolower($method);
         $firstThree   = substr($lowerMethod, 0, 3);
-        $isCollection = strpos($lowerMethod, 'collection') !== false;
+        $isCollection = strpos($lowerMethod, 'collection') !== false; // e.g. getCollection() getItemCollection() and so on
         if (true === $isCollection || isset($this->_mockMethodsReturnThis[$lowerMethod]) || isset($this->_mockMethodsReturnThis[$firstThree])) {
             $this->_log($method . ' return this');
             return $this;
@@ -84,12 +94,12 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
             $this->_log($method . ' return null');
             return null;
         }
-        if (isset($this->_mockMethodsReturnFalse[$firstThree])) {
+        if (isset($this->_mockMethodsReturnFalse[$firstThree]) || isset($this->_mockMethodsReturnFalse[$lowerMethod])) {
             $this->_log($method . ' return false');
             return false;
         }
 
-        throw new Varien_Exception("Invalid method " . get_class($this) . "::" . $method . "(" . print_r($args, 1) . ")");
+        throw new Varien_Exception("Invalid method " . get_class($this) . "::" . $method . ' Cannot print args ...');
     }
 
     /**

@@ -16,6 +16,15 @@
             <zookal_mock>
                 <class>Zookal_Mock_Model</class>
             </zookal_mock>
+            <!--
+            Example rewrite when Mage_Shipping is disabled and/or files are removed.
+            Add this rewrite xml somewhere into your config.xml files.
+            <catalog>
+                <rewrite>
+                    <product>Zookal_Mock_Model_Catalog_Model_Product</product>
+                </rewrite>
+            </catalog>
+            -->
         </models>
         <blocks>
             <zookal_mock>
@@ -45,11 +54,11 @@
         </translate>
     </adminhtml>
     <default>
-        <system>
+        <dev>
             <zookalmock>
                 <enable_method_log>0</enable_method_log>
             </zookalmock>
-        </system>
+        </dev>
     </default>
     <phpunit>
         <suite>

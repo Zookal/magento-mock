@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config>
     <sections>
-        <system>
+        <dev>
             <groups>
                 <zookalmock translate="label">
                     <label>Object Mock [Zookal_Mock Module]</label>
@@ -24,6 +24,6 @@
                     </fields>
                 </zookalmock>
             </groups>
-        </system>
+        </dev>
     </sections>
 </config>

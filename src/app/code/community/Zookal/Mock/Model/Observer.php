@@ -23,23 +23,29 @@ class Zookal_Mock_Model_Observer
      * @var array
      */
     protected $_mappingModel = array(
-        'Mage_Wishlist'       => 'wishlist',
-        'Mage_Tag'            => 'tag',
-        'Mage_Tax'            => 'tax',
-        'Mage_Sales'          => 'sales',
-        'Mage_Review'         => 'review',
-        'Mage_Reports'        => 'reports',
-        'Mage_Rating'         => 'rating',
-        'Mage_ProductAlert'   => 'productalert',
-        'Mage_Newsletter'     => 'newsletter',
-        'Mage_Log'            => 'log',
-        'Mage_GoogleCheckout' => 'googlecheckout',
-        'Mage_Dataflow'       => 'dataflow',
-        'Mage_Catalog'        => 'catalog',
-        'Mage_Customer'       => 'customer',
-        'Mage_Cms'            => 'cms',
-        'Mage_Backup'         => 'backup',
-        'Mage_Adminhtml'      => 'adminhtml',
+        'Mage_Wishlist'          => 'wishlist',
+        'Mage_Weee'              => 'weee',
+        'Mage_Usa'               => 'usa',
+        'Mage_Tag'               => 'tag',
+        'Mage_Tax'               => 'tax',
+        'Mage_Shipping'          => 'shipping',
+        'Mage_Sales'             => 'sales',
+        'Mage_Review'            => 'review',
+        'Mage_Reports'           => 'reports',
+        'Mage_Rating'            => 'rating',
+        'Mage_ProductAlert'      => 'productalert',
+        'Mage_Newsletter'        => 'newsletter',
+        'Mage_Log'               => 'log',
+        'Mage_GoogleCheckout'    => 'googlecheckout',
+        'Mage_GiftMessage'       => 'giftmessage',
+        'Mage_Dataflow'          => 'dataflow',
+        'Mage_Catalog'           => 'catalog',
+        'Mage_Customer'          => 'customer',
+        'Mage_Cms'               => 'cms',
+        'Mage_Backup'            => 'backup',
+        'Mage_Adminhtml'         => 'adminhtml',
+        'Mage_Admin'             => 'admin',
+        'Mage_AdminNotification' => 'adminnotification',
     );
 
     /**
@@ -48,22 +54,29 @@ class Zookal_Mock_Model_Observer
      * @var array
      */
     protected $_specialMethods = array(
-        'Mage_Adminhtml'      => '_mageMockIncludePath',
-        'Mage_Catalog'        => '_mageCatalog',
-        'Mage_Customer'       => '_mageCustomer',
-        'Mage_GoogleCheckout' => '_mageGoogleCheckout',
-        'Mage_Log'            => '_mageMockIncludePath',
-        'Mage_ProductAlert'   => '_mageMockHelper',
-        'Mage_Review'         => '_mageMockHelper',
-        'Mage_Tag'            => '_mageMockIncludePath',
-        'Mage_Tax'            => '_mageTaxClass',
-        'Mage_Wishlist'       => '_mageMockHelper',
+        'Mage_Admin'             => '_mageMockIncludePath',
+        'Mage_Adminhtml'         => '_mageMockIncludePath',
+        'Mage_AdminNotification' => '_mageMockIncludePath',
+        'Mage_Catalog'           => '_mageCatalog',
+        'Mage_Customer'          => '_mageCustomer',
+        'Mage_GiftMessage'       => '_mageMockHelperIncludePath',
+        'Mage_GoogleCheckout'    => '_mageGoogleCheckout',
+        'Mage_Log'               => '_mageMockIncludePath',
+        'Mage_ProductAlert'      => '_mageMockHelper',
+        'Mage_Review'            => '_mageMockHelper',
+        'Mage_Shipping'          => '_mageMockHelperIncludePath',
+        'Mage_Tag'               => '_mageMockHelperIncludePath',
+        'Mage_Tax'               => '_mageTaxClass',
+        'Mage_Usa'               => '_mageMockHelper',
+        'Mage_Wishlist'          => '_mageMockHelper',
+        'Mage_Weee'              => '_mageMockHelperIncludePath',
     );
 
     /**
-     * @param Varien_Event_Observer $observer
+     * To use this in a shell script call it: Mage::getModel('zookal_mock/observer')->mockDisabledModules();
+     * @fire controller_front_init_before
      */
-    public function mockDisabledModules(Varien_Event_Observer $observer)
+    public function mockDisabledModules()
     {
         $disabledModules = $this->_getDisabledModules();
         $pathPrefix      = 'global/models/';
@@ -102,7 +115,7 @@ class Zookal_Mock_Model_Observer
      * @param $moduleName
      * @param $resource
      */
-    protected function _mageMockIncludePath($pathPrefix, $moduleName, $resource)
+    protected function _mageMockIncludePath($pathPrefix = null, $moduleName = null, $resource = null)
     {
         Mage::helper('zookal_mock')->setMockPhpIncludePath();
     }
@@ -133,6 +146,19 @@ class Zookal_Mock_Model_Observer
     protected function _mageMockHelper($pathPrefix, $moduleName, $resource)
     {
         $this->_setConfigNode('global/helpers/' . $this->_mappingModel[$moduleName] . '/class', 'zookal_mock/mocks_mage');
+    }
+
+    /**
+     * Special Handling when Mage_ProductAlert is disabled, when need to fake a helper
+     *
+     * @param $pathPrefix
+     * @param $moduleName
+     * @param $resource
+     */
+    protected function _mageMockHelperIncludePath($pathPrefix, $moduleName, $resource)
+    {
+        $this->_mageMockHelper($pathPrefix, $moduleName, $resource);
+        $this->_mageMockIncludePath();
     }
 
     /**
