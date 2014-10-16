@@ -32,8 +32,14 @@ class Zookal_Mock_Block_Payment_Backend extends Zookal_Mock_Model_Mocks_Abstract
      */
     public function toHtml()
     {
-        Mage::dispatchEvent('mock_payment_backend_block_to_html_before', array('block' => $this, 'payment' => $this->_payment));
-        return strpos($this->_html, '{{paymentInfo}}') === false ? $this->_html : str_replace('{{paymentInfo}}', $this->_getPaymentInfoTable(), $this->_html);
+        Mage::dispatchEvent('mock_payment_backend_block_to_html_before',
+            array('block' => $this, 'payment' => $this->_payment)
+        );
+        $return = $this->_html;
+        if (strpos($this->_html, '{{paymentInfo}}') !== false) {
+            $return = str_replace('{{paymentInfo}}', $this->_getPaymentInfoTable(), $this->_html);
+        }
+        return $return;
     }
 
     /**

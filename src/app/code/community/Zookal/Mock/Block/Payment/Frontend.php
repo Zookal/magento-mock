@@ -32,8 +32,11 @@ class Zookal_Mock_Block_Payment_Frontend extends Mage_Core_Block_Abstract
      */
     protected function _toHtml()
     {
-        return strpos($this->_html, '{{method}}') === false ? $this->_html : $this->__(str_replace('{{method}}', $this->getInfo()->getMethod(),
-            $this->_html));
+        $return = $this->_html;
+        if (strpos($this->_html, '{{method}}') !== false) {
+            $return = $this->__(str_replace('{{method}}', $this->getInfo()->getMethod(), $this->_html));
+        }
+        return $return;
     }
 
     /**
