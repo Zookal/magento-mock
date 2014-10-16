@@ -49,6 +49,6 @@ class Zookal_Mock_Test_Config_SystemTest extends PHPUnit_Framework_TestCase
      */
     public function itShouldHaveAnApiUrlField()
     {
-        $this->assertFieldDefined('system/zookalmock/enable_method_log');
+        $this->assertFieldDefined('dev/zookalmock/enable_method_log');
     }
 }

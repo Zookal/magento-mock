@@ -56,6 +56,6 @@ class Zookal_Mock_Test_Config_ConfigTest extends EcomDev_PHPUnit_Test_Case_Confi
      */
     public function itShouldHaveTheEnableMethodLog()
     {
-        $this->assertDefaultConfigValue('system/zookalmock/enable_method_log', 0);
+        $this->assertDefaultConfigValue('dev/zookalmock/enable_method_log', 0);
     }
 }

@@ -21,7 +21,7 @@ class Zookal_Mock_Test_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
         $stubStore = $this->getMock('Mage_Core_Model_Store');
         $stubStore->expects($this->any())
             ->method('getConfig')
-            ->with('system/zookalmock/enable_method_log')
+            ->with('dev/zookalmock/enable_method_log')
             ->will($this->returnValue($enabled));
         return $stubStore;
     }
