@@ -92,35 +92,56 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
     {
         $lowerMethod = strtolower($method);
         $firstThree  = substr($lowerMethod, 0, 3);
-        // e.g. getCollection() getItemCollection() and so on
-        $isCollection = strpos($lowerMethod, 'collection') !== false;
-
-        if (
-            true === $isCollection ||
-            isset($this->_mockMethodsReturnThis[$lowerMethod]) ||
-            isset($this->_mockMethodsReturnThis[$firstThree])
-        ) {
-            $this->_log($method . ' return this');
-            return $this;
+        $methods     = array(
+            '_isReturnThis'  => $this,
+            '_isReturnNull'  => null,
+            '_isReturnFalse' => false,
+        );
+        foreach ($methods as $method => $return) {
+            if (true === $this->$method($lowerMethod, $firstThree)) {
+                $this->_log('return: ' . $method);
+                return $return;
+            }
         }
-
-        if (
-            isset($this->_mockMethodsReturnNull[$lowerMethod]) ||
-            isset($this->_mockMethodsReturnNull[$firstThree])
-        ) {
-            $this->_log($method . ' return null');
-            return null;
-        }
-
-        if (
-            isset($this->_mockMethodsReturnFalse[$firstThree]) ||
-            isset($this->_mockMethodsReturnFalse[$lowerMethod])
-        ) {
-            $this->_log($method . ' return false');
-            return false;
-        }
-
         throw new Varien_Exception("Invalid method " . get_class($this) . "::" . $method . ' Cannot print args ...');
+    }
+
+    /**
+     * @param string $lowerMethod
+     * @param string $firstThree
+     *
+     * @return bool
+     */
+    protected function _isReturnFalse($lowerMethod, $firstThree)
+    {
+        return isset($this->_mockMethodsReturnFalse[$firstThree]) ||
+        isset($this->_mockMethodsReturnFalse[$lowerMethod]);
+    }
+
+    /**
+     * @param string $lowerMethod
+     * @param string $firstThree
+     *
+     * @return bool
+     */
+    protected function _isReturnNull($lowerMethod, $firstThree)
+    {
+        return isset($this->_mockMethodsReturnNull[$lowerMethod]) ||
+        isset($this->_mockMethodsReturnNull[$firstThree]);
+    }
+
+    /**
+     * @param string $lowerMethod
+     * @param string $firstThree
+     *
+     * @return bool
+     */
+    protected function _isReturnThis($lowerMethod, $firstThree)
+    {
+        // e.g. getCollection() getItemCollection() and so on
+        return strpos($lowerMethod, 'collection') !== false ||
+        isset($this->_mockMethodsReturnThis[$lowerMethod]) ||
+        isset($this->_mockMethodsReturnThis[$firstThree]);
     }
 
     /**
