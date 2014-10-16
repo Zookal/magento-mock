@@ -135,7 +135,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
     /**
      * uncomment this in dev env to see what methods are called
      *
-     * @param $msg
+     * @param string $msg
      */
     protected function _log($msg)
     {

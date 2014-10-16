@@ -14,7 +14,7 @@
  * somewhere in Magentos source code hardcoded :-(
  * @see Zookal_Mock_Model_Observer::_setMockIncludePath
  */
-class Mage_Adminnotification_Model_Survey extends Zookal_Mock_Model_Mocks_Abstract
+class Mage_AdminNotification_Model_Survey extends Zookal_Mock_Model_Mocks_Abstract
 {
     public static function isSurveyViewed()
     {

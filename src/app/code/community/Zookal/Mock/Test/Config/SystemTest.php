@@ -9,6 +9,9 @@
  */
 class Zookal_Mock_Test_Config_SystemTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @return string
+     */
     protected function getFile()
     {
         $dir = Mage::getModuleDir('etc', 'Zookal_Mock');
@@ -22,6 +25,9 @@ class Zookal_Mock_Test_Config_SystemTest extends PHPUnit_Framework_TestCase
         return $xml;
     }
 
+    /**
+     * @param string $path
+     */
     public function assertFieldDefined($path, $message = '')
     {
         $defaultMessage = '';

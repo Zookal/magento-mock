@@ -14,7 +14,7 @@ class Zookal_Mock_Test_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
     /**
      * @param int $enabled
      *
-     * @return PHPUnit_Framework_MockObject_MockObject
+     * @return PHPUnit_Framework_MockObject_MockObject|null
      */
     public function getStoreMock($enabled = 0)
     {
