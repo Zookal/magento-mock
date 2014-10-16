@@ -18,7 +18,8 @@ tools:
     php_pdepend: true
 
     # https://scrutinizer-ci.com/docs/tools/php/php-analyzer/config_reference
-    php_analyzer: true
+    php_analyzer:
+        enabled: true
         config:
             suspicious_code:
                 non_existent_class_in_instanceof_check: false
