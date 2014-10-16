@@ -9,14 +9,14 @@
  */
 class Zookal_Mock_Test_Model_ObserverTest extends EcomDev_PHPUnit_Test_Case
 {
-    protected $class = 'Zookal_Mock_Model_Observer';
+    protected $_class = 'Zookal_Mock_Model_Observer';
 
     /**
      * @return Zookal_Mock_Model_Observer
      */
     public function getInstance()
     {
-        $instance = new $this->class;
+        $instance = new $this->_class;
 
         return $instance;
     }
@@ -26,7 +26,7 @@ class Zookal_Mock_Test_Model_ObserverTest extends EcomDev_PHPUnit_Test_Case
      */
     public function itShouldExist()
     {
-        $this->assertTrue(class_exists($this->class), "Failed asserting {$this->class} exists");
+        $this->assertTrue(class_exists($this->_class), "Failed asserting {$this->_class} exists");
     }
 
     /**
@@ -34,7 +34,7 @@ class Zookal_Mock_Test_Model_ObserverTest extends EcomDev_PHPUnit_Test_Case
      */
     public function itShouldHaveAMethodMockDisabledModules()
     {
-        $this->assertTrue(is_callable(array($this->class, 'mockDisabledModules')));
+        $this->assertTrue(is_callable(array($this->_class, 'mockDisabledModules')));
     }
 
     /**

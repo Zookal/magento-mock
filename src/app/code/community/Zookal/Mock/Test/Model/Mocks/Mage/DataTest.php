@@ -9,14 +9,14 @@
  */
 class Zookal_Mock_Test_Model_Mocks_Mage_DataTest extends Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase
 {
-    protected $class = 'Zookal_Mock_Model_Mocks_Mage_Data';
+    protected $_class = 'Zookal_Mock_Model_Mocks_Mage_Data';
 
     /**
      * @test
      */
     public function itShouldHaveA__Method()
     {
-        $this->assertTrue(method_exists($this->class, '__'));
+        $this->assertTrue(method_exists($this->_class, '__'));
     }
 
     /**

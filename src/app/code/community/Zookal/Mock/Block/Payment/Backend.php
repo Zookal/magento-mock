@@ -32,8 +32,15 @@ class Zookal_Mock_Block_Payment_Backend extends Zookal_Mock_Model_Mocks_Abstract
      */
     public function toHtml()
     {
-        Mage::dispatchEvent('mock_payment_backend_block_to_html_before', array('block' => $this, 'payment' => $this->_payment));
-        return strpos($this->_html, '{{paymentInfo}}') === false ? $this->_html : str_replace('{{paymentInfo}}', $this->_getPaymentInfoTable(), $this->_html);
+        Mage::dispatchEvent(
+            'mock_payment_backend_block_to_html_before',
+            array('block' => $this, 'payment' => $this->_payment)
+        );
+        $return = $this->_html;
+        if (strpos($this->_html, '{{paymentInfo}}') !== false) {
+            $return = str_replace('{{paymentInfo}}', $this->_getPaymentInfoTable(), $this->_html);
+        }
+        return $return;
     }
 
     /**
@@ -44,24 +51,42 @@ class Zookal_Mock_Block_Payment_Backend extends Zookal_Mock_Model_Mocks_Abstract
      */
     protected function _getPaymentInfoTable()
     {
-        $debug = $this->_payment->debug();
+        $debug = $this->_getPaymentDebug();
+        $data  = array();
+        foreach ($debug as $k => $v) {
+            if (false === empty($v)) {
+                $data[] = $this->_getPaymentInfoTableRow($k, $v);
+            }
+        }
+        return '<table>' . PHP_EOL . implode("\n", $data) . PHP_EOL . '</table>';
+    }
 
+    /**
+     * you can translate here the column names into nicer names via the .csv files for the backend users
+     *
+     * @param string $k
+     * @param string $v
+     *
+     * @return string
+     */
+    protected function _getPaymentInfoTableRow($k, $v)
+    {
+        return '<tr><td>' . Mage::helper('zookal_mock')->__($k) . '</td><td>' . $v . '</td></tr>';
+    }
+
+    /**
+     * @return array
+     */
+    protected function _getPaymentDebug()
+    {
+        $debug = $this->_payment->debug();
         if (isset($debug['additional_information']) && is_array($debug['additional_information'])) {
             $ai = $debug['additional_information'];
             unset($debug['additional_information']);
             $debug = array_merge($debug, $ai);
         }
-
         ksort($debug);
-        $data = array('<table>');
-        foreach ($debug as $k => $v) {
-            if (!empty($v)) {
-                // you can translate here the column names into nicer names via the .csv files for the backend users
-                $data[] = '<tr><td>' . Mage::helper('zookal_mock')->__($k) . '</td><td>' . $v . '</td></tr>';
-            }
-        }
-        $data[] = '</table>';
-        return implode("\n", $data);
+        return $debug;
     }
 
     /**

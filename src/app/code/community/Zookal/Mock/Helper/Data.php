@@ -51,40 +51,42 @@ class Zookal_Mock_Helper_Data extends Mage_Core_Helper_Abstract
      * Appends a new include path to the current existing one.
      * Appending is for performance reasons mandatory
      *
-     * @param array   $customFakePath
-     * @param boolean $append
+     * @param array $customFakePath
      *
      * @return bool
      */
-    public function setMockPhpIncludePath(array $customFakePath = null, $append = true)
+    public function setMockPhpIncludePath(array $customFakePath = null)
     {
         if (null === $this->_includePathSet) {
             $currentIncludePath = get_include_path();
 
-            $customFakePath = null === $customFakePath
-                ? array(
-                    'app', 'code', 'community', 'Zookal', 'Mock', 'Model', 'Mocks'
-                )
-                : $customFakePath;
-
-            $customFakePath = implode(DS, $customFakePath);
-            if (strpos($currentIncludePath, $customFakePath) !== false) {
+            $path = $this->_getCustomFakePath($customFakePath);
+            if (strpos($currentIncludePath, $path) !== false) {
                 $this->_includePathSet = false; // has already been set
                 return $this->_includePathSet;
             }
-
-            if (true === $append) {
-                $includePath = get_include_path() . PS . BP . DS . $customFakePath;
-            } else {
-                $includePath = $customFakePath . PS . BP . DS . get_include_path();
-            }
-
-            $this->_includePathSet = set_include_path($includePath) !== false;
+            $this->_includePathSet = set_include_path(get_include_path() . PS . BP . DS . $path) !== false;
         } else {
             // every other call returns false as include path has already been set
             $this->_includePathSet = false;
         }
 
         return $this->_includePathSet;
+    }
+
+    /**
+     * @param array $customFakePath
+     *
+     * @return string
+     */
+    protected function _getCustomFakePath(array $customFakePath = null)
+    {
+        $path = array(
+            'app', 'code', 'community', 'Zookal', 'Mock', 'Model', 'Mocks'
+        );
+        if (null !== $customFakePath) {
+            $path = $customFakePath;
+        }
+        return implode(DS, $path);
     }
 }

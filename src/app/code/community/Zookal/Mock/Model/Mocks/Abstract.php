@@ -7,6 +7,12 @@
  * @copyright   Copyright (c) Zookal Pty Ltd
  * @license     OSL - Open Software Licence 3.0 | http://opensource.org/licenses/osl-3.0.php
  */
+
+/**
+ * Class Zookal_Mock_Model_Mocks_Abstract
+ * @method Zookal_Mock_Model_Mocks_Abstract getWildCatsCollection()
+ * @method Zookal_Mock_Model_Mocks_Abstract zzz() Calling this method throws an error in the test
+ */
 abstract class Zookal_Mock_Model_Mocks_Abstract
 {
 
@@ -65,7 +71,8 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
      */
     public function __construct($helper = null)
     {
-        if (false === empty($helper) && $helper instanceof Zookal_Mock_Helper_Data) { // $helper is sometimes an empty array ...
+        // $helper is sometimes an empty array ...
+        if (false === empty($helper) && $helper instanceof Zookal_Mock_Helper_Data) {
             $this->_helper = $helper;
         }
 
@@ -83,23 +90,58 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
      */
     public function __call($method, $args)
     {
-        $lowerMethod  = strtolower($method);
-        $firstThree   = substr($lowerMethod, 0, 3);
-        $isCollection = strpos($lowerMethod, 'collection') !== false; // e.g. getCollection() getItemCollection() and so on
-        if (true === $isCollection || isset($this->_mockMethodsReturnThis[$lowerMethod]) || isset($this->_mockMethodsReturnThis[$firstThree])) {
-            $this->_log($method . ' return this');
-            return $this;
+        $lowerMethod = strtolower($method);
+        $firstThree  = substr($lowerMethod, 0, 3);
+        $methods     = array(
+            '_isReturnThis'  => $this,
+            '_isReturnNull'  => null,
+            '_isReturnFalse' => false,
+        );
+        foreach ($methods as $method => $return) {
+            if (true === $this->$method($lowerMethod, $firstThree)) {
+                $this->_log('return: ' . $method);
+                return $return;
+            }
         }
-        if (isset($this->_mockMethodsReturnNull[$lowerMethod]) || isset($this->_mockMethodsReturnNull[$firstThree])) {
-            $this->_log($method . ' return null');
-            return null;
-        }
-        if (isset($this->_mockMethodsReturnFalse[$firstThree]) || isset($this->_mockMethodsReturnFalse[$lowerMethod])) {
-            $this->_log($method . ' return false');
-            return false;
-        }
-
         throw new Varien_Exception("Invalid method " . get_class($this) . "::" . $method . ' Cannot print args ...');
+    }
+
+    /**
+     * @param string $lowerMethod
+     * @param string $firstThree
+     *
+     * @return bool
+     */
+    protected function _isReturnFalse($lowerMethod, $firstThree)
+    {
+        return isset($this->_mockMethodsReturnFalse[$firstThree]) ||
+        isset($this->_mockMethodsReturnFalse[$lowerMethod]);
+    }
+
+    /**
+     * @param string $lowerMethod
+     * @param string $firstThree
+     *
+     * @return bool
+     */
+    protected function _isReturnNull($lowerMethod, $firstThree)
+    {
+        return isset($this->_mockMethodsReturnNull[$lowerMethod]) ||
+        isset($this->_mockMethodsReturnNull[$firstThree]);
+    }
+
+    /**
+     * @param string $lowerMethod
+     * @param string $firstThree
+     *
+     * @return bool
+     */
+    protected function _isReturnThis($lowerMethod, $firstThree)
+    {
+        // e.g. getCollection() getItemCollection() and so on
+        return strpos($lowerMethod, 'collection') !== false ||
+        isset($this->_mockMethodsReturnThis[$lowerMethod]) ||
+        isset($this->_mockMethodsReturnThis[$firstThree]);
     }
 
     /**
@@ -115,7 +157,7 @@ abstract class Zookal_Mock_Model_Mocks_Abstract
     /**
      * uncomment this in dev env to see what methods are called
      *
-     * @param $msg
+     * @param string $msg
      */
     protected function _log($msg)
     {

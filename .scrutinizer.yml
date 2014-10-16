@@ -16,7 +16,14 @@ tools:
     php_cs_fixer: true
     php_mess_detector: true
     php_pdepend: true
-    php_analyzer: true
+
+    # https://scrutinizer-ci.com/docs/tools/php/php-analyzer/config_reference
+    php_analyzer:
+        enabled: true
+        config:
+            suspicious_code:
+                non_existent_class_in_instanceof_check: false
+                non_existent_class_in_catch_clause: false
     sensiolabs_security_checker: true
 
 build:
@@ -27,4 +34,4 @@ build_failure_conditions:
     - 'elements.rating(<= C).exists'
     - 'issues.count > 10'
     - 'issues.new.exists'
-    - 'project.metric("scrutinizer.quality", < 10)'
+    - 'project.metric("scrutinizer.quality", < 9.91)'

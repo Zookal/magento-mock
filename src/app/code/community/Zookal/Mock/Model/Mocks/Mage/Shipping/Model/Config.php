@@ -10,7 +10,8 @@
 
 /**
  * needed when Mage_Shipping is disabled
- * Do not change the class name, as it is needed for the autoloader because this class is somewhere in Magentos source code hardcoded :-(
+ * Do not change the class name, as it is needed for the autoloader because this class is
+ * somewhere in Magentos source code hardcoded :-(
  * @see Zookal_Mock_Model_Observer::_setMockIncludePath
  * Class Zookal_Mock_Model_Mocks_Mage_Config
  */

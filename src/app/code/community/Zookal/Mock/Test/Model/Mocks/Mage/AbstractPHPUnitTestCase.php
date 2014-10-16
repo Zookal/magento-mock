@@ -9,11 +9,11 @@
  */
 abstract class Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase extends EcomDev_PHPUnit_Test_Case
 {
-    protected $class = null;
+    protected $_class = null;
 
     public function getInstance()
     {
-        return new $this->class;
+        return new $this->_class;
     }
 
     /**
@@ -21,7 +21,7 @@ abstract class Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase extends
      */
     public function itShouldExist()
     {
-        $this->assertTrue(class_exists($this->class), "Failed asserting {$this->class} exists");
+        $this->assertTrue(class_exists($this->_class), "Failed asserting {$this->_class} exists");
     }
 
     /**

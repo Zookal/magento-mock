@@ -9,14 +9,14 @@
  */
 class Zookal_Mock_Test_Model_Mocks_Mage_GroupTest extends Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase
 {
-    protected $class = 'Zookal_Mock_Model_Mocks_Mage_Group';
+    protected $_class = 'Zookal_Mock_Model_Mocks_Mage_Group';
 
     /**
      * @test
      */
     public function itShouldHaveAGetTaxClassIdMethod()
     {
-        $this->assertTrue(method_exists($this->class, 'getTaxClassId'));
+        $this->assertTrue(method_exists($this->_class, 'getTaxClassId'));
     }
 
     /**

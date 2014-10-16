@@ -10,7 +10,8 @@
 
 /**
  * Class Mage_Log_Model_Visitor
- * Do not change the class name, as it is needed for the autoloader because this class is somewhere in Magentos source code hardcoded :-(
+ * Do not change the class name, as it is needed for the autoloader because this class is
+ * somewhere in Magentos source code hardcoded :-(
  * @see Zookal_Mock_Model_Observer::_setMockIncludePath
  */
 class Mage_Log_Model_Visitor extends Zookal_Mock_Model_Mocks_Abstract

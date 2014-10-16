@@ -7,7 +7,8 @@
  * @copyright   Copyright (c) Zookal Pty Ltd
  * @license     OSL - Open Software Licence 3.0 | http://opensource.org/licenses/osl-3.0.php
  */
-class Zookal_Mock_Test_Model_Mocks_Mage_Category_TreeTest extends Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase
+class Zookal_Mock_Test_Model_Mocks_Mage_Category_TreeTest
+    extends Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase
 {
-    protected $class = 'Zookal_Mock_Model_Mocks_Mage_Category_Tree';
+    protected $_class = 'Zookal_Mock_Model_Mocks_Mage_Category_Tree';
 }
