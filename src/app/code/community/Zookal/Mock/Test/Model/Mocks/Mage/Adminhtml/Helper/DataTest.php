@@ -13,9 +13,11 @@
  * Do not change the class name, as it is needed for the autoloader
  * @see Zookal_Mock_Model_Observer::_setMockIncludePath
  */
-class Zookal_Mock_Test_Model_Mocks_Mage_Adminhtml_Helper_DataTest extends Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase
+class Zookal_Mock_Test_Model_Mocks_Mage_Adminhtml_Helper_DataTest
+    extends Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase
 {
     //protected $_class = 'Mage_Adminhtml_Helper_Data';
     protected $_class = 'Zookal_Mock_Model_Mocks_Mage_Block'; // dummy for passing the test
-    // @todo implement test but change the model path and getIncludePath PHP in the config so that the mock class Mage_Tag_Model_Tag will get loaded
+    // @todo implement test but change the model path and getIncludePath PHP in the config so that the
+    //       mock class Mage_Tag_Model_Tag will get loaded
 }

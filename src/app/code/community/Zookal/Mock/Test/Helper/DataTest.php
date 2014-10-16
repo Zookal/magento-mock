@@ -9,7 +9,7 @@
  */
 class Zookal_Mock_Test_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
 {
-    protected $class = 'Zookal_Mock_Helper_Data';
+    protected $_class = 'Zookal_Mock_Helper_Data';
 
     /**
      * @param int $enabled
@@ -36,7 +36,7 @@ class Zookal_Mock_Test_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
         if (null === $mockStore) {
             $mockStore = $this->getStoreMock();
         }
-        return new $this->class($mockStore);
+        return new $this->_class($mockStore);
     }
 
     /**
@@ -44,7 +44,7 @@ class Zookal_Mock_Test_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
      */
     public function itShouldExist()
     {
-        $this->assertInstanceOf($this->class, $this->getInstance());
+        $this->assertInstanceOf($this->_class, $this->getInstance());
     }
 
     /**
@@ -60,7 +60,7 @@ class Zookal_Mock_Test_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
      */
     public function itShouldHaveAGetStoreMethod()
     {
-        $this->assertTrue(is_callable(array($this->class, 'getStore')));
+        $this->assertTrue(is_callable(array($this->_class, 'getStore')));
     }
 
     /**
@@ -79,7 +79,7 @@ class Zookal_Mock_Test_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
      */
     public function itShouldHaveAMethodIsLogMethodEnabled()
     {
-        $this->assertTrue(is_callable(array($this->class, 'isLogMethodEnabled')));
+        $this->assertTrue(is_callable(array($this->_class, 'isLogMethodEnabled')));
     }
 
     /**
@@ -109,7 +109,7 @@ class Zookal_Mock_Test_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
      */
     public function itShouldHaveAMethodSetMockPhpIncludePath()
     {
-        $this->assertTrue(is_callable(array($this->class, 'setMockPhpIncludePath')));
+        $this->assertTrue(is_callable(array($this->_class, 'setMockPhpIncludePath')));
     }
 
     /**

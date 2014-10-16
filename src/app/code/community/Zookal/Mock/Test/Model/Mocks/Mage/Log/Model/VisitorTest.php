@@ -10,10 +10,12 @@
 
 /**
  * Class Mage_Log_Model_Visitor
- * Do not change the class name, as it is needed for the autoloader because this class is somewhere in Magentos source code hardcoded :-(
+ * Do not change the class name, as it is needed for the autoloader because this class is
+ * somewhere in Magentos source code hardcoded :-(
  * @see Zookal_Mock_Model_Observer::_setMockIncludePath
  */
-class Zookal_Mock_Test_Model_Mocks_Mage_Log_Model_VisitorTest extends Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase
+class Zookal_Mock_Test_Model_Mocks_Mage_Log_Model_VisitorTest
+    extends Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase
 {
     protected function setUp()
     {

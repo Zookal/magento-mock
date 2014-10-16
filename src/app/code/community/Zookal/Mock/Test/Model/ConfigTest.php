@@ -9,7 +9,7 @@
  */
 class Zookal_Mock_Test_Model_ConfigTest extends EcomDev_PHPUnit_Test_Case
 {
-    protected $class = 'Zookal_Mock_Model_Config';
+    protected $_class = 'Zookal_Mock_Model_Config';
 
     /**
      * @param string|Varien_Simplexml_Element $sourceData
@@ -18,7 +18,7 @@ class Zookal_Mock_Test_Model_ConfigTest extends EcomDev_PHPUnit_Test_Case
      */
     public function getInstance($sourceData = null)
     {
-        return new $this->class($sourceData);
+        return new $this->_class($sourceData);
     }
 
     /**
@@ -26,7 +26,7 @@ class Zookal_Mock_Test_Model_ConfigTest extends EcomDev_PHPUnit_Test_Case
      */
     public function itShouldExist()
     {
-        $this->assertTrue(class_exists($this->class), "Failed asserting {$this->class} exists");
+        $this->assertTrue(class_exists($this->_class), "Failed asserting {$this->_class} exists");
     }
 
     /**
@@ -48,7 +48,7 @@ class Zookal_Mock_Test_Model_ConfigTest extends EcomDev_PHPUnit_Test_Case
             'getDependencyLiars',
         );
         //$this->assertTrue(method_exists($this->class, ));
-        $classMethods = array_flip(get_class_methods($this->class));
+        $classMethods = array_flip(get_class_methods($this->_class));
         foreach ($methods as $method) {
             $this->assertArrayHasKey($method, $classMethods);
         }
@@ -81,7 +81,11 @@ class Zookal_Mock_Test_Model_ConfigTest extends EcomDev_PHPUnit_Test_Case
                 $depends     = $config['depends'];
                 foreach ($liarModules as $liarModule) {
                     if (false === $modulesNoDependencies[$liarModule]['active']) {
-                        $this->assertArrayNotHasKey($liarModule, $depends, $module . ' -> ' . $liarModule . ' -> ' . var_export($depends, 1));
+                        $this->assertArrayNotHasKey(
+                            $liarModule,
+                            $depends,
+                            $module . ' -> ' . $liarModule . ' -> ' . var_export($depends, true)
+                        );
                     }
                 }
             }

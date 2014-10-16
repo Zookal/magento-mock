@@ -39,7 +39,12 @@ class Zookal_Mock_Test_Config_ConfigTest extends EcomDev_PHPUnit_Test_Case_Confi
      */
     public function itShouldHaveAControllerFrontInitBeforeObserver()
     {
-        $this->assertEventObserverDefined('global', 'controller_front_init_before', 'zookal_mock/observer', 'mockDisabledModules');
+        $this->assertEventObserverDefined(
+            'global',
+            'controller_front_init_before',
+            'zookal_mock/observer',
+            'mockDisabledModules'
+        );
     }
 
     /**
