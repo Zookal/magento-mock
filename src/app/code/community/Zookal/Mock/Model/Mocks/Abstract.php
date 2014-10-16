@@ -7,6 +7,11 @@
  * @copyright   Copyright (c) Zookal Pty Ltd
  * @license     OSL - Open Software Licence 3.0 | http://opensource.org/licenses/osl-3.0.php
  */
+
+/**
+ * Class Zookal_Mock_Model_Mocks_Abstract
+ * @method Zookal_Mock_Model_Mocks_Abstract getWildCatsCollection()
+ */
 abstract class Zookal_Mock_Model_Mocks_Abstract
 {
 

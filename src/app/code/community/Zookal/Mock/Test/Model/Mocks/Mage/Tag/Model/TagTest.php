@@ -9,7 +9,7 @@
  */
 class Zookal_Mock_Test_Model_Mocks_Mage_Tag_Model_TagTest extends Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase
 {
-    protected $class = 'Mage_Tag_Model_Tag';
+    protected $_class = 'Mage_Tag_Model_Tag';
 
     protected function setUp()
     {

@@ -9,7 +9,7 @@
  */
 class Zookal_Mock_Test_Model_Mocks_Mage_PaymentTest extends Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase
 {
-    protected $class = 'Zookal_Mock_Model_Mocks_Mage_Payment';
+    protected $_class = 'Zookal_Mock_Model_Mocks_Mage_Payment';
 
     /**
      * @param boolean $isAdmin
@@ -22,7 +22,7 @@ class Zookal_Mock_Test_Model_Mocks_Mage_PaymentTest extends Zookal_Mock_Test_Mod
         $stubStore->expects($this->any())
             ->method('isAdmin')
             ->will($this->returnValue($isAdmin));
-        return new $this->class(null, $stubStore);
+        return new $this->_class(null, $stubStore);
     }
 
     /**
@@ -30,7 +30,7 @@ class Zookal_Mock_Test_Model_Mocks_Mage_PaymentTest extends Zookal_Mock_Test_Mod
      */
     public function itShouldHaveAGetInfoBlockType()
     {
-        $this->assertTrue(method_exists($this->class, 'getInfoBlockType'));
+        $this->assertTrue(method_exists($this->_class, 'getInfoBlockType'));
     }
 
     /**
@@ -38,7 +38,7 @@ class Zookal_Mock_Test_Model_Mocks_Mage_PaymentTest extends Zookal_Mock_Test_Mod
      */
     public function itShouldHaveAGetMethodFormBlock()
     {
-        $this->assertTrue(method_exists($this->class, 'getMethodFormBlock'));
+        $this->assertTrue(method_exists($this->_class, 'getMethodFormBlock'));
     }
 
     /**

@@ -9,5 +9,5 @@
  */
 class Zookal_Mock_Test_Model_Mocks_Mage_Product_CollectionTest extends Zookal_Mock_Test_Model_Mocks_Mage_AbstractPHPUnitTestCase
 {
-    protected $class = 'Zookal_Mock_Model_Mocks_Mage_Product_Collection';
+    protected $_class = 'Zookal_Mock_Model_Mocks_Mage_Product_Collection';
 }

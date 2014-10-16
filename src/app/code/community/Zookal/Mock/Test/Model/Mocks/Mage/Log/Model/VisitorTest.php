@@ -21,6 +21,6 @@ class Zookal_Mock_Test_Model_Mocks_Mage_Log_Model_VisitorTest extends Zookal_Moc
         $this->_trickAutoloader();
     }
 
-    protected $class = 'Mage_Log_Model_Visitor';
+    protected $_class = 'Mage_Log_Model_Visitor';
 
 }
