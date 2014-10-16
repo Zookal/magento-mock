@@ -1,6 +1,10 @@
 History
 -------
 
+### 1.1.0
+
+- Major internal refactorings because of Scrutinizer CI integration
+
 ### 1.0.6
 
 - Add Mock for Mage_Downloadable_Model_Product_Type (if you have M2ePro installed)
