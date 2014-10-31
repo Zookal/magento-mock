@@ -5,6 +5,7 @@ Yes you can! And you can even remove
 
 - Mage_AdminNotification
 - Mage_Adminhtml
+- Mage_GiftMessage
 - Mage_Log
 - Mage_Shipping
 - Mage_Tag

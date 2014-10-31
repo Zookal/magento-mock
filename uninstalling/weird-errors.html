@@ -7,7 +7,7 @@
         <title>Weird Errors | Zookal Mock Objects for Magento</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 1.1.0">
+        <meta name="generator" content="GitBook 1.1.1">
         <meta name="HandheldFriendly" content="true"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,7 +15,6 @@
         <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
         <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
         
-    
     
     
     <link rel="next" href="../uninstalling/cms.html" />
@@ -33,7 +32,7 @@
 
 
         
-    <div class="book" data-level="2.4" data-basepath=".." data-revision="1413497285439">
+    <div class="book" data-level="2.4" data-basepath=".." data-revision="1414723394250">
     
 
 <div class="book-summary">
@@ -383,14 +382,34 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_15">
+                    <section class="normal" id="section-gitbook_14">
                     
-                        <h2 id="ive-disabled-mage_bundleratingreviewwishlistusa-but-getting-a-weird-error">I&#39;ve disabled Mage_[Bundle|Rating|Review|Wishlist|Usa] but getting a weird error!</h2>
+                        <h2 id="ive-disabled-mage_bundleratingreviewwishlistusagiftmessage-but-getting-a-weird-error">I&#39;ve disabled Mage_[Bundle|Rating|Review|Wishlist|Usa|GiftMessage] but getting a weird error!</h2>
 <p>The error is: <code>Notice: Trying to get property of non-object  in app/code/core/Mage/Core/Model/Config.php on line 1239</code>.</p>
 <p>Digging deeper Mage<em>Core<em>Model<em>Config would like to access `Mage::helper(&#39;core&#39;)-&gt;</em></em>()` to display you the error message that
 Mage</em>[Bundle|Rating|Review|Wishlist|Usa] requires the module Mage_XmlConnect. The notice message appears because the core helper is not yet initialized.</p>
 <p>So deactivating Mage_XmlConnect works out as the solution. It has many dependencies. Btw: Only if you have the Magento own mobile app you&#39;ll need the
 XmlConnect module. I&#39;ll disable it every time.</p>
+<h3 id="mage_giftmessage">Mage_GiftMessage</h3>
+<p>If you have disabled and or removed that module you may ran into issues like this:</p>
+<pre><code>Warning: include() [&lt;a href=&#39;function.include&#39;&gt;function.include&lt;/a&gt;]: Unable to access 
+Mage/Giftmessage/Block/Adminhtml/Product/Helper/Form/Config.php  in .../lib/Varien/Autoload.php on line 93
+</code></pre><p>The reason is a typo in the <code>frontend_input_renderer</code> column in 
+table <code>catalog_eav_attribute</code> for attribute code <code>gift_message_available</code>.</p>
+<p>Magento defaults this value during GiftMessage setup: <code>giftmessage/adminhtml_product_helper_form_config</code>
+which results later in the class name <code>Mage_Giftmessage_Block_Adminhtml_Product_Helper_Form_Config</code> but the folder
+name is <code>app/code/core/Mage/GiftMessage</code>. The upper and lower M.</p>
+<p><strong>Solution</strong></p>
+<p>If you disable GiftMessage module before installing the Mock Module then the Mock installer will 
+correct the name of the input renderer to <code>giftMessage/adminhtml_product_helper_form_config</code>.</p>
+<p>If you disable GiftMessage after the installation then please either drop/remove yourself 
+the attribute <code>gift_message_available</code> or simply run this:</p>
+<pre><code>UPDATE `catalog_eav_attribute` 
+    SET xfrontend_input_renderer=&#39;&#39; 
+    WHERE `attribute_id` = (SELECT attribute_id FROM `eav_attribute` WHERE attribute_code = &#39;gift_message_availablee&#39;)
+</code></pre><p>The typos in the SQL query are on purpose so that you hopefully read this before proceeding.</p>
+<p>The better way is to create an install script in one of your <code>app/code/local/</code> modules to 
+change/remove the attribute <code>gift_message_available</code>.</p>
 
                     
                     </section>
