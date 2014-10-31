@@ -3,6 +3,7 @@
     <modules>
         <Zookal_Mock>
             <version>1.0.0</version>
+            <data_version>1.0.0</data_version>
         </Zookal_Mock>
     </modules>
 
@@ -26,6 +27,14 @@
             </catalog>
             -->
         </models>
+        <resources>
+            <zookal_mock_setup>
+                <setup>
+                    <module>Zookal_Mock</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+            </zookal_mock_setup>
+        </resources>
         <blocks>
             <zookal_mock>
                 <class>Zookal_Mock_Block</class>
