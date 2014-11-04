@@ -76,4 +76,25 @@
             </modules>
         </suite>
     </phpunit>
+
+    <crontab>
+        <events>
+            <default>
+                <observers>
+                    <a_zookal_mock_cron_observer>
+                        <class>zookal_mock/observer</class>
+                        <method>mockDisabledModules</method>
+                    </a_zookal_mock_cron_observer>
+                </observers>
+            </default>
+            <always>
+                <observers>
+                    <a_zookal_mock_cron_observer>
+                        <class>zookal_mock/observer</class>
+                        <method>mockDisabledModules</method>
+                    </a_zookal_mock_cron_observer>
+                </observers>
+            </always>
+        </events>
+    </crontab>
 </config>

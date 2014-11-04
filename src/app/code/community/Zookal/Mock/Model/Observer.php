@@ -73,11 +73,27 @@ class Zookal_Mock_Model_Observer
     );
 
     /**
-     * To use this in a shell script call it: Mage::getModel('zookal_mock/observer')->mockDisabledModules();
+     * only needed for the crontab because implemented on the two events always and default.
+     * For controller execution we're only observing controller_front_init_before which fires once
+     *
+     * @var int
+     */
+    private $_singleton = 0;
+
+    /**
+     * To use this in a shell script (no cron) call it: Mage::getModel('zookal_mock/observer')->mockDisabledModules();
+     * @fire always
+     * @fire default
      * @fire controller_front_init_before
+     * @return null
      */
     public function mockDisabledModules()
     {
+        if ($this->_singleton > 0) {
+            return;
+        }
+        $this->_singleton++;
+
         $disabledModules = $this->_getDisabledModules();
         $pathPrefix      = 'global/models/';
 
@@ -97,6 +113,7 @@ class Zookal_Mock_Model_Observer
             ));
         }
         $this->_processSetNodes();
+        return;
     }
 
     /**
