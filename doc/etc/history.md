@@ -1,10 +1,21 @@
 History
 -------
 
+### 1.1.3
+
+Add observers for cron events to properly mock stuff. Implemented singleton pattern because of cron
+events `always` and `default`.
+
+### 1.1.2
+
+Bugfix to convert catalog_product attribute gift_message_available
+from `giftmessage/adminhtml_product_helper_form_config` to `giftMessage/adminhtml_product_helper_form_config`
+to find the class in the case-sensitive file system. This only applies if Mage_GiftMessage is
+disabled before installing Mock Module.
+
 ### 1.1.1
 
 - Merged PR [Issue 3](https://github.com/Zookal/magento-mock/issues/3) Disabled Mage_Weee fixes
-
 
 ### 1.1.0
 
