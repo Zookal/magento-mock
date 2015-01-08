@@ -69,7 +69,7 @@ class Zookal_Mock_Model_Observer
         'Mage_Tax'               => '_mageTaxClass',
         'Mage_Usa'               => '_mageMockHelper',
         'Mage_Wishlist'          => '_mageMockHelper',
-        'Mage_Weee'              => '_mageMockHelperIncludePath',
+        'Mage_Weee'              => '_mageMockIncludePath',
     );
 
     /**
