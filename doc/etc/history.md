@@ -1,6 +1,10 @@
 History
 -------
 
+### 1.1.4
+
+Bug fix for Weee Helper `->getApplied()` to return an array. Fixes issue No 5.
+
 ### 1.1.3
 
 Add observers for cron events to properly mock stuff. Implemented singleton pattern because of cron
