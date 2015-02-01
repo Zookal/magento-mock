@@ -1,6 +1,11 @@
 History
 -------
 
+### 1.1.5
+
+- Merged PR [PR 7](https://github.com/Zookal/magento-mock/pull/7) Add Enterprise_Websiterestriction helper
+[Issue 6](https://github.com/Zookal/magento-mock/issues/6)
+
 ### 1.1.4
 
 Bug fix for Weee Helper `->getApplied()` to return an array. Fixes issue No 5.
