@@ -71,7 +71,8 @@ class Zookal_Mock_Block_Payment_Backend extends Zookal_Mock_Model_Mocks_Abstract
      */
     protected function _getPaymentInfoTableRow($k, $v)
     {
-        return '<tr><td>' . Mage::helper('zookal_mock')->__($k) . '</td><td>' . $v . '</td></tr>';
+        // The white space between the TDs is needed for nice output in PDF generation
+        return '<tr><td>' . Mage::helper('zookal_mock')->__($k) . '</td> <td>' . $v . '</td></tr>';
     }
 
     /**
@@ -103,5 +104,14 @@ class Zookal_Mock_Block_Payment_Backend extends Zookal_Mock_Model_Mocks_Abstract
     public function getHtml()
     {
         return $this->_html;
+    }
+
+    /**
+     * Render as PDF
+     * @return string
+     */
+    public function toPdf()
+    {
+        return strip_tags($this->toHtml());
     }
 }
