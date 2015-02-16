@@ -1,6 +1,28 @@
 History
 -------
 
+```
+$ git log --tags --simplify-by-decoration --pretty="format:%ai %d"
+2015-02-16 11:43:11 +1100  (tag: v1.1.6)
+2015-02-02 09:22:51 +1100  (tag: v1.1.5)
+2015-01-09 09:39:48 +1100  (tag: v1.1.4)
+2014-11-04 16:25:34 +1100  (tag: v1.1.3)
+2014-10-31 12:40:34 +1100  (tag: v1.1.2)
+2014-10-17 09:01:28 +1100  (tag: v1.1.1)
+2014-10-16 15:53:35 +1100  (tag: v1.1.0)
+2014-10-10 14:00:19 +1100  (tag: v1.0.6)
+2014-10-10 11:45:50 +1100  (tag: v1.0.5)
+2014-05-01 17:07:04 +1000  (tag: v1.0.4)
+2014-04-30 15:05:43 +1000  (tag: v1.0.3)
+2014-04-25 20:18:04 +1000  (tag: v1.0.2)
+2014-04-15 12:17:20 +1000  (tag: v1.0.1)
+2014-04-03 12:13:30 +1100  (tag: v1.0.0)
+```
+
+### 1.1.6
+
+Fixed a bug when you try to print a PDF invoice, with a deleted/removed payment method, in the backend.
+
 ### 1.1.5
 
 - Merged PR [PR 7](https://github.com/Zookal/magento-mock/pull/7) Add Enterprise_Websiterestriction helper

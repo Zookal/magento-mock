@@ -4,16 +4,18 @@
     <head>
         
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
         <title>Introduction | Zookal Mock Objects for Magento</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="Transparent auto detecting of disabled core modules and extensions and providing mock objects for not breaking Magento. Nothing to configure. No class rewrites. Only one observer. Works out of the box.">
-        <meta name="generator" content="GitBook 1.1.1">
+        <meta name="generator" content="GitBook 1.5.0">
         <meta name="HandheldFriendly" content="true"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
         <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        
         
     
     
@@ -30,7 +32,7 @@
 
 
         
-    <div class="book" data-level="0" data-basepath="." data-revision="1422830223543">
+    <div class="book" data-level="0" data-basepath="." data-revision="1424047924790">
     
 
 <div class="book-summary">
@@ -380,14 +382,14 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_2">
+                    <section class="normal" id="section-gitbook_1">
                     
                         <h1 id="zookal-mock-objects-for-magento">Zookal Mock Objects for Magento</h1>
-<h5 id="tldr-transparent-autodetecting-of-disabled-core-modules-and-extensions-and-providing-mock-objects-for">TL;DR: Transparent autodetecting of disabled core modules and extensions and providing mock objects for</h5>
+<h5 id="tldr-transparent-auto-detecting-of-disabled-core-modules-and-extensions-and-providing-mock-objects-for">TL;DR: Transparent auto-detecting of disabled core modules and extensions and providing mock objects for</h5>
 <p>not breaking Magento. Nothing to configure. No class rewrites. Only one observer. Works out of the box.</p>
 <p>If you try to disable e.g. Mage_Newsletter or Mage_Wishlist or ... and you call certain parts of the backend 
 or some rare parts of the frontend you will get errors that Magento cannot find the class XYZ. Best examples 
-are the two previoulsy mentioned. If you have disabled them and you open in the backend a customer entry to 
+are the two previously mentioned. If you have disabled them and you open in the backend a customer entry to 
 edit it, the page will generate an error. Mage_Customer Edit has many dependencies with other modules. 
 So the <strong>Zookal Mock Module</strong> will provide you mock objects which catches all method calls to disabled
 classes of that modules without breaking anything.</p>
@@ -395,7 +397,7 @@ classes of that modules without breaking anything.</p>
 <p><a href="https://scrutinizer-ci.com/g/Zookal/magento-mock/?branch=master" target="_blank"><img src="https://scrutinizer-ci.com/g/Zookal/magento-mock/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"></a></p>
 <p><a href="https://scrutinizer-ci.com/g/Zookal/magento-mock/build-status/master" target="_blank"><img src="https://scrutinizer-ci.com/g/Zookal/magento-mock/badges/build.png?b=master" alt="Build Status"></a></p>
 <h2 id="author">Author</h2>
-<p><a href="https://github.com/SchumacherFM" target="_blank">Cyrill Schumacher</a> - <a href="http://www.schumacher.fm/cyrill.asc" target="_blank">My pgp public key</a> - <a href="https://keybase.io/cyrill" target="_blank">keybase.io/cyrill</a></p>
+<p><a href="http://cyrillschumacher.com" target="_blank">Cyrill Schumacher</a> - <a href="http://www.schumacher.fm/cyrill.asc" target="_blank">My pgp public key</a></p>
 <p>Made in Sydney, Australia :-)</p>
 
                     
