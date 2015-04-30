@@ -60,7 +60,6 @@ class Zookal_Mock_Model_Observer
         'Mage_Catalog'           => '_mageCatalog',
         'Mage_Customer'          => '_mageCustomer',
         'Mage_GiftMessage'       => '_mageMockHelperIncludePath',
-        'Mage_GoogleCheckout'    => '_mageGoogleCheckout',
         'Mage_Log'               => '_mageMockIncludePath',
         'Mage_ProductAlert'      => '_mageMockHelper',
         'Mage_Review'            => '_mageMockHelper',
@@ -134,23 +133,6 @@ class Zookal_Mock_Model_Observer
     protected function _mageMockIncludePath()
     {
         Mage::helper('zookal_mock')->setMockPhpIncludePath();
-    }
-
-    /**
-     * Special Handling when Mage_GoogleCheckout is disabled. It has a dependency in Mage_Sales/etc/config.xml :-(
-     *
-     * @param array $o
-     */
-    protected function _mageGoogleCheckout(array $o)
-    {
-        $prefixes = $this->_getAllPathPrefixes();
-        foreach ($prefixes as $prefix) {
-            $this->_setConfigNode($prefix . '/payment/' . $this->_mappingModel[$o['m']] . '/active', '0');
-            $this->_setConfigNode(
-                $prefix . '/payment/' . $this->_mappingModel[$o['m']] . '/model',
-                'zookal_mock/mocks_mage_payment'
-            );
-        }
     }
 
     /**
