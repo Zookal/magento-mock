@@ -143,6 +143,14 @@ class Zookal_Mock_Model_Observer
      */
     protected function _mageGoogleCheckout(array $o)
     {
+        // recent versions of Mage_Sales do not depend on Mage_GoolgeCheckout
+        if (method_exists('Mage', 'getEdition')){ // available from CE 1.7
+            if ((version_compare(Mage::getVersion(), '1.9.0.0', '>=') && (Mage::getEdition() == Mage::EDITION_COMMUNITY)) 
+                || (version_compare(Mage::getVersion(), '1.14.0.0', '>=') && (Mage::getEdition() == Mage::EDITION_ENTERPRISE))){
+                return;
+            }
+        }
+
         $prefixes = $this->_getAllPathPrefixes();
         foreach ($prefixes as $prefix) {
             $this->_setConfigNode($prefix . '/payment/' . $this->_mappingModel[$o['m']] . '/active', '0');
