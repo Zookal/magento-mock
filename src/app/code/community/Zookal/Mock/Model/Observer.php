@@ -147,6 +147,10 @@ class Zookal_Mock_Model_Observer
         foreach ($prefixes as $prefix) {
             $this->_setConfigNode($prefix . '/payment/' . $this->_mappingModel[$o['m']] . '/active', '0');
             $this->_setConfigNode(
+                $prefix . '/payment/' . $this->_mappingModel[$o['m']] . '/title',
+                'Unavailable: ' . $this->_mappingModel[$o['m']]
+            );
+            $this->_setConfigNode(
                 $prefix . '/payment/' . $this->_mappingModel[$o['m']] . '/model',
                 'zookal_mock/mocks_mage_payment'
             );
