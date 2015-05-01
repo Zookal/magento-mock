@@ -34,4 +34,4 @@ build_failure_conditions:
     - 'elements.rating(<= C).exists'
     - 'issues.count > 10'
     - 'issues.new.exists'
-    - 'project.metric("scrutinizer.quality", < 9.91)'
+    - 'project.metric("scrutinizer.quality", < 9.80)'

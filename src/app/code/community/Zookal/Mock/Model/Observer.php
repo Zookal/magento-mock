@@ -93,7 +93,7 @@ class Zookal_Mock_Model_Observer
             return;
         }
         $this->_singleton++;
-
+        $this->_initSpecialMethods();
         $disabledModules = $this->_getDisabledModules();
         $pathPrefix      = 'global/models/';
 
@@ -106,11 +106,17 @@ class Zookal_Mock_Model_Observer
             $resource = $this->_mappingModel[$moduleName] . '_resource';
             $this->_setConfigNode($pathPrefix . $this->_mappingModel[$moduleName] . '/resourceModel', $resource);
             $this->_setConfigNode($pathPrefix . $resource . '/class', $class);
-            $this->{$this->_getSpecialMethod($moduleName)}(array(
+
+            $o = array(
                 'p' => $pathPrefix,
                 'm' => $moduleName,
                 'r' => $resource
-            ));
+            );
+            if (is_array($this->_getSpecialMethod($moduleName))) {
+                call_user_func($this->_getSpecialMethod($moduleName), $o);
+            } else {
+                $this->{$this->_getSpecialMethod($moduleName)}($o);
+            }
         }
         $this->_processSetNodes();
         return;
@@ -121,11 +127,19 @@ class Zookal_Mock_Model_Observer
      *
      * @param $moduleName
      *
-     * @return string
+     * @return array
      */
     protected function _getSpecialMethod($moduleName)
     {
         return isset($this->_specialMethods[$moduleName]) ? $this->_specialMethods[$moduleName] : '_mageVoid';
+    }
+
+    /**
+     * Allows you to remove or add special methods. If the value of a key is an array then your class will be called.
+     */
+    protected function _initSpecialMethods()
+    {
+        Mage::dispatchEvent('zookal_mock_init_special_methods', array('mock' => $this));
     }
 
     /**
@@ -274,5 +288,24 @@ class Zookal_Mock_Model_Observer
             $prefixes['stores/' . $store->getCode()] = 'stores/' . $store->getCode();
         }
         return $prefixes;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSpecialMethods()
+    {
+        return $this->_specialMethods;
+    }
+
+    /**
+     * @param array $specialMethods
+     *
+     * @return $this
+     */
+    public function setSpecialMethods(array $specialMethods)
+    {
+        $this->_specialMethods = $specialMethods;
+        return $this;
     }
 }
