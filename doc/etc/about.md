@@ -2,7 +2,7 @@ About
 -----
 
 - Extension Key: Zookal_Mock
-- Version: 1.1.4
+- Version: 1.2.0
 - It's unit tested! :-)
 - It runs on production!
 

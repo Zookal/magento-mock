@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Dependency Errors | Zookal Mock Objects for Magento</title>
+        <title>Google Checkout and Magento 1.9 | Zookal Mock Objects for Magento</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -19,10 +19,10 @@
         
     
     
-    <link rel="next" href="../uninstalling/weird-errors.html" />
+    <link rel="next" href="../etc/performance.html" />
     
     
-    <link rel="prev" href="../uninstalling/adminhtml.html" />
+    <link rel="prev" href="../uninstalling/remove.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="2.3" data-basepath=".." data-revision="1430703022196">
+    <div class="book" data-level="2.8" data-basepath=".." data-revision="1430703022196">
     
 
 <div class="book-summary">
@@ -131,7 +131,7 @@
         </li>
     
         
-        <li class="chapter active" data-level="2.3" data-path="uninstalling/dependency-errors.html">
+        <li class="chapter " data-level="2.3" data-path="uninstalling/dependency-errors.html">
             
                 
                     <a href="../uninstalling/dependency-errors.html">
@@ -211,7 +211,7 @@
         </li>
     
         
-        <li class="chapter " data-level="2.8" data-path="uninstalling/google-checkout.html">
+        <li class="chapter active" data-level="2.8" data-path="uninstalling/google-checkout.html">
             
                 
                     <a href="../uninstalling/google-checkout.html">
@@ -400,21 +400,48 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_11">
+                    <section class="normal" id="section-gitbook_12">
                     
-                        <h2 id="ive-disabled-module-foobar-but-still-getting-errors-regarding-dependency">I&#39;ve disabled module FooBar but still getting errors regarding dependency?</h2>
-<p>Let&#39;s say you disabled Mage_Dataflow but enabled Mage_Catalog and the system is presenting you:</p>
-<pre><code>&quot;Mage_Catalog&quot; requires module &quot;Mage_Dataflow&quot;
-</code></pre><p>You have two possibilities:</p>
-<ol>
-<li>Edit app/etc/modules/Mage_*.xml and remove the appropriate dependencies.</li>
-<li>Edit your main index.php file and add this custom config model to <code>Mage::run()</code></li>
-</ol>
-<pre><code class="lang-php">Mage::run(<span class="hljs-variable">$mageRunCode</span>, <span class="hljs-variable">$mageRunType</span>, <span class="hljs-keyword">array</span>(
-    <span class="hljs-string">'config_model'</span> =&gt; <span class="hljs-string">'Zookal_Mock_Model_Config'</span>
-));
+                        <h2 id="google-checkout-and-magento-19">Google Checkout and Magento 1.9</h2>
+<p>Magento 1.9 does not have anymore a dependency to the <code>Mage_GoogleCheckout</code> module
+in the <code>Mage_Sales</code> module. This can lead to confused backend users because the payment
+select drop down can contain an empty entry.</p>
+<p><a href="https://github.com/Zookal/magento-mock/pull/9" target="_blank">Discussion in this pull request</a>.</p>
+<p>Add to your config.xml file:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">global</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-title">events</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">zookal_mock_init_special_methods</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">observers</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">zookal_mymodule</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-title">class</span>&gt;</span>zookal_mymodule/observer<span class="hljs-tag">&lt;/<span class="hljs-title">class</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-title">method</span>&gt;</span>mySpecialMethodObserver<span class="hljs-tag">&lt;/<span class="hljs-title">method</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-title">zookal_mymodule</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-title">observers</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">zookal_mock_init_special_methods</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">events</span>&gt;</span>
+ <span class="hljs-tag">&lt;/<span class="hljs-title">global</span>&gt;</span>
 </code></pre>
-<p>The config model <code>Zookal_Mock_Model_Config</code> will automatically resolve invalid dependencies for disabled modules. But some dependency really make sense ;-)</p>
+<p>and then create your own observer:</p>
+<pre><code class="lang-php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Zookal_MyModule_Model_Observer</span>
+</span>{
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mySpecialMethodObserver</span><span class="hljs-params">(Varien_Event_Observer <span class="hljs-variable">$observer</span>)</span>
+    </span>{
+        <span class="hljs-comment">/**<span class="hljs-phpdoc"> @var</span> Zookal_Mock_Model_Observer $mock */</span>
+        <span class="hljs-variable">$mock</span>                     = <span class="hljs-variable">$observer</span>-&gt;getMock();
+        <span class="hljs-variable">$m</span>                        = <span class="hljs-variable">$mock</span>-&gt;getSpecialMethods();
+        <span class="hljs-variable">$m</span>[<span class="hljs-string">'Mage_GoogleCheckout'</span>] = [<span class="hljs-variable">$this</span>, <span class="hljs-string">'mySpecialMethod'</span>];
+        <span class="hljs-variable">$mock</span>-&gt;setSpecialMethods(<span class="hljs-variable">$m</span>);
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mySpecialMethod</span><span class="hljs-params">(<span class="hljs-variable">$arg</span>)</span>
+    </span>{
+        <span class="hljs-comment">// noop</span>
+    }
+}
+</code></pre>
+<p>This allows you to disable the special method for Google Checkout. Of course you can add now your own methods for
+any other module.</p>
 
                     
                     </section>
@@ -425,10 +452,10 @@
         </div>
 
         
-        <a href="../uninstalling/adminhtml.html" class="navigation navigation-prev " aria-label="Previous page: Mage_Adminhtml"><i class="fa fa-angle-left"></i></a>
+        <a href="../uninstalling/remove.html" class="navigation navigation-prev " aria-label="Previous page: Removing files"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../uninstalling/weird-errors.html" class="navigation navigation-next " aria-label="Next page: Weird Errors"><i class="fa fa-angle-right"></i></a>
+        <a href="../etc/performance.html" class="navigation navigation-next " aria-label="Next page: Performance"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

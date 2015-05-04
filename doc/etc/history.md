@@ -3,6 +3,7 @@ History
 
 ```
 $ git log --tags --simplify-by-decoration --pretty="format:%ai %d"
+2015-05-01 14:24:28 +1000  (tag: v1.2.0)
 2015-02-16 11:43:11 +1100  (tag: v1.1.6)
 2015-02-02 09:22:51 +1100  (tag: v1.1.5)
 2015-01-09 09:39:48 +1100  (tag: v1.1.4)
@@ -19,13 +20,17 @@ $ git log --tags --simplify-by-decoration --pretty="format:%ai %d"
 2014-04-03 12:13:30 +1100  (tag: v1.0.0)
 ```
 
+### 1.2.0
+
+Add event `zookal_mock_init_special_methods` to allow changes to the internal `specialMethods` array.
+
 ### 1.1.6
 
 Fixed a bug when you try to print a PDF invoice, with a deleted/removed payment method, in the backend.
 
 ### 1.1.5
 
-- Merged PR [PR 7](https://github.com/Zookal/magento-mock/pull/7) Add Enterprise_Websiterestriction helper
+Merged PR [PR 7](https://github.com/Zookal/magento-mock/pull/7) Add Enterprise_Websiterestriction helper
 [Issue 6](https://github.com/Zookal/magento-mock/issues/6)
 
 ### 1.1.4

@@ -11,6 +11,7 @@ This is the summary of mock module.
     * [Mage_Cms](uninstalling/cms.md)
     * [Mage_Shipping](uninstalling/shipping.md)
     * [Removing files](uninstalling/remove.md)
+    * [Google Checkout and Magento 1.9](uninstalling/google-checkout.md)
 * [Performance](etc/performance.md)
 * [Example](etc/examples.md)
 * [About](etc/about.md)
