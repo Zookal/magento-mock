@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="2.4" data-basepath=".." data-revision="1430703022196">
+    <div class="book" data-level="2.4" data-basepath=".." data-revision="1434321247809">
     
 
 <div class="book-summary">
@@ -402,7 +402,10 @@
                 
                     <section class="normal" id="section-gitbook_16">
                     
-                        <h2 id="ive-disabled-mage_bundleratingreviewwishlistusagiftmessage-but-getting-a-weird-error">I&#39;ve disabled Mage_[Bundle|Rating|Review|Wishlist|Usa|GiftMessage] but getting a weird error!</h2>
+                        <h2 id="disabling-weee-module-gives-incorrect-taxes">Disabling WEEE module gives incorrect taxes.</h2>
+<p>No real easy fix. I suggest you do not disable it. </p>
+<p>Please read on Fabians blog more: <a href="http://blog.fabian-blechschmidt.de/mage_weee-and-why-it-is-important-for-tax-calculation/" target="_blank">http://blog.fabian-blechschmidt.de/mage_weee-and-why-it-is-important-for-tax-calculation/</a></p>
+<h2 id="ive-disabled-mage_bundleratingreviewwishlistusagiftmessage-but-getting-a-weird-error">I&#39;ve disabled Mage_[Bundle|Rating|Review|Wishlist|Usa|GiftMessage] but getting a weird error!</h2>
 <p>The error is: <code>Notice: Trying to get property of non-object  in app/code/core/Mage/Core/Model/Config.php on line 1239</code>.</p>
 <p>Digging deeper Mage<em>Core<em>Model<em>Config would like to access `Mage::helper(&#39;core&#39;)-&gt;</em></em>()` to display you the error message that
 Mage</em>[Bundle|Rating|Review|Wishlist|Usa] requires the module Mage_XmlConnect. The notice message appears because the core helper is not yet initialized.</p>

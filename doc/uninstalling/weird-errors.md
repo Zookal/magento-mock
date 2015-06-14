@@ -1,3 +1,10 @@
+Disabling WEEE module gives incorrect taxes.
+---------------------
+
+No real easy fix. I suggest you do not disable it. 
+
+Please read on Fabians blog more: [http://blog.fabian-blechschmidt.de/mage_weee-and-why-it-is-important-for-tax-calculation/](http://blog.fabian-blechschmidt.de/mage_weee-and-why-it-is-important-for-tax-calculation/)
+
 I've disabled Mage_[Bundle|Rating|Review|Wishlist|Usa|GiftMessage] but getting a weird error!
 ----------------------------------------------------
 
