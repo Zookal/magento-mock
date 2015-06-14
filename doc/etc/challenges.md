@@ -18,7 +18,7 @@ If one or all of the following modules (until now) are disabled they will then b
 - Mage_Cms
 - Mage_Catalog
 - Mage_Adminhtml
-- Mage_GiftMessages
+- Mage_GiftMessage
 - Mage_GoogleCheckout
 - All non Mage_* payment modules
 - and some more ... test it :-)
