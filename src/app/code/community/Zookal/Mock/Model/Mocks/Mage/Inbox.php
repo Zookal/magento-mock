@@ -15,4 +15,12 @@
  */
 class Zookal_Mock_Model_Mocks_Mage_Inbox extends Zookal_Mock_Model_Mocks_Abstract
 {
+    /**
+     * @param array $feed
+     *
+     * @return array
+     */
+    public function parse($feed = []) {
+        return $feed;
+    }
 }
