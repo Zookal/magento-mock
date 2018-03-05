@@ -7,7 +7,7 @@ Nothing to configure.
 
 No class rewrites.
 
-Only one observer. Works out of the box.
+Only two observers. Works out of the box.
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Zookal/magento-mock/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Zookal/magento-mock/?branch=master)
 
