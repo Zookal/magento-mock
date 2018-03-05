@@ -308,4 +308,45 @@ class Zookal_Mock_Model_Observer
         $this->_specialMethods = $specialMethods;
         return $this;
     }
+
+    /**
+     * Shim for functionality provided by the Mage_Log module if it is disabled.
+     *
+     * The Mage_Log module is responsible for logging visitor data to the database. This
+     * logging often takes up a large amount of space, and provides no value that Google
+     * Analytics isn't already providing. For this reason often the Mage_Log is often disabled,
+     * but unfortunately the functionality added in SUPEE-10570 to log customers out when they
+     * change their password utilises the customer_id stored in their session by this module.
+     * Rather than re-enable the entire module, we simply ensure that the customer_id is
+     * available if the customer is logged in so we can log customers out of other browser
+     * sessions when changing their password.
+     *
+     * Note that normally the visitor_data array contains a large number of different
+     * pieces of information relating to the current customer, but we only need the customer_id.
+     *
+     * @listen controller_action_postdispatch
+     * @param Varien_Event_Observer $observer
+     */
+    public function setupVisitorData(Varien_Event_Observer $observer)
+    {
+        // If the log module is enabled we don't need to polyfill this functionality
+        if (Mage::helper('core')->isModuleEnabled('Mage_Log')) {
+            return;
+        }
+
+        try {
+            /** @var Mage_Customer_Model_Customer $customer */
+            $customer = Mage::getSingleton('customer/session')->getCustomer();
+            $coreSession = Mage::getSingleton('core/session');
+            $visitorData = array();
+            $customerId = $customer->getId();
+            if (!empty($customerId)) {
+                $visitorData['customer_id'] = $customerId;
+            }
+
+            $coreSession->setVisitorData($visitorData);
+        } catch (Exception $e) {
+            Mage::logException($e);
+        }
+    }
 }
