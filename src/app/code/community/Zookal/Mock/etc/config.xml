@@ -62,6 +62,16 @@
             </modules>
         </translate>
     </adminhtml>
+    <frontend>
+        <controller_action_postdispatch>
+            <observers>
+                <log>
+                    <class>zookal_mock/observer</class>
+                    <method>setupVisitorData</method>
+                </log>
+            </observers>
+        </controller_action_postdispatch>
+    </frontend>
     <default>
         <dev>
             <zookalmock>
