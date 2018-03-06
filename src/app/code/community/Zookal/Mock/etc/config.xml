@@ -2,8 +2,8 @@
 <config>
     <modules>
         <Zookal_Mock>
-            <version>1.3.0</version>
-            <data_version>1.3.0</data_version>
+            <version>1.3.1</version>
+            <data_version>1.3.1</data_version>
         </Zookal_Mock>
     </modules>
 
@@ -63,14 +63,16 @@
         </translate>
     </adminhtml>
     <frontend>
-        <controller_action_postdispatch>
-            <observers>
-                <log>
-                    <class>zookal_mock/observer</class>
-                    <method>setupVisitorData</method>
-                </log>
-            </observers>
-        </controller_action_postdispatch>
+        <events>
+            <controller_action_postdispatch>
+                <observers>
+                    <log>
+                        <class>zookal_mock/observer</class>
+                        <method>setupVisitorData</method>
+                    </log>
+                </observers>
+            </controller_action_postdispatch>
+        </events>
     </frontend>
     <default>
         <dev>
