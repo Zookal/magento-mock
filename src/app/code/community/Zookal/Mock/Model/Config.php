@@ -35,7 +35,7 @@ class Zookal_Mock_Model_Config extends Mage_Core_Model_Config
         'Mage_Checkout'      => array('Mage_CatalogInventory'),
         'Mage_Customer'      => array('Mage_Dataflow'),
         'Mage_Persistent'    => array('Mage_Adminhtml'),
-        'Mage_Captcha'       => array('Mage_Adminhtml'),
+        'Mage_Captcha'       => array('Mage_Adminhtml', 'Mage_Sendfriend'),
         'VinaiKopp_LoginLog' => array('Mage_Adminhtml'),
     );
 
